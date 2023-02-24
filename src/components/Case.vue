@@ -1,11 +1,14 @@
 <script setup>
-  defineProps(["intitule"]);
+  defineProps(["intitule","bleu"]);
   defineEmits(["clickc"]);
 </script>
 
 <template>
-  <div @click="$emit('clickc', intitule)">
-    {{ intitule }}
+  <div id="divB" @click="$emit('clickc', intitule)" v-if="bleu">
+    <p>{{ intitule }}</p>
+  </div>
+  <div id="divR" @click="$emit('clickc', intitule)" v-else>
+    <p>{{ intitule }}</p>
   </div>
 </template>
 
@@ -19,14 +22,23 @@
 
   div {
     display: inline-block; height: 130px; width: 220px;
-    border-color: rgb(3, 155, 229); border-style: solid; border-width: 10px;
-    font-family: "Roboto-Regular"; color: rgb(3, 155, 229); font-size: 22px; text-transform:uppercase;
-    text-align: center; margin-bottom: 20px; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 20px;
+    border-style: solid; border-width: 10px;
+    margin-bottom: 20px; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 20px;
+    text-align: center; font-size: 22px;
+    font-family: "Roboto-Regular"; text-transform:uppercase;
   }
-  div:hover {
-    border-color: rgb(60, 60, 60); background-color: rgb(60, 60, 60); color: rgb(255, 255, 255);
+  div#divB {
+    border-color: rgb(3, 155, 229); color: rgb(3, 155, 229);
+  }
+  div#divR {
+    border-color: rgb(255, 129, 131); color: rgb(255, 129, 131);
   }
   p {
-    position: relative;
+    height: 130px; width: 220px;
+    position: relative; bottom: 22px; right: 2px;
+  }
+
+  div#divB:hover,div#divR:hover {
+    border-color: rgb(60, 60, 60); background-color: rgb(60, 60, 60); color: rgb(255, 255, 255);
   }
 </style>

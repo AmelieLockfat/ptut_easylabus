@@ -1,25 +1,11 @@
 <script setup>
-  import Case from "./components/Case.vue";
-  import { reactive } from "vue";
-  
-  let UEs = reactive([]);
-
-  UEs.push("Base de données")
-  UEs.push("Génie logiciel")
-  UEs.push("Anglais")
-  UEs.push("Urbanisation et interopérabilité des Systèmes d’informations de santé")
-  
-  function test (intitule){
-    console.log("CLICK sur "+intitule)
-  }
+  import Onglet_UE from "./components/Onglet_UE.vue";
+  import Onglet_NIVEAU from "./components/Onglet_NIVEAU.vue";
 </script>
 
 <template>
-  <Case
-    v-for="(ue) of UEs"
-    :intitule="ue"
-    @clickc="test"
-  />
+  <Onglet_NIVEAU/>
+  <Onglet_UE/>
   <h3>Hello world !!</h3>
 </template>
 
