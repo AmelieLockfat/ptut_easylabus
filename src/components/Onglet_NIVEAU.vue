@@ -1,6 +1,8 @@
 <script setup>
   import Case from "./Case.vue";
   import { reactive } from "vue";
+
+  const emit = defineEmits(["choixNiv"]);
   
   let Niveaux = reactive([]);
 
@@ -21,8 +23,8 @@
   Niveaux.push({nom:"FIA5",
                 estE:false})
   
-  function test (intitule){
-    console.log("CLICK sur le Niveau "+intitule)
+  function emitterChoixNiv (intitule){
+    emit("choixNiv",intitule);
   }
 </script>
 
@@ -31,7 +33,7 @@
     v-for="(niveau) of Niveaux"
     :intitule="niveau.nom"
     :bleu="niveau.estE"
-    @clickc="test"
+    @clickc="emitterChoixNiv"
   />
 </template>
 
