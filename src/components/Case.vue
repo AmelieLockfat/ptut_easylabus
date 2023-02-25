@@ -25,13 +25,13 @@
     border-style: solid; border-width: 10px;
     margin-bottom: 20px; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 20px;
     text-align: center; font-size: 22px;
-    font-family: "Roboto-Regular"; text-transform:uppercase;
+    font-family: "Roboto-Regular"; text-transform:uppercase;  color: rgb(255, 255, 255);
   }
   div#divB {
-    border-color: rgb(3, 155, 229); color: rgb(3, 155, 229);
+    border-color: rgb(3, 155, 229);
   }
   div#divR {
-    border-color: rgb(255, 129, 131); color: rgb(255, 129, 131);
+    border-color: rgb(255, 129, 131);
   }
   p {
     height: 130px; width: 220px;
