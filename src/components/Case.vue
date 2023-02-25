@@ -4,10 +4,10 @@
 </script>
 
 <template>
-  <div id="divB" @click="$emit('clickc', intitule)" v-if="bleu">
+  <div id="divB" class="case" @click="$emit('clickc', intitule)" v-if="bleu">
     <p>{{ intitule }}</p>
   </div>
-  <div id="divR" @click="$emit('clickc', intitule)" v-else>
+  <div id="divR" class="case" @click="$emit('clickc', intitule)" v-else>
     <p>{{ intitule }}</p>
   </div>
 </template>
@@ -38,7 +38,10 @@
     position: relative; bottom: 22px; right: 2px;
   }
 
-  div#divB:hover,div#divR:hover {
-    border-color: rgb(60, 60, 60); background-color: rgb(60, 60, 60); color: rgb(255, 255, 255);
+  div#divB:hover {
+    background-color: rgb(3, 155, 229); color: rgb(40, 53, 147);
+  }
+  div#divR:hover {
+    background-color: rgb(255, 129, 131); color: rgb(40, 53, 147);
   }
 </style>
