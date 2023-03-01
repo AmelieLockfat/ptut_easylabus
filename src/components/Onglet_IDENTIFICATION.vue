@@ -16,15 +16,35 @@
 </script>
 
 <template>
-    <div>
+    <div id="form">
+        <p>Entrez votre identifiant et votre mot de passe.</p>
         <form @submit.prevent="emitterSub(false)">
-            <input type="text" placeholder="identifiant:*" v-model="ident"/>
-            <input type="text" placeholder="mot de passe:*" v-model="mdp"/>
-            <input type="submit" value="Se connecter"/>
-            <input type="button" value="Accéder en tant qu'invité" @click="emitterSub(true)"/>
+            <input id="ident" class="text" type="text" placeholder="identifiant:*" v-model="ident"/>
+            <input id="mdp" class="text" type="text" placeholder="mot de passe:*" v-model="mdp"/>
+            <input class="sub" type="submit" value="Se connecter"/>
+            <input class="sub" type="button" value="Accéder en tant qu'invité" @click="emitterSub(true)"/>
         </form>
+        <div id="lign"></div>
     </div>
 </template>
 
 <style scoped>
+    div#form {
+        background-color: rgb(3, 155, 229); height: 450px; width: 700px; border-radius: 10px;
+    }
+
+    input.text {
+        background-color: rgba(255, 255, 255, 0); width: 600px; height: 50px;
+        border-style: solid; border-color: white; border-radius: 10px;
+    }
+
+    input.sub {
+        text-transform: uppercase; border-style: none; border-radius: 5px; height: 40px; width: 80px;
+        background-color: rgb(255, 129, 131); color: white; font-family: "Arial", "Sans serif";
+    }
+
+    div#lign {
+        height: 0px; width: 600px;
+        border-style: solid; border-radius: 10px; border-width: 2px; border-color: rgb(255, 129, 131);
+    }
 </style>
