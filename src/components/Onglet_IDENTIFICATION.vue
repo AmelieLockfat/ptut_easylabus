@@ -19,11 +19,12 @@
     <div id="form">
         <p>
             <img src="src\assets\Bouclier.png" alt=""/>
-            Entrez votre identifiant et votre mot de passe.
+              Entrez votre identifiant et votre mot de passe.
         </p>
         <form @submit.prevent="emitterSub(false)">
-            <input id="ident" class="text" type="text" placeholder="identifiant:*" v-model="ident"/>
-            <input id="mdp" class="text" type="password" placeholder="mot de passe:*" v-model="mdp"/>
+            <input id="ident" class="text" type="text" placeholder="Identifiant:*" v-model="ident"/>
+            <input id="mdp" class="text" type="password" placeholder="Mot de passe:*" v-model="mdp"/>
+            <hr/>
             <input class="sub" type="submit" value="Se connecter"/>
             <input class="sub" type="button" value="Accéder en tant qu'invité" @click="emitterSub(true)"/>
         </form>
@@ -34,6 +35,9 @@
 <style scoped>
     div#form {
         background-color: rgb(3, 155, 229); height: 450px; width: 700px; border-radius: 10px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
     }
 
     img {
@@ -50,8 +54,10 @@
     }
 
     input.sub {
-        text-transform: uppercase; border-style: none; border-radius: 5px; height: 40px; width: 80px;
+        text-transform: uppercase; border-radius: 5px; height: 40px; width: 250px;
         background-color: rgb(255, 129, 131); color: white; font-family: "Arial", "Sans serif";
+        border-color : white;
+      margin-left: 20px;
     }
 
     input.sub:hover {

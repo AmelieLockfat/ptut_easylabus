@@ -29,6 +29,8 @@
 </script>
 
 <template>
+  <img id ="logoISIS" src="src\assets\LogoISIS.png" alt="easyLabusLogo"/> <hr/>
+  <img id ="logoeL" src="src\assets\GrosLogo.png" alt="easyLabusLogo"/>
   <Case
     v-for="(niveau) of Niveaux"
     :intitule="niveau.nom"
@@ -38,4 +40,8 @@
 </template>
 
 <style scoped>
+#logoeL
+{width : 175px;height:35px;}
+#logoISIS
+{width : 175px;height:135px;}
 </style>
