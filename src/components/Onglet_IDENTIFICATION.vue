@@ -24,7 +24,6 @@
         <form @submit.prevent="emitterSub(false)">
             <input id="ident" class="text" type="text" placeholder="Identifiant:*" v-model="ident"/>
             <input id="mdp" class="text" type="password" placeholder="Mot de passe:*" v-model="mdp"/>
-            <hr/>
             <input class="sub" type="submit" value="Se connecter"/>
             <input class="sub" type="button" value="Accéder en tant qu'invité" @click="emitterSub(true)"/>
         </form>
@@ -35,9 +34,9 @@
 <style scoped>
     div#form {
         background-color: rgb(3, 155, 229); height: 450px; width: 700px; border-radius: 10px;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
     }
 
     img {
@@ -50,6 +49,7 @@
 
     input.text {
         background-color: rgba(255, 255, 255, 0); width: 600px; height: 50px;
+        color: white;
         border-style: solid; border-color: white; border-radius: 10px; border-width: 4px;
     }
 
