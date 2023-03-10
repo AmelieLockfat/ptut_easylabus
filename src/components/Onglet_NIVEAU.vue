@@ -6,21 +6,21 @@
   
   let Niveaux = reactive([]);
 
-  Niveaux.push({nom:"FIE1",
+  Niveaux.push({nom:"FIE 1",
                 estE:true})
-  Niveaux.push({nom:"FIE2",
+  Niveaux.push({nom:"FIE 2",
                 estE:true})
-  Niveaux.push({nom:"FIE3",
+  Niveaux.push({nom:"FIE 3",
                 estE:true})
-  Niveaux.push({nom:"FIE4",
+  Niveaux.push({nom:"FIE 4",
                 estE:true})
-  Niveaux.push({nom:"FIE5",
+  Niveaux.push({nom:"FIE 5",
                 estE:true})
-  Niveaux.push({nom:"FIA3",
+  Niveaux.push({nom:"FIA 3",
                 estE:false})
-  Niveaux.push({nom:"FIA4",
+  Niveaux.push({nom:"FIA 4",
                 estE:false})
-  Niveaux.push({nom:"FIA5",
+  Niveaux.push({nom:"FIA 5",
                 estE:false})
   
   function emitterChoixNiv (intitule){
@@ -29,19 +29,36 @@
 </script>
 
 <template>
-  <img id ="logoISIS" src="src\assets\LogoISIS.png" alt="easyLabusLogo"/> <hr/>
-  <img id ="logoeL" src="src\assets\GrosLogo.png" alt="easyLabusLogo"/>
+  <img id ="logoISIS" src="src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
+  <img id ="logo" src="src\assets\GrosLogo.png" alt="easyLabusLogo"/>
+<div id="niveaux">
   <Case
     v-for="(niveau) of Niveaux"
     :intitule="niveau.nom"
     :bleu="niveau.estE"
     @clickc="emitterChoixNiv"
   />
+</div>
 </template>
 
 <style scoped>
-#logoeL
-{width : 175px;height:35px;}
-#logoISIS
-{width : 175px;height:135px;}
+#niveaux{
+  position:absolute;
+  left:250px;
+  bottom:20px;
+}
+#logo{
+  width : 15%; height:5%;
+  position:absolute;
+  top:220px;
+  left: 10px;
+  margin-right: 10px;
+  filter: blur(1px);
+}
+#logoISIS{
+  width : 12%; height:12%;
+  position: relative;
+  top: 70px;
+  filter: blur(1px);
+}
 </style>

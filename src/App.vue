@@ -29,7 +29,6 @@
 </script>
 
 <template>
-  <p>{{ intNiv }}</p>
   <Onglet_UE v-if="nivChoisie&&connecte"/>
   <Onglet_NIVEAU @choixNiv="handlerChoixNiv" v-else-if="connecte"/>
   <Onglet_IDENTIFICATION @sub="handlerSub" v-else/>

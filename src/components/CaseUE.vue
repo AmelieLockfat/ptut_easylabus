@@ -1,13 +1,10 @@
 <script setup>
-  defineProps(["intitule","bleu"]);
+  defineProps(["intitule"]);
   defineEmits(["clickc"]);
 </script>
 
 <template>
-  <div id="divB" class="case" @click="$emit('clickc', intitule)" v-if="bleu">
-    <p>{{ intitule }}</p>
-  </div>
-  <div id="divR" class="case" @click="$emit('clickc', intitule)" v-else>
+  <div class="case" @click="$emit('clickc', intitule)">
     <p>{{ intitule }}</p>
   </div>
 </template>
@@ -26,25 +23,18 @@
     margin-bottom: 20px; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 20px;
     text-align: center; font-size: 22px;
     font-family: "Roboto-Regular"; text-transform:uppercase;  color: rgb(255, 255, 255);
-  }
-  div#divB {
     border-color: rgb(3, 155, 229);
-    
-  }
-  div#divR {
-    border-color: rgb(255, 129, 131);
-  }
-  p {
-    height: 130px; width: 220px;
-    position: relative; 
-    font-size:40px;
-    font-weight: bold;
+
   }
 
-  div#divB:hover {
-    background-color: rgb(3, 155, 229); color: rgb(40, 53, 147);
+  p {
+   /*height: 130px; width: 220px; */
+   font-size:20px;
+   margin: auto; /* Important */
+        text-align: center;
   }
-  div#divR:hover {
-    background-color: rgb(255, 129, 131); color: rgb(40, 53, 147);
+
+  div:hover {
+    background-color: rgb(3, 155, 229); color: rgb(40, 53, 147);
   }
 </style>

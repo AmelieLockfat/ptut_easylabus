@@ -102,7 +102,7 @@
 
     input.sub {
         text-transform: uppercase; border-radius: 5px; height: 40px; width: 250px;
-        background-color: rgb(255, 129, 131); color: white; font-family: "Arial", "Sans serif";
+        background-color: #ff8183; color: white; font-family: "Arial", "Sans serif";
         border-color : white;
       margin-left: 20px;
       position : relative;
@@ -110,8 +110,12 @@
     }
 
     input.sub:hover {
-        background-color: rgb(255, 100, 103);
+        background-color: rgb(255, 164, 165);
     }
+    input.sub:active {
+    background-color: rgb(255, 83, 86);
+    outline: none; /* Pour enlever la bordure bleu */
+}
 
     div#lign {
         position : relative;
