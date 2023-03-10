@@ -1,6 +1,8 @@
 <script setup>
   import CaseUE from "./CaseUE.vue";
   import { reactive } from "vue";
+
+  const emit = defineEmits(["choixUE"]);
   
   let UE1s = reactive([]);
   let UE2s = reactive([]);
@@ -13,8 +15,8 @@
   UE2s.push("Technologie Web")
   UE2s.push("Anglais")
   
-  function test (intitule){
-    console.log("CLICK sur l'UE "+intitule)
+  function emitterChoixUE (intitule){
+    emit("choixUE",intitule);
   }
 </script>
 
@@ -29,7 +31,7 @@
       v-for="(ue) of UE1s"
       :intitule="ue"
       :bleu="true"
-      @clickc="test"
+      @clickc="emitterChoixUE"
     />
   </div>
   <div class="sem">
@@ -37,7 +39,8 @@
     <CaseUE
       v-for="(ue) of UE2s"
       :intitule="ue"
-      @clickc="test"
+      :bleu="true"
+      @clickc="emitterChoixUE"
     />
   </div>
 </template>
