@@ -68,7 +68,7 @@
   #logo{
   width : 15%; height:5%;
   position:absolute;
-  top:220px;
+  top:250px;
   left: 10px;
   margin-right: 10px;
   filter: blur(1px);
@@ -81,11 +81,11 @@
 }
 
 #banderole {
-        position : relative;
-        top : 30px;
-        height: 30px; width: 600px;
-        background-color: rgb(255, 129, 131);
-        border-style: solid; border-radius: 10px; border-width: 2px; border-color: rgb(255, 129, 131);
+  position : relative;
+  top : 30px;
+  height: 30px; width: 600px;
+  background-color: rgb(255, 129, 131);
+  border-style: solid; border-radius: 10px; border-width: 2px; border-color: rgb(255, 129, 131);
     }
 
 </style>

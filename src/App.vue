@@ -48,6 +48,7 @@
     v-if="connecte"
   />
   <Onglet_IDENTIFICATION @sub="handlerSub" v-else/>
+  
 </template>
 
 <style>
