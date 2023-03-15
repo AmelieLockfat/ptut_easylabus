@@ -18,21 +18,21 @@
     }
 
   div {
-    display: inline-block; height: 130px; width: 220px;
+    display: inline-block; height: 150px; width: 220px;
     border-style: solid; border-width: 10px;
     margin-bottom: 20px; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 20px;
-    text-align: center; font-size: 22px;
-    font-family: "Roboto-Regular"; text-transform:uppercase;  color: rgb(255, 255, 255);
+    text-align: center; font-size: 18px; text-transform: uppercase;
+    font-family: "Roboto-Regular"; color: rgb(255, 255, 255);
     border-color: rgb(3, 155, 229);
 
   }
 
-  p {
-   /*height: 130px; width: 220px; */
-   font-size:20px;
-   margin: auto; /* Important */
+  /*p {
+    height: 130px; width: 220px;
+    font-size:20px;
+    margin: auto; 
         text-align: center;
-  }
+  }*//*Qu'on mette ça ou non il n'y a pas de changement*/
 
   div:hover {
     background-color: rgb(3, 155, 229); color: rgb(40, 53, 147);

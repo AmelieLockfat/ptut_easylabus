@@ -2,6 +2,8 @@
   import CaseUE from "./CaseUE.vue";
   import { reactive } from "vue";
 
+  defineProps(["Niveau"])
+
   const emit = defineEmits(["choixUE"]);
   
   let UE1s = reactive([]);
@@ -21,25 +23,19 @@
 </script>
 
 <template>
-  <div id="banderole"></div>
-  <img id ="logoISIS" src="src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
-  <img id ="logo" src="src\assets\GrosLogo.png" alt="easyLabusLogo"/>
-
-  <div class="sem">
+  <div id="sem1" class="sem">
     <p>Semestre 1</p>
     <CaseUE
       v-for="(ue) of UE1s"
       :intitule="ue"
-      :bleu="true"
       @clickc="emitterChoixUE"
     />
   </div>
-  <div class="sem">
+  <div id="sem2" class="sem">
     <p>Semestre 2</p>
     <CaseUE
       v-for="(ue) of UE2s"
       :intitule="ue"
-      :bleu="true"
       @clickc="emitterChoixUE"
     />
   </div>
@@ -51,7 +47,7 @@
     border-left-style: solid; border-left-color: rgb(255, 129, 131); border-left-width: 5px;
     position:relative;
     left:240px;
-    bottom : 70px;
+    top : 100px;
   }
   div.sem p {
     text-transform: uppercase;
@@ -62,30 +58,11 @@
     position: relative; bottom: 30px; right: 5px;
   }
 
-  div.sem div.case {
-    position: relative; bottom: 50px;
+  .case {
+    position: relative; bottom: 17px;
   }
-  #logo{
-  width : 15%; height:5%;
-  position:absolute;
-  top:250px;
-  left: 10px;
-  margin-right: 10px;
-  filter: blur(1px);
-}
-#logoISIS{
-  width : 12%; height:12%;
-  position: relative;
-  top: 70px;
-  filter: blur(1px);
-}
 
-#banderole {
-  position : relative;
-  top : 30px;
-  height: 30px; width: 600px;
-  background-color: rgb(255, 129, 131);
-  border-style: solid; border-radius: 10px; border-width: 2px; border-color: rgb(255, 129, 131);
-    }
-
+  #sem2 {
+    position: relative;
+  }
 </style>

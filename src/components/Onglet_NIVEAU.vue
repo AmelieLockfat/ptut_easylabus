@@ -29,36 +29,21 @@
 </script>
 
 <template>
-  <img id ="logoISIS" src="src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
-  <img id ="logo" src="src\assets\GrosLogo.png" alt="easyLabusLogo"/>
   <div id="niveaux">
-  <Case
-    v-for="(niveau) of Niveaux"
-    :intitule="niveau.nom"
-    :bleu="niveau.estE"
-    @clickc="emitterChoixNiv"
-  />
+    <Case
+      v-for="(niveau) of Niveaux"
+      :intitule="niveau.nom"
+      :bleu="niveau.estE"
+      @clickc="emitterChoixNiv"
+    />
   </div>
 </template>
 
 <style scoped>
-#niveaux{
-  position:relative;
-  left:250px;
-  bottom:20px;
-}
-#logo{
-  width : 15%; height:5%;
-  position:relative;
-  top:220px;
-  left: 10px;
-  margin-right: 10px;
-  filter: blur(1px);
-}
-#logoISIS{
-  width : 12%; height:12%;
-  position: relative;
-  top: 70px;
-  filter: blur(1px);
-}
+  #niveaux{
+    position:relative;
+    left:250px;
+    top:100px;
+    width: 900px;
+  }
 </style>
