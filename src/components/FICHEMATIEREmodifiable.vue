@@ -1,6 +1,6 @@
 <script setup>
-    defineProps(["UE"])
-    
+    defineProps("MAT")
+
     const emit = defineEmits(["finEdit"]);
 </script>
 

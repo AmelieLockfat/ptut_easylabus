@@ -1,13 +1,11 @@
 <script setup>
-    defineProps(["UE"])
-    
-    const emit = defineEmits(["finEdit"]);
+  defineProps(["MAT"])
 </script>
 
 <template>
-    <input class="edit" type="button" value="terminer" @click="$emit('finEdit')"/>
+    <input class="edit" type="button" value="éditer" @click="$emit('debutEdit')"/>
     <div id="fiche">
-
+        <h1>FICHE ENSEIGNEMENT</h1>
     </div>
 </template>
 
