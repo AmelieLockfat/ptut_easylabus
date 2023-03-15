@@ -4,6 +4,7 @@
 
 <template>
     <div id="fiche">
+      <h1>FICHE ENSEIGNEMENT</h1>
     </div>
 </template>
 

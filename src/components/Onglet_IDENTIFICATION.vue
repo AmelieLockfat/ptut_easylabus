@@ -49,41 +49,45 @@
 <style scoped>
     #logoISIS{
         height: 170px; width: 180px;
-}
-#logo{
-        position:relative;
+        position: absolute;
+        left: 10px; top: 10px;
+        /*filter: blur(1px);*/
+    }
+
+    #logo{
+        position:absolute;
         height: 70px; width: 470px;
         margin-left: 185px;
-        bottom:30px
+        top: 20px; left: 220px;
         
-}
-#coeur{
-    position:relative;
+    }
+    #coeur{
+    position:absolute;
     height: 160px; width: 170px;
     margin-left: 45px;
-    top:10px;
+    top:6px; left: 865px;
 
-}
-div#form {
+    }
+    div#form {
         background-color: rgb(3, 155, 229); height: 450px; width: 700px; border-radius: 10px;
         margin-left: auto;
         margin-right: auto ;
         text-align: center;
-        position : relative;
-        bottom:100px;
+        position : absolute;
+        top: 62px; left: 290px;
         margin-top:50px;
-}
+    }
 
-img {
+    img {
     vertical-align:middle;
     height: 35px; width: 30px;
-}
+    }
 
-p {
-    position : relative;
-    top:65px;
-    color: white; font-family: "Arial","Sans serif"; font-weight: bold; font-size: 20px;
-}
+    p {
+        position : relative;
+        top:65px;
+        color: white; font-family: "Arial","Sans serif"; font-weight: bold; font-size: 20px;
+    }
    
 /* #ident{
     background-color: rgba(255, 255, 255, 0); width: 600px; height: 50px;

@@ -22,25 +22,24 @@
 
 <style scoped>
     #logo{
-        width : 15%; height:5%;
+        width : 180px; height: 27px;
         position:absolute;
-        top:250px;
-        left: 10px;
+        top:200px; left: 10px;
         margin-right: 10px;
-        filter: blur(1px);
+        /*filter: blur(1px);*/
     }
     
     #logoISIS{
-        width : 12%; height:12%;
-        position: relative;
-        top: 70px;
-        filter: blur(1px);
+        height: 170px; width: 180px;
+        position: absolute;
+        left: 10px; top: 10px;
+        /*filter: blur(1px);*/
     }
 
     #banderole {
-        position : relative;
-        top : 30px;
-        height: 30px; width: 600px;
+        position : absolute;
+        left: 250px; top: 30px;
+        height: 50px; width: 600px;
         background-color: rgb(255, 129, 131);
         border-style: solid; border-radius: 10px; border-width: 2px; border-color: rgb(255, 129, 131);
     }
