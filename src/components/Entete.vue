@@ -14,9 +14,9 @@
     <p>{{ prenom }}</p>
     <p>{{ nom }}</p>
     <div id="banderole">
-        <div id="divNiv" @click="emitterRetour('NIV')"><p>{{ NIVchoisi }}</p></div>
-        <div @click="emitterRetour('UE')"><p>{{ UEchoisi }}</p></div>
-        <div @click="emitterRetour('MAT')"><p>{{ MATchoisi }}</p></div>
+        <button id="butNiv" @click="emitterRetour('NIV')" v-if="NIVchoisi!=''">{{ NIVchoisi }}</button>
+        <button @click="emitterRetour('UE')" v-if="UEchoisi!=''">{{ UEchoisi }}</button>
+        <button @click="emitterRetour('MAT')" v-if="MATchoisi!=''">{{ MATchoisi }}</button>
     </div>
 </template>
 
@@ -43,16 +43,16 @@
         border-style: solid; border-radius: 10px; border-width: 2px; border-color: rgb(255, 129, 131);
     }
 
-    #banderole div {
+    #banderole button {
         display: inline-block;
         border-style: solid; border-color: black;
         background-color: rgb(3, 155, 229);;
-        height: 60px; min-width: 60px; max-width: 315px;
-        padding-left:5px; padding-right: 5px; margin: 5px; text-align: center;
+        height: 70px; min-width: 70px; max-width: 315px;
+        padding-left:5px; padding-right: 5px; margin: 5px;
         text-transform: uppercase; font-size: 15px;
     }
 
-    #divNiv p{
-        position: relative; top: 11px; font-size: 20px;
+    button#butNiv {
+        font-size: 20px;
     }
 </style>

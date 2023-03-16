@@ -23,4 +23,7 @@
         border-style: solid; border-color: rgb(255, 129, 131); border-width: 10px;
         font-size: 30px; font-family: "Arial"; font-weight: bold; width: 210px; height: 70px;
     }
+    input.edit:hover {
+        background-color: rgb(255, 129, 131); color: rgb(40, 53, 147);
+    }
 </style>
