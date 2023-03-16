@@ -4,12 +4,12 @@
 </script>
 
 <template>
-  <div id="divB" class="case" @click="$emit('clickc', intitule)" v-if="bleu">
-    <p>{{ intitule }}</p>
-  </div>
-  <div id="divR" class="case" @click="$emit('clickc', intitule)" v-else>
-    <p>{{ intitule }}</p>
-  </div>
+  <button id="butB" class="case" @click="$emit('clickc', intitule)" v-if="bleu">
+    {{ intitule }}
+  </button>
+  <button id="butR" class="case" @click="$emit('clickc', intitule)" v-else>
+    {{ intitule }}
+  </button>
 </template>
 
 <style scoped>
@@ -20,31 +20,24 @@
     src: url('../assets/Roboto-Regular.woff2') format('woff2');
     }
 
-  div {
-    display: inline-block; height: 130px; width: 220px;
+  button {
+    display: inline-block; height: 150px; width: 220px;
     border-style: solid; border-width: 10px;
     margin-bottom: 20px; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 20px;
-    text-align: center; font-size: 22px;
+    font-size:40px; font-weight: bold;
     font-family: "Roboto-Regular"; text-transform:uppercase;  color: rgb(255, 255, 255);
   }
-  div#divB {
+  button#butB {
     border-color: rgb(3, 155, 229);
     
   }
-  div#divR {
+  button#butR {
     border-color: rgb(255, 129, 131);
   }
-  p {
-    height: 130px; width: 220px;
-    position: relative; 
-    font-size:40px;
-    font-weight: bold;
-  }
-
-  div#divB:hover {
+  button#butB:hover {
     background-color: rgb(3, 155, 229); color: rgb(40, 53, 147);
   }
-  div#divR:hover {
+  button#butR:hover {
     background-color: rgb(255, 129, 131); color: rgb(40, 53, 147);
   }
 </style>
