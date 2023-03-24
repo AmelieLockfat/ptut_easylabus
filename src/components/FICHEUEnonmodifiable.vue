@@ -1,6 +1,6 @@
 <script setup>
   import { reactive } from "vue";
-  import CaseMAT from "./CaseMAT.vue";
+  import CaseMATnonmodifiable from "./CaseMATnonmodifiable.vue";
 
   defineProps(["UE"])
 
@@ -94,7 +94,7 @@
         <table border="1">
             <caption>Contenu (MATIERES)</caption>
             <tbody>
-                <CaseMAT v-for="(mat) of mats"
+                <CaseMATnonmodifiable v-for="(mat) of mats"
                     :intMat="mat.inti"
                     :contMat="mat.cont"
                     @choixMAT="handlerChoixMAT"
