@@ -1,41 +1,106 @@
 <script setup>
-  import CaseUE from "./CaseUE.vue";
   import { reactive } from "vue";
+  import { onMounted } from "vue";
+  import { ref } from "vue";
 
-  defineProps(["Niveau"])
+  import SEMESTRE from "../SEMESTRE";
+  import PETITUE from "../PETITUE";
+
+  import CaseUE from "./CaseUE.vue";
+
+  const props = defineProps({Niveau: String});
 
   const emit = defineEmits(["choixUE"]);
   
+  let Semestres = [];
+  let numSem1 = ref("");
+  let numSem2 = ref("");
   let UE1s = reactive([]);
   let UE2s = reactive([]);
 
-  UE1s.push("Base de données")
-  UE1s.push("Génie logiciel")
-  UE1s.push("Anglais")
-  UE1s.push("Urbanisation et interopérabilité des Systèmes d’informations de santé")
+  function getAll (intNiv) {
+    getSemestres(intNiv);
+    if (Semestres[0].num>Semestres[1].num) {
+      Semestres.reverse();
+    }
+    numSem1.value = "Semestre "+Semestres[0].num;
+    numSem2.value = "Semestre "+Semestres[1].num;
+    getUE1s(Semestres[0].id);
+    getUE2s(Semestres[1].id);
+  }
+
+  function getSemestres(intNiv) {
+    /*const fetchOptions = { method: "GET" };
+    fetch(url, fetchOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((dataJSON) => {*/
+        console.log(intNiv);
+        let dataJSON = [{idsemestre:1, numsemestre:5},{idsemestre:2, numsemestre:6}];
+        Semestres.splice(0, Semestres.length);
+        dataJSON.forEach((v) =>
+          Semestres.push(new SEMESTRE(v.idsemestre,v.numsemestre))
+        );
+    /*  })
+      .catch((error) => console.log(error));*/
+  }
+
+  function getUE1s(idSem) {
+    /*const fetchOptions = { method: "GET" };
+    fetch(url, fetchOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((dataJSON) => {*/
+        let dataJSON = [{codeue:"codeBDD", intituleue:"Base de données"},{codeue:"codeGL", intituleue:"Génie logiciel"},{codeue:"codeA1", intituleue:"Anglais"},{codeue:"codeUISIS", intituleue:"Urbanisation et interopérabilité des Systèmes d’informations de santé"}];
+        UE1s.splice(0, Semestres.length);
+        dataJSON.forEach((v) =>
+          UE1s.push(new PETITUE(v.codeue, v.intituleue))
+        );
+    /*  })
+      .catch((error) => console.log(error));*/
+  }
+
+  function getUE2s(idSem) {
+    /*const fetchOptions = { method: "GET" };
+    fetch(url, fetchOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((dataJSON) => {*/
+        let dataJSON = [{codeue:"codeTW", intituleue:"Technologie Web"},{codeue:"codeA2", intituleue:"Anglais"}];
+        UE2s.splice(0, Semestres.length);
+        dataJSON.forEach((v) =>
+          UE2s.push(new PETITUE(v.codeue, v.intituleue))
+        );
+    /*  })
+      .catch((error) => console.log(error));*/
+  }
+  onMounted(() => {
+    getAll(props.Niveau);
+  });
   
-  UE2s.push("Technologie Web")
-  UE2s.push("Anglais")
-  
-  function emitterChoixUE (intitule){
-    emit("choixUE",intitule);
+  function emitterChoixUE (codeUE){
+    emit("choixUE",codeUE);
   }
 </script>
 
 <template>
   <div id="sem1" class="sem">
-    <p>Semestre 1</p>
+    <p>{{ numSem1 }}</p>
     <CaseUE
       v-for="(ue) of UE1s"
-      :intitule="ue"
+      :intitule="ue.intitule"
       @clickc="emitterChoixUE"
     />
   </div>
   <div id="sem2" class="sem">
-    <p>Semestre 2</p>
+    <p>{{ numSem2 }}</p>
     <CaseUE
       v-for="(ue) of UE2s"
-      :intitule="ue"
+      :code="ue.code"
+      :intitule="ue.intitule"
       @clickc="emitterChoixUE"
     />
   </div>
