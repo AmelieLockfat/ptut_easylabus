@@ -13,6 +13,13 @@
     mats.push({inti:"Mécanique physique",cont:"Contenu Mécanique physique"})
     mats.push({inti:"Optique",cont:"Contenu Optique"})
 
+    function handlerDelete(idx) {
+        mats.splice(idx,1)
+    }
+
+    function handlerAdd() {
+        mats.push({inti:"",cont:""})
+    }
 </script>
 
 <template>
@@ -91,11 +98,12 @@
         <table border="1">
             <caption>Contenu (MATIERES)</caption>
             <tbody>
-                <CaseMATmodifiable v-for="(mat) of mats"
-                    :intMat="mat.inti"
-                    :contMat="mat.cont"
+                <CaseMATmodifiable v-for="(mati, index) of mats"
+                    :mat="mati"
+                    :indexm="index"
+                    @delete="handlerDelete"
                 />
-                <!--<tr><input type="button" value="+"/></tr>-->
+                <tr><input type="button" value="+" @click="handlerAdd"/></tr>
             </tbody>
         </table>
         <table border="1">
@@ -116,12 +124,12 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>54</td>
-                    <td>74</td>
-                    <td>24</td>
-                    <td>90</td>
-                    <td>0</td>
-                    <td>0</td>
+                    <td><input type="number" value="54"/></td>
+                    <td><input type="number" value="74"/></td>
+                    <td><input type="number" value="24"/></td>
+                    <td><input type="number" value="90"/></td>
+                    <td><input type="number" value="0"/></td>
+                    <td><input type="number" value="0"/></td>
                 </tr>
             </tbody>
         </table>
@@ -129,7 +137,7 @@
             <caption>Prérequis pour suivre l'UE</caption>
             <tbody>
                 <tr>
-                    <td>Ble ble ble ble ble</td>
+                    <td><input type="text" value="Ble ble ble ble ble"/></td>
                 </tr>
             </tbody>
         </table>
@@ -137,7 +145,7 @@
             <caption>Modalités de contrôle des connaissances (Conditions de validation / Principes généraux)</caption>
             <tbody>
                 <tr>
-                    <td>Voir les Modalités de Cintrôle des Connaissances.</td>
+                    <td><input type="text" value="Voir les Modalités de Cintrôle des Connaissances."/></td>
                 </tr>
             </tbody>
         </table>
@@ -145,7 +153,7 @@
             <caption>Bibliographie de base</caption>
             <tbody>
                 <tr>
-                    <td>Bli bli bli bli bli</td>
+                    <td><input type="text" value="Bli bli bli bli bli"/></td>
                 </tr>
             </tbody>
         </table>

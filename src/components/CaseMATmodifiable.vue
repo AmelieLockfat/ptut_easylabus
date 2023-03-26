@@ -1,16 +1,13 @@
 <script setup>
-    import { ref } from 'vue';
+    defineProps(["mat","indexm"]);
 
-    defineProps(["intMat","contMat"]);
-
-    const emit = defineEmits(["choixMAT"]);
-
-    let cont = ref("uuuuuuuuuu");
+    defineEmits(["delete"])
 </script>
 
 <template>
     <tr>
-        <td><input type="text" v-="intMat"/></td>
-        <td><input type="text" v-model="cont"/></td>
+        <td><input type="text" v-bind:value="mat.inti"/></td>
+        <td><input type="text" v-bind:value="mat.cont"/></td>
     </tr>
+    <input type="button" id="del" value="X" @click="$emit('delete', indexm)"/>
 </template>
