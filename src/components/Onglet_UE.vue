@@ -77,12 +77,13 @@
     /*  })
       .catch((error) => console.log(error));*/
   }
+
   onMounted(() => {
     getAll(props.Niveau);
   });
   
-  function emitterChoixUE (codeUE){
-    emit("choixUE",codeUE);
+  function emitterChoixUE (UE){
+    emit("choixUE",UE.code,UE.intitule);
   }
 </script>
 
@@ -91,7 +92,7 @@
     <p>{{ numSem1 }}</p>
     <CaseUE
       v-for="(ue) of UE1s"
-      :intitule="ue.intitule"
+      :ue="ue"
       @clickc="emitterChoixUE"
     />
   </div>
@@ -99,8 +100,7 @@
     <p>{{ numSem2 }}</p>
     <CaseUE
       v-for="(ue) of UE2s"
-      :code="ue.code"
-      :intitule="ue.intitule"
+      :ue="ue"
       @clickc="emitterChoixUE"
     />
   </div>

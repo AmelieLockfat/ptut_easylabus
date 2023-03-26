@@ -12,6 +12,7 @@
   
   let ueChoisie = ref(false)
   let intUE = ref("")
+  let codUE = ref("")
 
   let connecte = ref(false)
   let prenom = ref("")
@@ -36,9 +37,10 @@
     intNiv.value=intitule;
   }
 
-  function handlerChoixUE (intitule) {
+  function handlerChoixUE (codeUE,intituleUE) {
     ueChoisie=true;
-    intUE.value=intitule;
+    codUE.value=codeUE;
+    intUE.value=intituleUE;
   }
 
   function handlerChoixMAT (intitule) {
@@ -54,6 +56,7 @@
     if (retourA=="UE" || retourA=="NIV"){
       ueChoisie=false;
       intUE.value="";
+      codUE.value="";
     }
     if (retourA=="MAT" || retourA=="UE" || retourA=="NIV"){
       matChoisie=false;
@@ -64,7 +67,7 @@
 
 <template>
   <Onglet_FICHEMATIERE :MAT="intMat" v-if="matChoisie"/>
-  <Onglet_FICHEUE :UE="intUE" @choixMAT="handlerChoixMAT" v-else-if="ueChoisie"/>
+  <Onglet_FICHEUE :UE="codUE" @choixMAT="handlerChoixMAT" v-else-if="ueChoisie"/>
   <Onglet_UE @choixUE="handlerChoixUE" :Niveau="intNiv" v-else-if="nivChoisie"/>
   <Onglet_NIVEAU @choixNiv="handlerChoixNiv" v-else-if="connecte"/>
   <Entete

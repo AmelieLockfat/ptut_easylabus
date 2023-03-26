@@ -1,11 +1,11 @@
 <script setup>
-  defineProps(["code","intitule"]);
+  defineProps(["ue"]);
   defineEmits(["clickc"]);
 </script>
 
 <template>
-  <button class="case" @click="$emit('clickc', code)">
-    {{ intitule }}
+  <button class="case" @click="$emit('clickc', ue)">
+    {{ ue.intitule }}
   </button>
 </template>
 
