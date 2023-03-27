@@ -20,6 +20,7 @@
   
   let matChoisie = ref(false)
   let intMat = ref("")
+  let codMat = ref("")
 
   function handlerSub (invite,ident,mdp){
     if (invite){
@@ -43,9 +44,10 @@
     intUE.value=intituleUE;
   }
 
-  function handlerChoixMAT (intitule) {
+  function handlerChoixMAT (codeMAT,intituleMAT) {
     matChoisie=true;
-    intMat.value=intitule;
+    codMat.value=codeMAT;
+    intMat.value=intituleMAT;
   }
 
   function handlerRetour (retourA) {
@@ -61,13 +63,14 @@
     if (retourA=="MAT" || retourA=="UE" || retourA=="NIV"){
       matChoisie=false;
       intMat.value="";
+      codMat.value="";
     }
   }
 </script>
 
 <template>
-  <Onglet_FICHEMATIERE :MAT="intMat" v-if="matChoisie"/>
-  <Onglet_FICHEUE :UE="codUE" @choixMAT="handlerChoixMAT" v-else-if="ueChoisie"/>
+  <Onglet_FICHEMATIERE :codeMAT="codMat" v-if="matChoisie"/>
+  <Onglet_FICHEUE :codeUE="codUE" @choixMAT="handlerChoixMAT" v-else-if="ueChoisie"/>
   <Onglet_UE @choixUE="handlerChoixUE" :Niveau="intNiv" v-else-if="nivChoisie"/>
   <Onglet_NIVEAU @choixNiv="handlerChoixNiv" v-else-if="connecte"/>
   <Entete
