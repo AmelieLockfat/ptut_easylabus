@@ -1,17 +1,38 @@
 <script setup>
     import { reactive } from 'vue';
+    import { onMounted } from 'vue';
+    
+    import PETITEMATIERE from "../PETITEMATIERE";
+
     import CaseMATmodifiable from "./CaseMATmodifiable.vue";
 
-    defineProps(["UE"])
+    const props = defineProps({codeUE : String, UE : Object})
+
+    let codeUE = props.codeUE;
     
     const emit = defineEmits(["finEdit"]);
 
     let mats = reactive([]);
 
-    mats.push({inti:"Mathématiques Analyse 1",cont:"Contenu Mathématiques"})
-    mats.push({inti:"Electricité 1",cont:"Contenu Electricité"})
-    mats.push({inti:"Mécanique physique",cont:"Contenu Mécanique physique"})
-    mats.push({inti:"Optique",cont:"Contenu Optique"})
+    function getMats (codeUE) {
+        /*const fetchOptions = { method: "GET" };
+    fetch(url, fetchOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((dataJSON) => {*/
+        console.log(codeUE);
+        let dataJSON = [{codeens:"E1-1-SFPH-1",nomens:"Mathématiques Analyse 1",contenu:"Cet enseignement aborde l'étude des fonctions, la trigonométrie, les suites réelles et complexes ainsi que les équations différentielles du premier et second ordre à coefficients complexes."},{codeens:"E1-1-SFPH-2",nomens:"Electricité 1",contenu:"Différentes caractéristiques de signaux Loi d'ohm en régime stationnaire puis en régime sinusoïdal. Lois de Kirchhoff, théorèmes de superposition, de Thévenin, de Norton et de Millman. Oscilloscope, multimètre. Représentation complexe des signaux sinusoïdaux."},{codeens:"E1-1-SFPH-3",nomens:"Mécanique physique",contenu:"Mécanique du point : vecteurs OM, vitesse, accélération. La loi fondamentale de la dynamique. énergie cinétique et énergie mécanique. relation force - énergie potentielle"},{codeens:"E1-1-SFPH-4",nomens:"Optique",contenu:"Savoir déterminer le trajet suivi par la lumière (modèle du rayon lumineux) lorsqu’elle est réfractée ou réfléchie (lame de verre et dioptres) Dans l’approximation de Gauss, savoir déterminer, à partir d'objets réels et virtuels, la position et la taille des images correspondantes théoriquement et graphiquement. Contenu : - Fondements de l’optique géométrique : principe de Fermat, lois de Descartes Formation des images - Dioptres et miroirs sphériques"}];
+        dataJSON.forEach((v) =>
+          mats.push(new PETITEMATIERE (v.codeens, v.nomens, v.contenu))
+        );
+    /*  })
+      .catch((error) => console.log(error));*/
+    }
+
+    onMounted(() => {
+        getMats(codeUE);
+  });
 
     function handlerDelete(idx) {
         mats.splice(idx,1)
@@ -25,18 +46,20 @@
 <template>
     <input class="edit" type="button" value="terminer" @click="$emit('finEdit')"/>
     <div id="fiche">
-        <input type="text" value="Mathématiques - Algorithmique"/>
+        <input type="text" :value="props.UE.intitule"/>
         <table border="1">
             <thead>
                 <tr>
                     <th>Code UE</th>
                     <th>Intitulé UE</th>
+                    <th>Crédits ECTS</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="text" value="E1-1-SFPH"/></td>
-                    <td><input type="text" value="Sciences fondamentales et physiques"/></td>
+                    <td><input type="text" :value="props.UE.code"/></td>
+                    <td><input type="text" :value="props.UE.intitule"/></td>
+                    <td><input type="text" :value="props.UE.creditsects"/></td>
                 </tr>
             </tbody>
         </table>
@@ -74,8 +97,8 @@
                     <td>Spécialité " informatique pour la santé "</td>
                     <td>Premier cycle</td>
                     <td>FIE1</td>
-                    <td>1</td>
-                    <td><input type="number" value="1"/></td>
+                    <td><input type="number" :value="props.UE.numsemestre"/></td>
+                    <td><input type="number" :value="props.UE.ordre"/></td>
                 </tr>
             </tbody>
         </table>
@@ -83,7 +106,7 @@
             <caption>Mots-clés (RNCP)</caption>
             <tbody>
                 <tr>
-                    <td><input type="text" value="Bla bla bla bla bla"/></td>
+                    <td><input type="text" :value="props.UE.motscles"/></td>
                 </tr>
             </tbody>
         </table>
@@ -91,7 +114,7 @@
             <caption>Compétences (RNCP)</caption>
             <tbody>
                 <tr>
-                    <td><input type="text" value="Capacité à mobiliser les ressources d'un large champ de sciences fondamentales"/></td>
+                    <td><input type="text" :value="props.UE.competences"/></td>
                 </tr>
             </tbody>
         </table>
@@ -124,12 +147,12 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="number" value="54"/></td>
-                    <td><input type="number" value="74"/></td>
-                    <td><input type="number" value="24"/></td>
-                    <td><input type="number" value="90"/></td>
-                    <td><input type="number" value="0"/></td>
-                    <td><input type="number" value="0"/></td>
+                    <td><input type="number" :value="props.UE.heurecm"/></td>
+                    <td><input type="number" :value="props.UE.heuretd"/></td>
+                    <td><input type="number" :value="props.UE.heuretp"/></td>
+                    <td><input type="number" :value="props.UE.volumtravailperso"/></td>
+                    <td><input type="number" :value="props.UE.volumprojet"/></td>
+                    <td><input type="number" :value="props.UE.volumstage"/></td>
                 </tr>
             </tbody>
         </table>
@@ -137,7 +160,7 @@
             <caption>Prérequis pour suivre l'UE</caption>
             <tbody>
                 <tr>
-                    <td><input type="text" value="Ble ble ble ble ble"/></td>
+                    <td><input type="text" :value="props.UE.prerequis"/></td>
                 </tr>
             </tbody>
         </table>
@@ -145,7 +168,7 @@
             <caption>Modalités de contrôle des connaissances (Conditions de validation / Principes généraux)</caption>
             <tbody>
                 <tr>
-                    <td><input type="text" value="Voir les Modalités de Cintrôle des Connaissances."/></td>
+                    <td><input type="text" :value="props.UE.modalitescontrole"/></td>
                 </tr>
             </tbody>
         </table>
@@ -153,7 +176,7 @@
             <caption>Bibliographie de base</caption>
             <tbody>
                 <tr>
-                    <td><input type="text" value="Bli bli bli bli bli"/></td>
+                    <td><input type="text" :value="props.UE.bibliographiedebase"/></td>
                 </tr>
             </tbody>
         </table>

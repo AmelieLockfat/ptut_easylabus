@@ -1,10 +1,7 @@
 <script setup>
     import { reactive } from "vue";
     import { onMounted } from "vue";
-    import { toRefs } from "@vue/reactivity";
-    import { ref } from "vue";
 
-    import UEclass from "../UEclass";
     import PETITEMATIERE from "../PETITEMATIERE";
 
     import CaseMATnonmodifiable from "./CaseMATnonmodifiable.vue";
@@ -120,10 +117,8 @@
         <table border="1">
             <caption>Contenu (MATIERES)</caption>
             <tbody>
-                <CaseMATnonmodifiable v-for="(mat) of mats"
-                    :codMat="mat.code"
-                    :intMat="mat.nom"
-                    :contMat="mat.contenu"
+                <CaseMATnonmodifiable v-for="(mati) of mats"
+                    :mat="mati"
                     @choixMAT="handlerChoixMAT"
                 />
             </tbody>

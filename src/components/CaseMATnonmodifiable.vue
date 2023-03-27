@@ -1,5 +1,5 @@
 <script setup>
-    defineProps(["codMat","intMat","contMat"]);
+    defineProps(["mat"]);
 
     const emit = defineEmits(["choixMAT"]);
 
@@ -9,8 +9,8 @@
 </script>
 
 <template>
-    <tr @click="emitterChoixMAT(codMat,intMat)">
-        <td>{{ intMat }}</td>
-        <td>{{ contMat }}</td>
+    <tr @click="emitterChoixMAT(mat.code,mat.nom)">
+        <td>{{ mat.nom }}</td>
+        <td>{{ mat.contenu }}</td>
     </tr>
 </template>
