@@ -1,5 +1,6 @@
 <script setup>
     import { reactive } from 'vue';
+    import { ref } from 'vue';
     import { onMounted } from 'vue';
     
     import PETITEMATIERE from "../PETITEMATIERE";
@@ -13,6 +14,20 @@
     const emit = defineEmits(["finEdit"]);
 
     let mats = reactive([]);
+
+    let code = ref(props.UE.code)
+    let intitule = ref(props.UE.intitule)
+    let creditsects = ref(props.UE.creditsects);
+    let numsemestre = ref(props.UE.numsemestre);
+    let ordre = ref(props.UE.ordre)
+    let motscles = ref(props.UE.motscles);
+    let competences = ref(props.UE.competences);
+    let volumtravailperso = ref(props.UE.volumtravailperso);
+    let volumprojet = ref(props.UE.volumprojet);
+    let volumstage = ref(props.UE.volumstage);
+    let prerequis = ref(props.UE.prerequis);
+    let modalitescontrole = ref(props.UE.modalitescontrole);
+    let bibliographiedebase = ref(props.UE.bibliographiedebase);
 
     function getMats (codeUE) {
         /*const fetchOptions = { method: "GET" };
@@ -46,7 +61,7 @@
 <template>
     <input class="edit" type="button" value="terminer" @click="$emit('finEdit')"/>
     <div id="fiche">
-        <input type="text" :value="props.UE.intitule"/>
+        <input type="text" v-model="intitule"/>
         <table border="1">
             <thead>
                 <tr>
@@ -57,9 +72,9 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="text" :value="props.UE.code"/></td>
-                    <td><input type="text" :value="props.UE.intitule"/></td>
-                    <td><input type="text" :value="props.UE.creditsects"/></td>
+                    <td><input type="text" v-model="code"/></td>
+                    <td><input type="text" v-model="intitule"/></td>
+                    <td><input type="text" v-model="creditsects"/></td>
                 </tr>
             </tbody>
         </table>
@@ -97,8 +112,8 @@
                     <td>Spécialité " informatique pour la santé "</td>
                     <td>Premier cycle</td>
                     <td>FIE1</td>
-                    <td><input type="number" :value="props.UE.numsemestre"/></td>
-                    <td><input type="number" :value="props.UE.ordre"/></td>
+                    <td><input type="number" v-model="numsemestre"/></td>
+                    <td><input type="number" v-model="ordre"/></td>
                 </tr>
             </tbody>
         </table>
@@ -106,7 +121,7 @@
             <caption>Mots-clés (RNCP)</caption>
             <tbody>
                 <tr>
-                    <td><input type="text" :value="props.UE.motscles"/></td>
+                    <td><input type="text" v-model="motscles"/></td>
                 </tr>
             </tbody>
         </table>
@@ -114,15 +129,16 @@
             <caption>Compétences (RNCP)</caption>
             <tbody>
                 <tr>
-                    <td><input type="text" :value="props.UE.competences"/></td>
+                    <td><input type="text" v-model="competences"/></td>
                 </tr>
             </tbody>
         </table>
         <table border="1">
             <caption>Contenu (MATIERES)</caption>
             <tbody>
-                <CaseMATmodifiable v-for="(mati, index) of mats"
-                    :mat="mati"
+                <CaseMATmodifiable v-for="(mat, index) of mats"
+                    :nom="mat.nom"
+                    :contenu="mat.contenu"
                     :indexm="index"
                     @delete="handlerDelete"
                 />
@@ -147,12 +163,12 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="number" :value="props.UE.heurecm"/></td>
-                    <td><input type="number" :value="props.UE.heuretd"/></td>
-                    <td><input type="number" :value="props.UE.heuretp"/></td>
-                    <td><input type="number" :value="props.UE.volumtravailperso"/></td>
-                    <td><input type="number" :value="props.UE.volumprojet"/></td>
-                    <td><input type="number" :value="props.UE.volumstage"/></td>
+                    <td>{{ props.UE.heurecm }}</td>
+                    <td>{{ props.UE.heuretd }}</td>
+                    <td>{{ props.UE.heuretp }}</td>
+                    <td><input type="number" v-model="volumtravailperso"/></td>
+                    <td><input type="number" v-model="volumprojet"/></td>
+                    <td><input type="number" v-model="volumstage"/></td>
                 </tr>
             </tbody>
         </table>
@@ -160,7 +176,7 @@
             <caption>Prérequis pour suivre l'UE</caption>
             <tbody>
                 <tr>
-                    <td><input type="text" :value="props.UE.prerequis"/></td>
+                    <td><input type="text" v-model="prerequis"/></td>
                 </tr>
             </tbody>
         </table>
@@ -168,7 +184,7 @@
             <caption>Modalités de contrôle des connaissances (Conditions de validation / Principes généraux)</caption>
             <tbody>
                 <tr>
-                    <td><input type="text" :value="props.UE.modalitescontrole"/></td>
+                    <td><input type="text" v-model="modalitescontrole"/></td>
                 </tr>
             </tbody>
         </table>
@@ -176,7 +192,7 @@
             <caption>Bibliographie de base</caption>
             <tbody>
                 <tr>
-                    <td><input type="text" :value="props.UE.bibliographiedebase"/></td>
+                    <td><input type="text" v-model="bibliographiedebase"/></td>
                 </tr>
             </tbody>
         </table>
