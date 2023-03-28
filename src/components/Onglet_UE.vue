@@ -47,7 +47,7 @@
     border-left-style: solid; border-left-color: rgb(255, 129, 131); border-left-width: 5px;
     position:relative;
     left:240px;
-    top : 100px;
+    top : 150px;
   }
   div.sem p {
     text-transform: uppercase;

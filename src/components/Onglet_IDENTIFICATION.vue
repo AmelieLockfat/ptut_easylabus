@@ -25,18 +25,38 @@
             <img src="src\assets\Bouclier.png" alt=""/>
               Entrez votre identifiant et votre mot de passe
         </p>
-        <VForm 
-        class="mt-14 "
-        @submit.prevent="emitterSub(false)">
-            <v-text-field 
-            id="ident" clearable label="Identifiant :*" prepend-icon="mdi-vuetify" ></v-text-field>
-            <v-text-field
-            id="mdp" clearable label="Mot de passe :*" prepend-icon="mdi-vuetify" v-model="mdp" ></v-text-field>
+
+        <br>
+        
+        <VForm class="mt-16 ma-15 ">
+        
+        <v-text-field 
+            :rules="[v => !!v || 'Vous devez entrer votre identifiant.']"
+            id="login" clearable label="Identifiant :*" variant="outlined" >
+        </v-text-field>
+            
+            
+
+        <v-text-field
+            v-model="password"
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="show1 ? 'text' : 'password'"
+            @click:append="show1 = !show1"
+            
+            :rules="[v => !!v || 'Vous devez entrer votre mot de passe.']"
+            id="login" clearable label="Mot de passe :*" variant="outlined">
+        </v-text-field>
+
             <!-- <input id="ident" class="text" type="text" placeholder="Identifiant :*" v-model="ident" /> -->
             <!-- <input id="mdp" class="text" type="password" placeholder="Mot de passe :*" v-model="mdp"/> -->
-            <v-btn id="vuetify" type="submit" >Se connecter</v-btn> 
-            <v-btn id="vuetify" type="submit">Accéder en tant qu'invité</v-btn> 
-
+        
+        </VForm>
+    <VForm
+    class="my-10"
+    @submit.prevent="emitterSub(false)">
+        
+            <v-btn id="vuetify" type="submit" @click="emitterSub(true)">Se connecter</v-btn> 
+            <v-btn id="vuetify" type="submit"  @click="emitterSub(true)">Accéder en tant qu'invité</v-btn> 
             <!-- <input class="sub" type="submit" value="Se connecter" @click="emitterSub(true)"/> -->
             <!-- <input class="sub" type="button" value="Accéder en tant qu'invité" @click="emitterSub(true)"/> -->
         </VForm>
@@ -66,6 +86,7 @@
     height: 160px; width: 170px;
     margin-left: 45px;
     top:6px; left: 865px;
+ 
 
     }
     div#form {
@@ -85,7 +106,7 @@
 
     p {
         position : relative;
-        top:65px;
+        top:55px;
         color: white; font-family: "Arial","Sans serif"; font-weight: bold; font-size: 20px;
     }
    
@@ -114,7 +135,9 @@
 #mdp:hover{
     border-color: black;
 } */
-
+#login:active{
+    color:#ff8183;
+}
     
 #vuetify {
     text-transform: uppercase; border-radius: 5px; height: 40px; width: 250px;
@@ -122,7 +145,7 @@
     border-color : white;
     margin-left: 20px;
     position : relative;
-    /* top : 150px; */
+     bottom : 40px; 
 }
 
 #vuetify:hover {
@@ -136,12 +159,13 @@ input.sub:active {
 
 
 div#lign {
-    position : relative;
-    left:50px;
+    position : absolute;
+    left:90px;
     margin-left:255px;
     /* margin-right:none; */
-    bottom: 180px;
+    bottom:100px;
     height: 0px; width: 600px;
     border-style: solid; border-radius: 10px; border-width: 2px; border-color: rgb(255, 129, 131);
 }
+
 </style>
