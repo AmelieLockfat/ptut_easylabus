@@ -1,6 +1,5 @@
 <script setup>
-  import { ref } from "vue";
-  import { onMounted } from "vue";
+  import { ref , onMounted } from "vue";
 
   import UEclass from "../UEclass";
   import PERSONNE from "../PERSONNE";

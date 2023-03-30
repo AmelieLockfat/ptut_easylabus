@@ -1,7 +1,5 @@
 <script setup>
-    import { ref } from "vue";
-    import { reactive } from "vue";
-    import { onMounted } from "vue";
+    import { ref , reactive , onMounted } from "vue";
 
     import PETITEMATIERE from "../PETITEMATIERE";
     import PERSONNE from "../PERSONNE";
@@ -61,7 +59,7 @@
 
     onMounted(() => {
         getAll(codeUE);
-  });
+    });
 </script>
 
 <template>

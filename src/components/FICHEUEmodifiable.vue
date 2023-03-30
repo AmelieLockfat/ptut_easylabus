@@ -1,7 +1,5 @@
 <script setup>
-    import { reactive } from 'vue';
-    import { ref } from 'vue';
-    import { onMounted } from 'vue';
+    import { reactive , ref , onMounted } from 'vue';
     
     import PETITEMATIERE from "../PETITEMATIERE";
     import PERSONNE from "../PERSONNE";

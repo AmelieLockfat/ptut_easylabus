@@ -1,16 +1,36 @@
 <script setup>
-    import { reactive } from 'vue';
+    import { reactive , onMounted } from 'vue';
 
     import PERSONNE from '../PERSONNE';
 
     import CasePROFnonmodifiable from './CasePROFnonmodifiable.vue';
 
-    defineProps(["MAT"]);
+    const props = defineProps({codeMAT : String, MAT : Object})
+
+    let codeMAT = props.codeMAT;
+
+    defineEmits(["debutEdit"]);
 
     let perss = reactive([]);
 
-    perss.push(new PERSONNE("mprof1",null,"Monsieur","Prof de Maths 1","monsieur.profmaths1@univ-jfc.fr","0612345678"));
-    perss.push(new PERSONNE("mprof2",null,"Monsieur","Prof de Maths 2","monsieur.profmaths2@univ-jfc.fr","0612345679"));
+    function getPerss (codeMAT) {
+        /*const fetchOptions = { method: "GET" };
+    fetch(url, fetchOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((dataJSON) => {*/
+        let dataJSON = [{identifiant:"mprof1",prenompers:"Monsieur",nompers:"Prof de Maths 1",numtel:"0612345678",email:"monsieur.profmaths1@univ-jfc.fr",coordprivee:true},{identifiant:"mprof2",prenompers:"Monsieur",nompers:"Prof de Maths 2",numtel:"0612345679",email:"monsieur.profmaths2@univ-jfc.fr",coordprivee:false}];
+        dataJSON.forEach((v) =>
+          perss.push(new PERSONNE (v.identifiant, null, v.prenompers, v.nompers, v.email, v.numtel, v.coordprivee))
+        );
+    /*  })
+      .catch((error) => console.log(error));*/
+    }
+
+    onMounted(() => {
+        getPerss(codeMAT);
+    });
 </script>
 
 <template>
@@ -20,21 +40,21 @@
         <table border="1">
             <tr>
                 <th>INTITULE DE L'ENSEIGNEMENT :</th>
-                <td>Mathématiques Analyse 1</td>
+                <td>{{ props.MAT.nom }}</td>
                 <td></td>
             </tr>
         </table>
         <table border="1">
             <tr>
                 <th rowspan="2">Code et Nom de l'UE</th>
-                <td>E1-1-SFPH</td>
+                <td>{{ props.MAT.codeue }}</td>
                 <th>Année d'études</th>
                 <th>Semestre</th>
             </tr>
             <tr>
-                <td>Sciences fondamentales et physiques</td>
+                <td>{{ props.MAT.intituleue }}</td>
                 <td>2022/2023</td>
-                <td>1</td>
+                <td>{{ props.MAT.numsemestre }}</td>
             </tr>
             <tr>
                 <th colspan="2">Nom de l'intervenant</th>
@@ -54,12 +74,12 @@
                 <th>Coefficient</th>
             </tr>
             <tr>
-                <td>14</td>
-                <td>6</td>
-                <td>0</td>
-                <td>20</td>
-                <td>0</td>
-                <td>0.4</td>
+                <td>{{ props.MAT.heurecm }}</td>
+                <td>{{ props.MAT.heuretd }}</td>
+                <td>{{ props.MAT.heuretp }}</td>
+                <td>{{ props.MAT.heuretotalencadree }}</td>
+                <td>{{ props.MAT.heuretravailperso }}</td>
+                <td>{{ props.MAT.coefficient }}</td>
             </tr>
         </table>
         <table border="1">
@@ -69,7 +89,7 @@
                 <th>Prérequis pour suivre l'enseignement :</th>
             </tr>
             <tr>
-                <td>Prérequis et trucs</td>
+                <td>{{ props.MAT.prerequis }}</td>
             </tr>
         </table>
         <table border="1">
@@ -77,7 +97,7 @@
                 <th>Description de l'enseignement et plan du cours</th>
             </tr>
             <tr>
-                <td>Description et plan du cours</td>
+                <td>{{ props.MAT.planducours }}</td>
             </tr>
         </table>
         <table border="1">
@@ -85,7 +105,7 @@
                 <th>Modalités d'évaluation</th>
             </tr>
             <tr>
-                <td>Les Modalités et trucs</td>
+                <td>{{ props.MAT.modalitesevaluation }}</td>
             </tr>
         </table>
     </div>
