@@ -1,5 +1,8 @@
 <script setup>
-  import { initCustomFormatter, ref } from "vue";
+  import { ref } from "vue";
+
+  import PERSONNE from "./PERSONNE";
+
   import Entete from "./components/Entete.vue";
   import Onglet_FICHEMATIERE from "./components/Onglet_FICHEMATIERE.vue";
   import Onglet_FICHEUE from "./components/Onglet_FICHEUE.vue";
@@ -15,20 +18,24 @@
   let codUE = ref("")
 
   let connecte = ref(false)
-  let prenom = ref("")
-  let nom = ref("")
+  let utilisateur = ref(new PERSONNE())
   
   let matChoisie = ref(false)
   let intMat = ref("")
   let codMat = ref("")
 
   function handlerSub (invite,ident,mdp){
-    if (invite){
-
-    }
-    else {
-      prenom.value = ident;
-      nom.value = mdp;
+    if (!invite) {
+      /*const fetchOptions = { method: "GET" };
+      fetch(url, fetchOptions)
+        .then((response) => {
+          return response.json();
+        })
+        .then((dataJSON) => {*/
+          let dataJSON = {identifiant:"acharron",prenompers:"Arnaud",nompers:"Charron",numtel:"0698765432",email:"arnaud.charron@univ-jfc.fr",coordprivee:true};
+          utilisateur = new PERSONNE (dataJSON.identifiant, null, dataJSON.prenompers, dataJSON.nompers, dataJSON.numtel, dataJSON.email, dataJSON.coordprivee);
+      /*  })
+        .catch((error) => console.log(error));*/
     }
     connecte.value = true;
   }
@@ -77,8 +84,8 @@
   <Onglet_UE @choixUE="handlerChoixUE" :Niveau="intNiv" v-else-if="nivChoisie && connecte"/>
   <Onglet_NIVEAU @choixNiv="handlerChoixNiv" v-else-if="connecte"/>
   <Entete
-    :nom="nom"
-    :prenom="prenom"
+    :nom="utilisateur.nom"
+    :prenom="utilisateur.prenom"
     :NIVchoisi="intNiv"
     :UEchoisi="intUE"
     :MATchoisi="intMat"

@@ -12,9 +12,9 @@
     <img id ="logoISIS" src="src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
     <img id ="logo" src="src\assets\GrosLogo.png" alt="easyLabusLogo"/>
     <img id ="util" src="src\assets\Utilisateur.png" alt=""/>
-    <p id="prenom" v-if="prenom!=''">{{ prenom }}</p>
-    <p id="nom" v-if="prenom!=''">{{ nom }}</p>
-    <button id="connect" @click="emitterRetour('CONNECT')"  v-if="prenom=='' && nom==''">SE CONNECTER</button>
+    <p id="prenom" v-if="prenom!='' || prenom!=null">{{ prenom }}</p>
+    <p id="nom" v-if="prenom!='' || nom!=null">{{ nom }}</p>
+    <button id="connect" @click="emitterRetour('CONNECT')"  v-if="prenom==null && nom==null">SE CONNECTER</button>
     <div id="banderole" v-if="NIVchoisi!=''">
         <ul>
             <li><button id="butNiv" @click="emitterRetour('NIV')">{{ NIVchoisi }} </button></li>
