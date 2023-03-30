@@ -65,7 +65,7 @@
         content: "→";
         
     }
-    #banderole li:hover{
+    #banderole button:hover{
         color: white;
  
     }
