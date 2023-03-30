@@ -1,27 +1,33 @@
 <script setup>
-  import Case from "./Case.vue";
   import { reactive } from "vue";
+  import { onMounted } from "vue";
+
+  import NIVEAU from "../NIVEAU";
+  
+  import Case from "./Case.vue";
 
   const emit = defineEmits(["choixNiv"]);
   
   let Niveaux = reactive([]);
 
-  Niveaux.push({nom:"FIE 1",
-                estE:true})
-  Niveaux.push({nom:"FIE 2",
-                estE:true})
-  Niveaux.push({nom:"FIE 3",
-                estE:true})
-  Niveaux.push({nom:"FIE 4",
-                estE:true})
-  Niveaux.push({nom:"FIE 5",
-                estE:true})
-  Niveaux.push({nom:"FIA 3",
-                estE:false})
-  Niveaux.push({nom:"FIA 4",
-                estE:false})
-  Niveaux.push({nom:"FIA 5",
-                estE:false})
+  function getNiveaux() {
+    /*const fetchOptions = { method: "GET" };
+    fetch(url, fetchOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((dataJSON) => {*/
+        let dataJSON = [{intituleniveau:"FIE1"},{intituleniveau:"FIE2"},{intituleniveau:"FIE3"},{intituleniveau:"FIE4"},{intituleniveau:"FIE5"},{intituleniveau:"FIA3"},{intituleniveau:"FIA4"},{intituleniveau:"FIA5"}];
+        Niveaux.splice(0, Niveaux.length);
+        dataJSON.forEach((v) =>
+          Niveaux.push(new NIVEAU(v.intituleniveau))
+        );
+    /*  })
+      .catch((error) => console.log(error));*/
+  }
+  onMounted(() => {
+    getNiveaux();
+  });
   
   function emitterChoixNiv (intitule){
     emit("choixNiv",intitule);
@@ -32,8 +38,8 @@
   <div id="niveaux">
     <Case
       v-for="(niveau) of Niveaux"
-      :intitule="niveau.nom"
-      :bleu="niveau.estE"
+      :intitule="niveau.intitule"
+      :bleu="niveau.estFIE"
       @clickc="emitterChoixNiv"
     />
   </div>

@@ -18,7 +18,7 @@
     }
 
     input.edit {
-        position: fixed; top: 497px; left: 19px;
+        position: fixed; bottom: 19px; left: 19px;
         text-transform: uppercase; color: white;
         border-style: solid; border-color: rgb(255, 129, 131); border-width: 10px;
         font-size: 30px; font-family: "Arial"; font-weight: bold; width: 210px; height: 70px;

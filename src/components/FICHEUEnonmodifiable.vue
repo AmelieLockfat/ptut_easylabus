@@ -1,53 +1,106 @@
 <script setup>
-  import { reactive } from "vue";
-  import CaseMAT from "./CaseMAT.vue";
+    import { ref } from "vue";
+    import { reactive } from "vue";
+    import { onMounted } from "vue";
 
-  defineProps(["UE"])
+    import PETITEMATIERE from "../PETITEMATIERE";
+    import PERSONNE from "../PERSONNE";
 
-  const emit = defineEmits(["debutEdit","choixMAT"]);
+    import CaseMATnonmodifiable from "./CaseMATnonmodifiable.vue";
+    import CaseINTUE from "./CaseINTUE.vue";
 
-  let mats = reactive([]);
+    const props = defineProps({codeUE : String, UE : Object, Responsable : Object})
 
-  mats.push({inti:"Mathématiques Analyse 1",cont:"Contenu Mathématiques"})
-  mats.push({inti:"Electricité 1",cont:"Contenu Electricité"})
-  mats.push({inti:"Mécanique physique",cont:"Contenu Mécanique physique"})
-  mats.push({inti:"Optique",cont:"Contenu Optique"})
+    let codeUE = props.codeUE;
 
-  function handlerChoixMAT (intituleMat){
-    emit("choixMAT",intituleMat);
-  }
+    const emit = defineEmits(["debutEdit","choixMAT"]);
+
+    let mats = reactive([]);
+    let ints = reactive([]);
+    let int0 = ref(new PERSONNE())
+
+    function getMats (codeUE) {
+        /*const fetchOptions = { method: "GET" };
+    fetch(url, fetchOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((dataJSON) => {*/
+        let dataJSON = [{codeens:"E1-1-SFPH-1",nomens:"Mathématiques Analyse 1",contenu:"Cet enseignement aborde l'étude des fonctions, la trigonométrie, les suites réelles et complexes ainsi que les équations différentielles du premier et second ordre à coefficients complexes."},{codeens:"E1-1-SFPH-2",nomens:"Electricité 1",contenu:"Différentes caractéristiques de signaux Loi d'ohm en régime stationnaire puis en régime sinusoïdal. Lois de Kirchhoff, théorèmes de superposition, de Thévenin, de Norton et de Millman. Oscilloscope, multimètre. Représentation complexe des signaux sinusoïdaux."},{codeens:"E1-1-SFPH-3",nomens:"Mécanique physique",contenu:"Mécanique du point : vecteurs OM, vitesse, accélération. La loi fondamentale de la dynamique. énergie cinétique et énergie mécanique. relation force - énergie potentielle"},{codeens:"E1-1-SFPH-4",nomens:"Optique",contenu:"Savoir déterminer le trajet suivi par la lumière (modèle du rayon lumineux) lorsqu’elle est réfractée ou réfléchie (lame de verre et dioptres) Dans l’approximation de Gauss, savoir déterminer, à partir d'objets réels et virtuels, la position et la taille des images correspondantes théoriquement et graphiquement. Contenu : - Fondements de l’optique géométrique : principe de Fermat, lois de Descartes Formation des images - Dioptres et miroirs sphériques"}];
+        dataJSON.forEach((v) =>
+          mats.push(new PETITEMATIERE (v.codeens, v.nomens, v.contenu))
+        );
+    /*  })
+      .catch((error) => console.log(error));*/
+    }
+
+    function getInts (codeUE) {
+        /*const fetchOptions = { method: "GET" };
+    fetch(url, fetchOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((dataJSON) => {*/
+        let dataJSON = [{identifiant:"edupuis",prenompers:"Erik",nompers:"Dupuis"},{identifiant:"eduba",prenompers:"Erika",nompers:"Duba"},{identifiant:"hdurant",prenompers:"Henri",nompers:"Durant"}];
+        int0 = new PERSONNE (dataJSON[0].identifiant, null, dataJSON[0].prenompers, dataJSON[0].nompers, null, null, null);
+        dataJSON.forEach((v) =>
+          ints.push(new PERSONNE (v.identifiant, null, v.prenompers, v.nompers, null, null, null))
+        );
+    /*  })
+      .catch((error) => console.log(error));*/
+    }
+
+    function handlerChoixMAT (codeMAT,intituleMAT){
+        emit("choixMAT",codeMAT,intituleMAT);
+    }
+
+    function getAll(codeUE) {
+        getMats(codeUE);
+        getInts(codeUE);
+    }
+
+    onMounted(() => {
+        getAll(codeUE);
+  });
 </script>
 
 <template>
     <input class="edit" type="button" value="éditer" @click="$emit('debutEdit')"/>
     <div id="fiche">
-        <h1>Mathématiques - Algorithmique</h1>
+        <h1>{{ props.UE.intitule }}</h1>
         <table border="1">
             <thead>
                 <tr>
                     <th>Code UE</th>
                     <th>Intitulé UE</th>
+                    <th>Crédits ECTS</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>E1-1-SFPH</td>
-                    <td>Sciences fondamentales et physiques</td>
+                    <td>{{ props.UE.code }}</td>
+                    <td>{{ props.UE.intitule }}</td>
+                    <td>{{ props.UE.creditsects }}</td>
                 </tr>
             </tbody>
         </table>
         <table border="1">
             <thead>
                 <tr>
-                    <th>Responsable pédagogique de l'UE</th>
-                    <th>Principaux intervenants</th>
+                    <th colspan="2">Responsable pédagogique de l'UE</th>
+                    <th colspan="2">Principaux intervenants</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Responsable d'année</td>
-                    <td>Noms des professeurs</td>
+                    <td :rowspan="ints.length">{{ props.Responsable.prenom }}</td>
+                    <td :rowspan="ints.length">{{ props.Responsable.nom }}</td>
+                    <td>{{ int0.prenom }}</td>
+                    <td>{{ int0.nom }}</td>
                 </tr>
+                <CaseINTUE  v-for="(int) of ints.slice(1)"
+                    :inter="int"
+                />
             </tbody>
         </table>
         <table border="1">
@@ -67,11 +120,11 @@
                 <tr>
                     <td>Princ.</td>
                     <td>ISIS</td>
-                    <td>Spécialité " informatique pour la santé "</td>
-                    <td>Premier cycle</td>
-                    <td>FIE1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td>{{ props.UE.intitulediplome }}</td>
+                    <td>{{ props.UE.nomorientation }}</td>
+                    <td>{{ props.UE.intituleniveau }}</td>
+                    <td>{{ props.UE.numsemestre }}</td>
+                    <td>{{ props.UE.ordre }}</td>
                 </tr>
             </tbody>
         </table>
@@ -79,7 +132,7 @@
             <caption>Mots-clés (RNCP)</caption>
             <tbody>
                 <tr>
-                    <td>Bla bla bla bla bla</td>
+                    <td>{{ props.UE.motscles }}</td>
                 </tr>
             </tbody>
         </table>
@@ -87,16 +140,15 @@
             <caption>Compétences (RNCP)</caption>
             <tbody>
                 <tr>
-                    <td>Capacité à mobiliser les ressources d'un large champ de sciences fondamentales</td>
+                    <td>{{ props.UE.competences }}</td>
                 </tr>
             </tbody>
         </table>
         <table border="1">
             <caption>Contenu (MATIERES)</caption>
             <tbody>
-                <CaseMAT v-for="(mat) of mats"
-                    :intMat="mat.inti"
-                    :contMat="mat.cont"
+                <CaseMATnonmodifiable v-for="(mati) of mats"
+                    :mat="mati"
                     @choixMAT="handlerChoixMAT"
                 />
             </tbody>
@@ -119,12 +171,12 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>54</td>
-                    <td>74</td>
-                    <td>24</td>
-                    <td>90</td>
-                    <td>0</td>
-                    <td>0</td>
+                    <td>{{ props.UE.heurecm }}</td>
+                    <td>{{ props.UE.heuretd }}</td>
+                    <td>{{ props.UE.heuretp }}</td>
+                    <td>{{ props.UE.volumtravailperso }}</td>
+                    <td>{{ props.UE.volumprojet }}</td>
+                    <td>{{ props.UE.volumstage }}</td>
                 </tr>
             </tbody>
         </table>
@@ -132,7 +184,7 @@
             <caption>Prérequis pour suivre l'UE</caption>
             <tbody>
                 <tr>
-                    <td>Ble ble ble ble ble</td>
+                    <td>{{ props.UE.prerequis }}</td>
                 </tr>
             </tbody>
         </table>
@@ -140,7 +192,7 @@
             <caption>Modalités de contrôle des connaissances (Conditions de validation / Principes généraux)</caption>
             <tbody>
                 <tr>
-                    <td>Voir les Modalités de Cintrôle des Connaissances.</td>
+                    <td>{{ props.UE.modalitescontrole }}</td>
                 </tr>
             </tbody>
         </table>
@@ -148,7 +200,7 @@
             <caption>Bibliographie de base</caption>
             <tbody>
                 <tr>
-                    <td>Bli bli bli bli bli</td>
+                    <td>{{ props.UE.bibliographiedebase }}</td>
                 </tr>
             </tbody>
         </table>
@@ -162,7 +214,7 @@
     }
 
     input.edit {
-        position: fixed; top: 497px; left: 19px;
+        position: fixed; bottom: 19px; left: 19px;
         text-transform: uppercase; color: white;
         border-style: solid; border-color: rgb(255, 129, 131); border-width: 10px;
         font-size: 30px; font-family: "Arial"; font-weight: bold; width: 210px; height: 70px;
