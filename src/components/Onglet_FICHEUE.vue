@@ -3,6 +3,7 @@
   import { onMounted } from "vue";
 
   import UEclass from "../UEclass";
+  import PERSONNE from "../PERSONNE";
 
   import FICHEUEnonmodifiable from "./FICHEUEnonmodifiable.vue"
   import FICHEUEmodifiable from "./FICHEUEmodifiable.vue"
@@ -11,6 +12,7 @@
 
   let modeEDIT = ref(false);
   let UE = ref(new UEclass());
+  let Resp = ref(new PERSONNE());
 
   const emit = defineEmits(["choixMAT"]);
 
@@ -27,8 +29,26 @@
       .catch((error) => console.log(error));*/
   }
 
+  function getResp(intituleniveau) {
+    /*const fetchOptions = { method: "GET" };
+    fetch(url, fetchOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((dataJSON) => {*/
+        let dataJSON = {identifiant:"jmpecatte", prenompers:"Jean Marie", nompers:"Pecatte"}
+        Resp.value = new PERSONNE(dataJSON.identifiant, null, dataJSON.prenompers, dataJSON.nompers, null, null, null);
+    /*  })
+      .catch((error) => console.log(error));*/
+  }
+
+  function getAll(codeUE) {
+    getUE(codeUE);
+    getResp(UE.value.intituleniveau);
+  }
+
   onMounted(() => {
-    getUE(props.codeUE);
+    getAll(props.codeUE);
   });
 
   function handlerChoixMAT (codeMAT,intituleMAT){
@@ -37,8 +57,8 @@
 </script>
 
 <template>
-  <FICHEUEmodifiable :codeUE="props.codeUE" :UE="UE" @finEdit="modeEDIT=false" v-if="modeEDIT"/>
-  <FICHEUEnonmodifiable :codeUE="props.codeUE" :UE="UE" @debutEdit="modeEDIT=true" @choixMAT="handlerChoixMAT" v-else/>
+  <FICHEUEmodifiable :codeUE="props.codeUE" :UE="UE" :Responsable="Resp" @finEdit="modeEDIT=false" v-if="modeEDIT"/>
+  <FICHEUEnonmodifiable :codeUE="props.codeUE" :UE="UE" :Responsable="Resp" @debutEdit="modeEDIT=true" @choixMAT="handlerChoixMAT" v-else/>
 </template>
 
 <style scoped>

@@ -36,7 +36,6 @@
         return response.json();
       })
       .then((dataJSON) => {*/
-        console.log(intNiv);
         let dataJSON = [{idsemestre:1, numsemestre:5},{idsemestre:2, numsemestre:6}];
         Semestres.splice(0, Semestres.length);
         dataJSON.forEach((v) =>

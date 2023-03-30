@@ -1,18 +1,23 @@
 <script setup>
+    import { ref } from "vue";
     import { reactive } from "vue";
     import { onMounted } from "vue";
 
     import PETITEMATIERE from "../PETITEMATIERE";
+    import PERSONNE from "../PERSONNE";
 
     import CaseMATnonmodifiable from "./CaseMATnonmodifiable.vue";
+    import CaseINTUE from "./CaseINTUE.vue";
 
-    const props = defineProps({codeUE : String, UE : Object})
+    const props = defineProps({codeUE : String, UE : Object, Responsable : Object})
 
     let codeUE = props.codeUE;
 
     const emit = defineEmits(["debutEdit","choixMAT"]);
 
     let mats = reactive([]);
+    let ints = reactive([]);
+    let int0 = ref(new PERSONNE())
 
     function getMats (codeUE) {
         /*const fetchOptions = { method: "GET" };
@@ -21,10 +26,25 @@
         return response.json();
       })
       .then((dataJSON) => {*/
-        console.log(codeUE);
         let dataJSON = [{codeens:"E1-1-SFPH-1",nomens:"Mathématiques Analyse 1",contenu:"Cet enseignement aborde l'étude des fonctions, la trigonométrie, les suites réelles et complexes ainsi que les équations différentielles du premier et second ordre à coefficients complexes."},{codeens:"E1-1-SFPH-2",nomens:"Electricité 1",contenu:"Différentes caractéristiques de signaux Loi d'ohm en régime stationnaire puis en régime sinusoïdal. Lois de Kirchhoff, théorèmes de superposition, de Thévenin, de Norton et de Millman. Oscilloscope, multimètre. Représentation complexe des signaux sinusoïdaux."},{codeens:"E1-1-SFPH-3",nomens:"Mécanique physique",contenu:"Mécanique du point : vecteurs OM, vitesse, accélération. La loi fondamentale de la dynamique. énergie cinétique et énergie mécanique. relation force - énergie potentielle"},{codeens:"E1-1-SFPH-4",nomens:"Optique",contenu:"Savoir déterminer le trajet suivi par la lumière (modèle du rayon lumineux) lorsqu’elle est réfractée ou réfléchie (lame de verre et dioptres) Dans l’approximation de Gauss, savoir déterminer, à partir d'objets réels et virtuels, la position et la taille des images correspondantes théoriquement et graphiquement. Contenu : - Fondements de l’optique géométrique : principe de Fermat, lois de Descartes Formation des images - Dioptres et miroirs sphériques"}];
         dataJSON.forEach((v) =>
           mats.push(new PETITEMATIERE (v.codeens, v.nomens, v.contenu))
+        );
+    /*  })
+      .catch((error) => console.log(error));*/
+    }
+
+    function getInts (codeUE) {
+        /*const fetchOptions = { method: "GET" };
+    fetch(url, fetchOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((dataJSON) => {*/
+        let dataJSON = [{identifiant:"edupuis",prenompers:"Erik",nompers:"Dupuis"},{identifiant:"eduba",prenompers:"Erika",nompers:"Duba"},{identifiant:"hdurant",prenompers:"Henri",nompers:"Durant"}];
+        int0 = new PERSONNE (dataJSON[0].identifiant, null, dataJSON[0].prenompers, dataJSON[0].nompers, null, null, null);
+        dataJSON.forEach((v) =>
+          ints.push(new PERSONNE (v.identifiant, null, v.prenompers, v.nompers, null, null, null))
         );
     /*  })
       .catch((error) => console.log(error));*/
@@ -34,8 +54,13 @@
         emit("choixMAT",codeMAT,intituleMAT);
     }
 
-    onMounted(() => {
+    function getAll(codeUE) {
         getMats(codeUE);
+        getInts(codeUE);
+    }
+
+    onMounted(() => {
+        getAll(codeUE);
   });
 </script>
 
@@ -62,15 +87,20 @@
         <table border="1">
             <thead>
                 <tr>
-                    <th>Responsable pédagogique de l'UE</th>
-                    <th>Principaux intervenants</th>
+                    <th colspan="2">Responsable pédagogique de l'UE</th>
+                    <th colspan="2">Principaux intervenants</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Responsable d'année</td>
-                    <td>Noms des professeurs</td>
+                    <td :rowspan="ints.length">{{ props.Responsable.prenom }}</td>
+                    <td :rowspan="ints.length">{{ props.Responsable.nom }}</td>
+                    <td>{{ int0.prenom }}</td>
+                    <td>{{ int0.nom }}</td>
                 </tr>
+                <CaseINTUE  v-for="(int) of ints.slice(1)"
+                    :inter="int"
+                />
             </tbody>
         </table>
         <table border="1">
@@ -184,7 +214,7 @@
     }
 
     input.edit {
-        position: fixed; top: 497px; left: 19px;
+        position: fixed; bottom: 19px; left: 19px;
         text-transform: uppercase; color: white;
         border-style: solid; border-color: rgb(255, 129, 131); border-width: 10px;
         font-size: 30px; font-family: "Arial"; font-weight: bold; width: 210px; height: 70px;

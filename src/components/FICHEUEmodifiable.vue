@@ -4,16 +4,20 @@
     import { onMounted } from 'vue';
     
     import PETITEMATIERE from "../PETITEMATIERE";
+    import PERSONNE from "../PERSONNE";
 
     import CaseMATmodifiable from "./CaseMATmodifiable.vue";
+    import CaseINTUE from "./CaseINTUE.vue";
 
-    const props = defineProps({codeUE : String, UE : Object})
+    const props = defineProps({codeUE : String, UE : Object, Responsable : Object})
 
     let codeUE = props.codeUE;
     
     const emit = defineEmits(["finEdit"]);
 
     let mats = reactive([]);
+    let ints = reactive([]);
+    let int0 = ref(new PERSONNE())
 
     let code = ref(props.UE.code)
     let intitule = ref(props.UE.intitule)
@@ -45,16 +49,52 @@
       .catch((error) => console.log(error));*/
     }
 
-    onMounted(() => {
+    function getInts (codeUE) {
+        /*const fetchOptions = { method: "GET" };
+    fetch(url, fetchOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((dataJSON) => {*/
+        let dataJSON = [{identifiant:"edupuis",prenompers:"Erik",nompers:"Dupuis"},{identifiant:"eduba",prenompers:"Erika",nompers:"Duba"},{identifiant:"hdurant",prenompers:"Henri",nompers:"Durant"}];
+        int0 = new PERSONNE (dataJSON[0].identifiant, null, dataJSON[0].prenompers, dataJSON[0].nompers, null, null, null);
+        dataJSON.forEach((v) =>
+          ints.push(new PERSONNE (v.identifiant, null, v.prenompers, v.nompers, null, null, null))
+        );
+    /*  })
+      .catch((error) => console.log(error));*/
+    }
+
+    function getAll(codeUE) {
         getMats(codeUE);
+        getInts(codeUE);
+    }
+
+    onMounted(() => {
+        getAll(codeUE);
   });
 
     function handlerDelete(idx) {
-        mats.splice(idx,1)
+        mats.splice(idx,1);
+        
+    }
+
+    function handlerInput(codeMat, nomMat, contenuMat, idx) {
+        let mat = new PETITEMATIERE(codeMat, nomMat, contenuMat);
+        mats.splice(idx,1,mat);
     }
 
     function handlerAdd() {
-        mats.push({inti:"",cont:""})
+        let max = 0;
+        let numMat = 0;
+        for (let mat of mats) {
+            numMat = Number(mat.code.split("-")[mat.code.split("-").length-1]);
+            if (numMat > max){
+                max = numMat;
+            }
+        }
+        max++;
+        mats.push(new PETITEMATIERE (codeUE+"-"+max, null, null));
     }
 </script>
 
@@ -74,22 +114,27 @@
                 <tr>
                     <td><input type="text" v-model="code"/></td>
                     <td><input type="text" v-model="intitule"/></td>
-                    <td><input type="text" v-model="creditsects"/></td>
+                    <td><input type="number" v-model="creditsects"/></td>
                 </tr>
             </tbody>
         </table>
         <table border="1">
             <thead>
                 <tr>
-                    <th>Responsable pédagogique de l'UE</th>
-                    <th>Principaux intervenants</th>
+                    <th colspan="2">Responsable pédagogique de l'UE</th>
+                    <th colspan="2">Principaux intervenants</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Responsable d'année</td>
-                    <td>Noms des professeurs</td>
+                    <td :rowspan="ints.length">{{ props.Responsable.prenom }}</td>
+                    <td :rowspan="ints.length">{{ props.Responsable.nom }}</td>
+                    <td>{{ int0.prenom }}</td>
+                    <td>{{ int0.nom }}</td>
                 </tr>
+                <CaseINTUE  v-for="(int) of ints.slice(1)"
+                    :inter="int"
+                />
             </tbody>
         </table>
         <table border="1">
@@ -137,10 +182,10 @@
             <caption>Contenu (MATIERES)</caption>
             <tbody>
                 <CaseMATmodifiable v-for="(mat, index) of mats"
-                    :nom="mat.nom"
-                    :contenu="mat.contenu"
+                    :mat="mat"
                     :indexm="index"
-                    @delete="handlerDelete"
+                    @deleteMat="handlerDelete"
+                    @inputMat="handlerInput"
                 />
                 <tr><input type="button" value="+" @click="handlerAdd"/></tr>
             </tbody>
@@ -206,7 +251,7 @@
     }
 
     input.edit {
-        position: fixed; top: 497px; left: 19px;
+        position: fixed; bottom: 19px; left: 19px;
         text-transform: uppercase; color: white;
         border-style: solid; border-color: rgb(255, 129, 131); border-width: 10px;
         font-size: 30px; font-family: "Arial"; font-weight: bold; width: 210px; height: 70px;
