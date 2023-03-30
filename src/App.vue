@@ -65,13 +65,16 @@
       intMat.value="";
       codMat.value="";
     }
+    if (retourA=="CONNECT") {
+      connecte.value = false;
+    }
   }
 </script>
 
 <template>
-  <Onglet_FICHEMATIERE :codeMAT="codMat" v-if="matChoisie"/>
-  <Onglet_FICHEUE :codeUE="codUE" @choixMAT="handlerChoixMAT" v-else-if="ueChoisie"/>
-  <Onglet_UE @choixUE="handlerChoixUE" :Niveau="intNiv" v-else-if="nivChoisie"/>
+  <Onglet_FICHEMATIERE :codeMAT="codMat" v-if="matChoisie && connecte"/>
+  <Onglet_FICHEUE :codeUE="codUE" @choixMAT="handlerChoixMAT" v-else-if="ueChoisie && connecte"/>
+  <Onglet_UE @choixUE="handlerChoixUE" :Niveau="intNiv" v-else-if="nivChoisie && connecte"/>
   <Onglet_NIVEAU @choixNiv="handlerChoixNiv" v-else-if="connecte"/>
   <Entete
     :nom="nom"
@@ -79,8 +82,8 @@
     :NIVchoisi="intNiv"
     :UEchoisi="intUE"
     :MATchoisi="intMat"
-    v-if="connecte"
     @retour="handlerRetour"
+    v-if="connecte"
   />
   <Onglet_IDENTIFICATION @sub="handlerSub" v-else/>
   

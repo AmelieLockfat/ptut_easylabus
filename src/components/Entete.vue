@@ -11,13 +11,15 @@
 <template>
     <img id ="logoISIS" src="src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
     <img id ="logo" src="src\assets\GrosLogo.png" alt="easyLabusLogo"/>
-    <p>{{ prenom }}</p>
-    <p>{{ nom }}</p>
+    <img id ="util" src="src\assets\Utilisateur.png" alt=""/>
+    <p id="prenom" v-if="prenom!=''">{{ prenom }}</p>
+    <p id="nom" v-if="prenom!=''">{{ nom }}</p>
+    <button id="connect" @click="emitterRetour('CONNECT')"  v-if="prenom=='' && nom==''">SE CONNECTER</button>
     <div id="banderole" v-if="NIVchoisi!=''">
         <ul>
             <li><button id="butNiv" @click="emitterRetour('NIV')">{{ NIVchoisi }} </button></li>
-            <li v-if="UEchoisi!=''"><button @click="emitterRetour('UE')" >{{ UEchoisi }} </button></li>
-            <li v-if="MATchoisi!=''" aria-current="page"><button @click="emitterRetour('MAT')" >{{ MATchoisi }} </button></li>
+            <li v-if="UEchoisi!=''"><button @click="emitterRetour('UE')">{{ UEchoisi }} </button></li>
+            <li v-if="MATchoisi!=''" aria-current="page"><button @click="emitterRetour('MAT')">{{ MATchoisi }} </button></li>
         </ul>
     </div>
 </template>
@@ -36,6 +38,29 @@
         position: absolute;
         left: 10px; top: 10px;
         /* filter: blur(1px); */
+    }
+
+    #util {
+        position: absolute;
+        right: 10px; top: 10px;
+        height: 100px; width: 100px;
+    }
+    p {
+        color: white; font-size: 25px; text-align: right;
+    }
+
+    #prenom {
+        position: absolute; top: 18px; right: 120px;
+    }
+
+    #nom {
+        position: absolute; top: 68px; right: 120px;
+    }
+
+    #connect {
+        position: absolute; top: 41px; right: 120px;
+        color: white; font-size: 25px; text-align: right; font-family: 'Arial Black', 'Arial';
+        background-color: rgba(0, 0, 0, 0); border-style: none;
     }
 
     #banderole {
