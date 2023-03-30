@@ -13,9 +13,9 @@
     <img id ="logo" src="src\assets\GrosLogo.png" alt="easyLabusLogo"/>
     <p>{{ prenom }}</p>
     <p>{{ nom }}</p>
-    <div id="banderole">
+    <div id="banderole" v-if="NIVchoisi!=''">
         <ul>
-            <li  v-if="NIVchoisi!=''"><button id="butNiv" @click="emitterRetour('NIV')">{{ NIVchoisi }} </button></li>
+            <li><button id="butNiv" @click="emitterRetour('NIV')">{{ NIVchoisi }} </button></li>
             <li v-if="UEchoisi!=''"><button @click="emitterRetour('UE')" >{{ UEchoisi }} </button></li>
             <li v-if="MATchoisi!=''" aria-current="page"><button @click="emitterRetour('MAT')" >{{ MATchoisi }} </button></li>
         </ul>
@@ -35,7 +35,7 @@
         height: 170px; width: 180px;
         position: absolute;
         left: 10px; top: 10px;
-        filter: blur(1px);
+        /* filter: blur(1px); */
     }
 
     #banderole {
@@ -59,26 +59,16 @@
         text-transform: uppercase; font-size: 15px;
 
     }
-    /* #banderole li::not(:last-child)::after{
-        content: "/\00a0";
-        padding: 8px;
-        color: black;
-    } */
     #banderole li+li:before{
         padding: 8px;
         color: black;
-        content: " →";
+        content: "→";
         
     }
     #banderole li:hover{
         color: white;
  
     }
-    #banderole li{
-        /* display: inline-block; */
- 
-    }
-
     button#butNiv {
         font-size: 20px;
     }

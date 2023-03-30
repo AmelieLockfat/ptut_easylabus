@@ -31,6 +31,7 @@
         <VForm class="mt-16 ma-15 ">
         
         <v-text-field 
+            v-model="ident"
             :rules="[v => !!v || 'Vous devez entrer votre identifiant.']"
             id="login" clearable label="Identifiant :*" variant="outlined" >
         </v-text-field>
@@ -38,7 +39,7 @@
             
 
         <v-text-field
-            v-model="password"
+            v-model="mdp"
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :type="show1 ? 'text' : 'password'"
             @click:append="show1 = !show1"
@@ -55,7 +56,7 @@
     class="my-10"
     @submit.prevent="emitterSub(false)">
         
-            <v-btn id="vuetify" type="submit" @click="emitterSub(true)">Se connecter</v-btn> 
+            <v-btn id="vuetify" type="submit" @click="emitterSub(false)">Se connecter</v-btn> 
             <v-btn id="vuetify" type="submit"  @click="emitterSub(true)">Accéder en tant qu'invité</v-btn> 
             <!-- <input class="sub" type="submit" value="Se connecter" @click="emitterSub(true)"/> -->
             <!-- <input class="sub" type="button" value="Accéder en tant qu'invité" @click="emitterSub(true)"/> -->
