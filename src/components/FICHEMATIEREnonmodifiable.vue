@@ -1,5 +1,16 @@
 <script setup>
-  defineProps(["MAT"])
+    import { reactive } from 'vue';
+
+    import PERSONNE from '../PERSONNE';
+
+    import CasePROFnonmodifiable from './CasePROFnonmodifiable.vue';
+
+    defineProps(["MAT"]);
+
+    let perss = reactive([]);
+
+    perss.push(new PERSONNE("mprof1",null,"Monsieur","Prof de Maths 1","monsieur.profmaths1@univ-jfc.fr","0612345678"));
+    perss.push(new PERSONNE("mprof2",null,"Monsieur","Prof de Maths 2","monsieur.profmaths2@univ-jfc.fr","0612345679"));
 </script>
 
 <template>
@@ -29,20 +40,9 @@
                 <th colspan="2">Nom de l'intervenant</th>
                 <th colspan="2">Coordonnées intervenant</th>
             </tr>
-            <tr>
-                <td colspan="2" rowspan="2">Monsieur prof de Maths 1</td>
-                <td colspan="2">monsieur.profmaths1@univ-jfc.fr</td>
-            </tr>
-            <tr>
-                <td colspan="2">0612345678</td>
-            </tr>
-            <tr>
-                <td colspan="2" rowspan="2">Monsieur prof de Maths 2</td>
-                <td colspan="2">monsieur.profmaths2@univ-jfc.fr</td>
-            </tr>
-            <tr>
-                <td colspan="2">0612345679</td>
-            </tr>
+            <CasePROFnonmodifiable v-for="(pers) of perss"
+                :pers="pers"
+            />
         </table>
         <table border="1">
             <tr>
