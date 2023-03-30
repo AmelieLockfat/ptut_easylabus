@@ -15,9 +15,9 @@
     <p>{{ nom }}</p>
     <div id="banderole">
         <ul>
-            <li><button id="butNiv" @click="emitterRetour('NIV')" v-if="NIVchoisi!=''">{{ NIVchoisi }}</button></li>
-            <li><button @click="emitterRetour('UE')" v-if="UEchoisi!=''">{{ UEchoisi }}</button></li>
-            <li aria-current="page"><button @click="emitterRetour('MAT')" v-if="MATchoisi!=''">{{ MATchoisi }}</button></li>
+            <li  v-if="NIVchoisi!=''"><button id="butNiv" @click="emitterRetour('NIV')">{{ NIVchoisi }} </button></li>
+            <li v-if="UEchoisi!=''"><button @click="emitterRetour('UE')" >{{ UEchoisi }} </button></li>
+            <li v-if="MATchoisi!=''" aria-current="page"><button @click="emitterRetour('MAT')" >{{ MATchoisi }} </button></li>
         </ul>
     </div>
 </template>
@@ -46,19 +46,15 @@
         border-style: solid; border-radius: 3px; border-width: 2px;
          border-color: rgb(255, 129, 131);
          border: none;
+         opacity: 0.65;
     }
 
     #banderole ul  {
         
         position: absolute;
-
-        text-align: center;
         list-style: none;
-        flex-wrap: wrap;
-        display: flex;
-        /* border-style: solid; border-color: black;
-        background-color: rgb(255, 129, 131); */
-        height: 60px; min-width: 100px; max-width: 500px;
+         /* border-style: solid; border-color: black; */
+        /* height: 60px; min-width: 100px; max-width: 500px; */
         padding-left:5px; padding-right: 5px; margin: 5px;
         text-transform: uppercase; font-size: 15px;
 
@@ -71,11 +67,15 @@
     #banderole li+li:before{
         padding: 8px;
         color: black;
-        content: "/\00a0";
+        content: " →";
         
     }
     #banderole li:hover{
         color: white;
+ 
+    }
+    #banderole li{
+        /* display: inline-block; */
  
     }
 
