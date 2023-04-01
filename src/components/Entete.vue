@@ -1,7 +1,7 @@
 <script setup>
     defineProps(["nom","prenom","NIVchoisi","UEchoisi","MATchoisi"]);
     
-    const emit = defineEmits(["retour"]);
+    const emit = defineEmits(["retour","editCompte"]);
 
     function emitterRetour (retourA){
         emit("retour",retourA);
@@ -11,10 +11,16 @@
 <template>
     <img id ="logoISIS" src="src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
     <img id ="logo" src="src\assets\GrosLogo.png" alt="easyLabusLogo"/>
-    <img id ="util" src="src\assets\Utilisateur.png" alt=""/>
-    <p id="prenom" v-if="prenom!='' || prenom!=null">{{ prenom }}</p>
-    <p id="nom" v-if="prenom!='' || nom!=null">{{ nom }}</p>
-    <button id="connect" @click="emitterRetour('CONNECT')"  v-if="prenom==null && nom==null">SE CONNECTER</button>
+    <div v-if="prenom!=null && nom!=null">
+        <img id ="util" class="util" src="src\assets\Utilisateur.png" alt=""/>
+        <img id ="param" class="util" src="src\assets\Paramètre.png" alt="" @click="$emit('editCompte')"/>
+        <p id="prenom" v-if="prenom!='' || prenom!=null">{{ prenom }}</p>
+        <p id="nom" v-if="prenom!='' || nom!=null">{{ nom }}</p>
+    </div>
+    <div v-else>
+        <img class="util" src="src\assets\Utilisateur.png" alt=""/>
+        <button id="connect" @click="emitterRetour('CONNECT')"  v-if="prenom==null && nom==null">SE CONNECTER</button>
+    </div>
     <div id="banderole" v-if="NIVchoisi!=''">
         <ul>
             <li><button id="butNiv" @click="emitterRetour('NIV')">{{ NIVchoisi }} </button></li>
@@ -40,11 +46,27 @@
         /* filter: blur(1px); */
     }
 
-    #util {
+    .util {
         position: absolute;
         right: 10px; top: 10px;
         height: 100px; width: 100px;
     }
+
+    #util {
+        z-index: 2;
+    }
+
+    #param {
+        z-index: 1;
+    }
+
+    #util:hover {
+        display: none;
+    }
+    #param:hover {
+        z-index: 3;
+    }
+
     p {
         color: white; font-size: 25px; text-align: right;
     }

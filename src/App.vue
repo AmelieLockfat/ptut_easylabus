@@ -8,6 +8,7 @@
   import Onglet_FICHEUE from "./components/Onglet_FICHEUE.vue";
   import Onglet_UE from "./components/Onglet_UE.vue";
   import Onglet_NIVEAU from "./components/Onglet_NIVEAU.vue";
+  import Onglet_EDITCOMPTE from "./components/Onglet_EDITCOMPTE.vue";
   import Onglet_IDENTIFICATION from "./components/Onglet_IDENTIFICATION.vue";
 
   let nivChoisie = ref(false)
@@ -19,6 +20,8 @@
 
   let connecte = ref(false)
   let utilisateur = ref(new PERSONNE())
+
+  let editC = ref(false)
   
   let matChoisie = ref(false)
   let intMat = ref("")
@@ -76,6 +79,11 @@
       connecte.value = false;
     }
   }
+
+  function handlerEditCompte () {
+    editC.value=!editC.value;
+    connecte.value=!connecte.value;
+  }
 </script>
 
 <template>
@@ -90,9 +98,11 @@
     :UEchoisi="intUE"
     :MATchoisi="intMat"
     @retour="handlerRetour"
+    @editCompte="handlerEditCompte"
     v-if="connecte"
   />
-  <Onglet_IDENTIFICATION @sub="handlerSub" v-else/>
+  <Onglet_IDENTIFICATION @sub="handlerSub" v-else-if="editC==false"/>
+  <Onglet_EDITCOMPTE v-else/>
   
 </template>
 
