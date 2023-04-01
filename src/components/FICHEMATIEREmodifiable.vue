@@ -3,11 +3,21 @@
 
     import PERSONNE from "../PERSONNE";
     
-    import CasePROFnonmodifiable from './CasePROFnonmodifiable.vue';
+    import CasePROFmodifiable from './CasePROFmodifiable.vue';
 
     const props = defineProps({codeMAT : String, MAT : Object})
 
     let codeMAT = props.codeMAT;
+    let nom = ref(props.MAT.nom);
+    let heurecm = ref(props.MAT.heurecm);
+    let heuretd = ref(props.MAT.heuretd);
+    let heuretp = ref(props.MAT.heuretp);
+    let heuretotalencadree = ref(props.MAT.heuretotalencadree);
+    let heuretravailperso = ref(props.MAT.heuretravailperso);
+    let coefficient = ref(props.MAT.coefficient);
+    let prerequis = ref(props.MAT.prerequis);
+    let planducours = ref(props.MAT.planducours);
+    let modalitesevaluation = ref(props.MAT.modalitesevaluation);
 
     const emit = defineEmits(["finEdit"]);
 
@@ -20,7 +30,7 @@
         return response.json();
       })
       .then((dataJSON) => {*/
-        let dataJSON = [{identifiant:"mprof1",prenompers:"Monsieur",nompers:"Prof de Maths 1",numtel:"0612345678",email:"monsieur.profmaths1@univ-jfc.fr",coordprivee:true},{identifiant:"mprof2",prenompers:"Monsieur",nompers:"Prof de Maths 2",numtel:"0612345679",email:"monsieur.profmaths2@univ-jfc.fr",coordprivee:false}];
+        let dataJSON = [{identifiant:"mprof1",prenompers:"Monsieur1",nompers:"Prof de Maths 1",numtel:"0612345678",email:"monsieur.profmaths1@univ-jfc.fr",coordprivee:true},{identifiant:"mprof2",prenompers:"Monsieur2",nompers:"Prof de Maths 2",numtel:"0612345679",email:"monsieur.profmaths2@univ-jfc.fr",coordprivee:false}];
         dataJSON.forEach((v) =>
           perss.push(new PERSONNE (v.identifiant, null, v.prenompers, v.nompers, v.email, v.numtel, v.coordprivee))
         );
@@ -31,6 +41,10 @@
     onMounted(() => {
         getPerss(codeMAT);
     });
+
+    function handlerDelete(idx) {
+        perss.splice(idx,1);
+    }
 </script>
 
 <template>
@@ -40,7 +54,7 @@
         <table border="1">
             <tr>
                 <th>INTITULE DE L'ENSEIGNEMENT :</th>
-                <td>{{ props.MAT.nom }}</td>
+                <td><input type="text" v-model="nom"/></td>
                 <td></td>
             </tr>
         </table>
@@ -60,8 +74,10 @@
                 <th colspan="2">Nom de l'intervenant</th>
                 <th colspan="2">Coordonnées intervenant</th>
             </tr>
-            <CasePROFnonmodifiable v-for="(pers) of perss"
+            <CasePROFmodifiable v-for="(pers,index) of perss"
                 :pers="pers"
+                :indexp="index"
+                @deletePers="handlerDelete"
             />
         </table>
         <table border="1">
@@ -74,12 +90,12 @@
                 <th>Coefficient</th>
             </tr>
             <tr>
-                <td>{{ props.MAT.heurecm }}</td>
-                <td>{{ props.MAT.heuretd }}</td>
-                <td>{{ props.MAT.heuretp }}</td>
-                <td>{{ props.MAT.heuretotalencadree }}</td>
-                <td>{{ props.MAT.heuretravailperso }}</td>
-                <td>{{ props.MAT.coefficient }}</td>
+                <td><input type="text" v-model="heurecm"/></td>
+                <td><input type="text" v-model="heuretd"/></td>
+                <td><input type="text" v-model="heuretp"/></td>
+                <td>{{ heuretotalencadree }}</td>
+                <td><input type="text" v-model="heuretravailperso"/></td>
+                <td><input type="text" v-model="coefficient"/></td>
             </tr>
         </table>
         <table border="1">
@@ -89,7 +105,7 @@
                 <th>Prérequis pour suivre l'enseignement :</th>
             </tr>
             <tr>
-                <td>{{ props.MAT.prerequis }}</td>
+                <td><input type="text" v-model="prerequis"/></td>
             </tr>
         </table>
         <table border="1">
@@ -97,7 +113,7 @@
                 <th>Description de l'enseignement et plan du cours</th>
             </tr>
             <tr>
-                <td>{{ props.MAT.planducours }}</td>
+                <td><input type="text" v-model="planducours"/></td>
             </tr>
         </table>
         <table border="1">
@@ -105,7 +121,7 @@
                 <th>Modalités d'évaluation</th>
             </tr>
             <tr>
-                <td>{{ props.MAT.modalitesevaluation }}</td>
+                <td><input type="text" v-model="modalitesevaluation"/></td>
             </tr>
         </table>
     </div>

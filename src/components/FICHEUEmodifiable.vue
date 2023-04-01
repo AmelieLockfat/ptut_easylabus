@@ -74,7 +74,6 @@
 
     function handlerDelete(idx) {
         mats.splice(idx,1);
-        
     }
 
     function handlerInput(codeMat, nomMat, contenuMat, idx) {

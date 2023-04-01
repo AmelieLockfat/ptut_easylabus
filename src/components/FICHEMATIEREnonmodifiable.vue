@@ -1,5 +1,5 @@
 <script setup>
-    import { reactive , onMounted } from 'vue';
+    import { ref , reactive , onMounted } from 'vue';
 
     import PERSONNE from '../PERSONNE';
 
@@ -20,7 +20,7 @@
         return response.json();
       })
       .then((dataJSON) => {*/
-        let dataJSON = [{identifiant:"mprof1",prenompers:"Monsieur",nompers:"Prof de Maths 1",numtel:"0612345678",email:"monsieur.profmaths1@univ-jfc.fr",coordprivee:true},{identifiant:"mprof2",prenompers:"Monsieur",nompers:"Prof de Maths 2",numtel:"0612345679",email:"monsieur.profmaths2@univ-jfc.fr",coordprivee:false}];
+        let dataJSON = [{identifiant:"mprof1",prenompers:"Monsieur1",nompers:"Prof de Maths 1",numtel:"0612345678",email:"monsieur.profmaths1@univ-jfc.fr",coordprivee:true},{identifiant:"mprof2",prenompers:"Monsieur2",nompers:"Prof de Maths 2",numtel:"0612345679",email:"monsieur.profmaths2@univ-jfc.fr",coordprivee:false}];
         dataJSON.forEach((v) =>
           perss.push(new PERSONNE (v.identifiant, null, v.prenompers, v.nompers, v.email, v.numtel, v.coordprivee))
         );
