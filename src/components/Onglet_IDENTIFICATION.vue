@@ -4,7 +4,7 @@
     const emit = defineEmits(["sub"]);
     const ident = ref("");
     const mdp = ref("");
-
+    const mdpVisible=ref(false)
     function emitterSub (invite){
         if (invite) {
             emit("sub",invite,null,null)
@@ -28,7 +28,7 @@
 
         <br>
         
-        <VForm class="mt-16 ma-15 ">
+        <VForm class="ma-10">
         
         <v-text-field 
             v-model="ident"
@@ -37,16 +37,15 @@
         </v-text-field>
             
             
-
         <v-text-field
             v-model="mdp"
-            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="show1 ? 'text' : 'password'"
-            @click:append="show1 = !show1"
-            
+            :append-inner-icon="mdpVisible ? 'mdi-eye-off' : 'mdi-eye'"
+            :type="mdpVisible ? 'text' : 'password'"
+            @click:append-inner="mdpVisible = !mdpVisible"
             :rules="[v => !!v || 'Vous devez entrer votre mot de passe.']"
-            id="login" clearable label="Mot de passe :*" variant="outlined">
+            id="login" label="Mot de passe :*" variant="outlined">
         </v-text-field>
+        <br>
 
             <!-- <input id="ident" class="text" type="text" placeholder="Identifiant :*" v-model="ident" /> -->
             <!-- <input id="mdp" class="text" type="password" placeholder="Mot de passe :*" v-model="mdp"/> -->
@@ -68,6 +67,7 @@
 </template>
 
 <style scoped>
+
     #logoISIS{
         height: 170px; width: 180px;
         position: absolute;
@@ -164,7 +164,7 @@ div#lign {
     left:90px;
     margin-left:255px;
     /* margin-right:none; */
-    bottom:100px;
+    bottom:140px;
     height: 0px; width: 600px;
     border-style: solid; border-radius: 10px; border-width: 2px; border-color: rgb(255, 129, 131);
 }

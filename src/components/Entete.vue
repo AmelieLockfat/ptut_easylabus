@@ -34,13 +34,13 @@
     #logo{
         width : 180px; height: 27px;
         position:absolute;
-        top:200px; left: 10px;
+        top:180px; left: 10px;
         margin-right: 10px;
         /*filter: blur(1px);*/
     }
     
     #logoISIS{
-        height: 170px; width: 180px;
+        height: 145px; width: 165px;
         position: absolute;
         left: 10px; top: 10px;
         /* filter: blur(1px); */
@@ -48,8 +48,8 @@
 
     .util {
         position: absolute;
-        right: 10px; top: 10px;
-        height: 100px; width: 100px;
+        right: 25px; top: 30px;
+        height: 50px; width: 50px;
     }
 
     #util {
@@ -68,15 +68,15 @@
     }
 
     p {
-        color: white; font-size: 25px; text-align: right;
+        color: white; font-size: 15px; text-align: right;
     }
 
     #prenom {
-        position: absolute; top: 18px; right: 120px;
+        position: absolute; top: 40px; right: 90px;
     }
 
     #nom {
-        position: absolute; top: 68px; right: 120px;
+        position: absolute; top: 60px; right: 90px;
     }
 
     #connect {
