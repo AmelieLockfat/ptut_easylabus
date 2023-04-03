@@ -1,5 +1,5 @@
 <script setup>
-    import { ref , reactive , onMounted } from 'vue';
+    import { reactive , onMounted } from 'vue';
 
     import PERSONNE from '../PERSONNE';
 
@@ -37,25 +37,25 @@
     <input class="edit" type="button" value="éditer" @click="$emit('debutEdit')"/>
     <div id="fiche">
         <h1>FICHE ENSEIGNEMENT</h1>
-        <table border="1">
-            <tr>
-                <th>INTITULE DE L'ENSEIGNEMENT :</th>
+        <table border="0">
+            <tr class="fondOrange textGauche">
+                <th colspan="2">INTITULE DE L'ENSEIGNEMENT :</th>
                 <td>{{ props.MAT.nom }}</td>
                 <td></td>
             </tr>
-        </table>
-        <table border="1">
             <tr>
-                <th rowspan="2">Code et Nom de l'UE</th>
+                <th rowspan="2" class="fondBleu textGauche">Code et Nom de l'UE</th>
                 <td>{{ props.MAT.codeue }}</td>
-                <th>Année d'études</th>
-                <th>Semestre</th>
+                <th class="fondBleu textGauche">Année d'études</th>
+                <th class="fondBleu">Semestre</th>
             </tr>
             <tr>
                 <td>{{ props.MAT.intituleue }}</td>
                 <td>2022/2023</td>
                 <td>{{ props.MAT.numsemestre }}</td>
             </tr>
+        </table>
+        <table border="0">
             <tr>
                 <th colspan="2">Nom de l'intervenant</th>
                 <th colspan="2">Coordonnées intervenant</th>
@@ -64,8 +64,8 @@
                 :pers="pers"
             />
         </table>
-        <table border="1">
-            <tr>
+        <table border="0" id="heures">
+            <tr class="fondOrange">
                 <th>Nb heure CM</th>
                 <th>Nb heure TD</th>
                 <th>Nb heure TP</th>
@@ -82,32 +82,30 @@
                 <td>{{ props.MAT.coefficient }}</td>
             </tr>
         </table>
-        <table border="1">
-        </table>
-        <table border="1">
+        <div class="textGauche textLong">
             <tr>
                 <th>Prérequis pour suivre l'enseignement :</th>
             </tr>
-            <tr>
+            <tr cla>
                 <td>{{ props.MAT.prerequis }}</td>
             </tr>
-        </table>
-        <table border="1">
+        </div>
+        <div class="textGauche textLong">
             <tr>
                 <th>Description de l'enseignement et plan du cours</th>
             </tr>
             <tr>
                 <td>{{ props.MAT.planducours }}</td>
             </tr>
-        </table>
-        <table border="1">
+        </div>
+        <div class="textGauche textLong">
             <tr>
                 <th>Modalités d'évaluation</th>
             </tr>
             <tr>
                 <td>{{ props.MAT.modalitesevaluation }}</td>
             </tr>
-        </table>
+        </div>
     </div>
 </template>
 
@@ -125,5 +123,37 @@
     }
     input.edit:hover {
         background-color: rgb(255, 129, 131); color: rgb(40, 53, 147);
+    }
+
+    div {
+        border-color: black; border-style: solid; border-width: 3px; width: 650px; position: relative; left: 75px;
+    }
+
+    table {
+        background-color: black; width: 650px; position: relative; left: 75px;
+    }
+
+    #heures {
+        width: 500px;
+    }
+
+    tr {
+        background-color: white;
+    }
+
+    .fondOrange {
+        background-color: #F7CAAC;
+    }
+
+    .fondBleu {
+        background-color: #B4C6E7;
+    }
+
+    .textGauche {
+        text-align: left;
+    }
+
+    .textLong {
+        min-height: 100px;
     }
 </style>

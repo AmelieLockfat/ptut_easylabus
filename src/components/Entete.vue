@@ -6,14 +6,22 @@
     function emitterRetour (retourA){
         emit("retour",retourA);
     }
+
+    function emitterEditCompte (comptePerso){
+        emit("editCompte",comptePerso);
+    }
 </script>
 
 <template>
     <img id ="logoISIS" src="src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
     <img id ="logo" src="src\assets\GrosLogo.png" alt="easyLabusLogo"/>
     <div v-if="prenom!=null && nom!=null">
-        <img id ="util" class="util" src="src\assets\Utilisateur.png" alt=""/>
-        <img id ="param" class="util" src="src\assets\Paramètre.png" alt="" @click="$emit('editCompte')"/>
+        <div id="menuDEroulant">
+            <img id ="util" class="util" src="src\assets\Utilisateur.png" alt=""/>
+            <img id ="param" class="util" src="src\assets\Paramètre.png" alt=""/>
+            <button class="option" id="o1" @click="emitterEditCompte(true)">Paramètre</button>
+            <button class="option" id="o2" @click="emitterEditCompte(false)">Modifier/Ajouter un compte</button>
+        </div>
         <p id="prenom" v-if="prenom!='' || prenom!=null">{{ prenom }}</p>
         <p id="nom" v-if="prenom!='' || nom!=null">{{ nom }}</p>
     </div>
@@ -60,10 +68,10 @@
         z-index: 1;
     }
 
-    #util:hover {
+    div#menuDEroulant:hover #util{
         display: none;
     }
-    #param:hover {
+    div#menuDEroulant:hover #param{
         z-index: 3;
     }
 
@@ -118,5 +126,23 @@
     }
     button#butNiv {
         font-size: 20px;
+    }
+
+    div#menuDEroulant .option {
+        display: none; position: absolute; right: 20px; top: 80px;
+        color: white; font-family: "Arial"; text-align: right; text-transform: uppercase;
+        background-color: rgb(40, 53, 147);
+    }
+
+    div#menuDEroulant #o2 {
+        top: 103px;
+    }
+
+    .option:hover {
+        font-weight: bold;
+    }
+
+    div#menuDEroulant:hover .option {
+        display: block;
     }
 </style>

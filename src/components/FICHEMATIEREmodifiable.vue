@@ -42,6 +42,10 @@
         getPerss(codeMAT);
     });
 
+    function handlerTotal() {
+        heuretotalencadree.value = heurecm.value + heuretd.value + heuretp.value;
+    }
+
     function handlerDelete(idx) {
         perss.splice(idx,1);
     }
@@ -54,24 +58,24 @@
         <table border="1">
             <tr>
                 <th>INTITULE DE L'ENSEIGNEMENT :</th>
-                <td><input type="text" v-model="nom"/></td>
+                <td><input type="text" required="true" v-model="nom"/></td>
                 <td></td>
             </tr>
         </table>
         <table border="1">
             <tr>
                 <th rowspan="2">Code et Nom de l'UE</th>
-                <td>{{ props.MAT.codeue }}</td>
+                <td colspan="2">{{ props.MAT.codeue }}</td>
                 <th>Année d'études</th>
                 <th>Semestre</th>
             </tr>
             <tr>
-                <td>{{ props.MAT.intituleue }}</td>
+                <td colspan="2">{{ props.MAT.intituleue }}</td>
                 <td>2022/2023</td>
                 <td>{{ props.MAT.numsemestre }}</td>
             </tr>
             <tr>
-                <th colspan="2">Nom de l'intervenant</th>
+                <th colspan="3">Nom de l'intervenant</th>
                 <th colspan="2">Coordonnées intervenant</th>
             </tr>
             <CasePROFmodifiable v-for="(pers,index) of perss"
@@ -90,12 +94,12 @@
                 <th>Coefficient</th>
             </tr>
             <tr>
-                <td><input type="text" v-model="heurecm"/></td>
-                <td><input type="text" v-model="heuretd"/></td>
-                <td><input type="text" v-model="heuretp"/></td>
+                <td><input type="number" min="0" step="1" v-model="heurecm" @input="handlerTotal"/></td>
+                <td><input type="number" min="0" step="1" v-model="heuretd" @input="handlerTotal"/></td>
+                <td><input type="number" min="0" step="1" v-model="heuretp" @input="handlerTotal"/></td>
                 <td>{{ heuretotalencadree }}</td>
-                <td><input type="text" v-model="heuretravailperso"/></td>
-                <td><input type="text" v-model="coefficient"/></td>
+                <td><input type="number" min="0" step="1" v-model="heuretravailperso"/></td>
+                <td><input type="number" min="0" step="0.1" v-model="coefficient"/></td>
             </tr>
         </table>
         <table border="1">
