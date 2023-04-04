@@ -1,7 +1,19 @@
 <script setup>
+    import { reactive } from "vue";
+
     defineProps(["nom","prenom","NIVchoisi","UEchoisi","MATchoisi"]);
     
     const emit = defineEmits(["retour","editCompte"]);
+
+    // let items = reactive([])
+    // items.push("Réglages")
+    // // items.push("Ajouter un compte") directement dans editCompte
+    // items.push("Se déconnecter")
+    // let items =  {
+    //     reglages: 'reglages',
+    //     modifier: 'modifier', 
+    //     deconnexion: 'deconnexion' 
+    // }
 
     function emitterRetour (retourA){
         emit("retour",retourA);
@@ -24,6 +36,8 @@
         </div>
         <p id="prenom" v-if="prenom!='' || prenom!=null">{{ prenom }}</p>
         <p id="nom" v-if="prenom!='' || nom!=null">{{ nom }}</p>
+       
+    
     </div>
     <div v-else>
         <img class="util" src="src\assets\Utilisateur.png" alt=""/>
@@ -53,7 +67,12 @@
         left: 10px; top: 10px;
         /* filter: blur(1px); */
     }
-
+#menuCompte{
+    position:absolute;
+    bottom:430px;
+    margin-left:1125px;
+    
+}
     .util {
         position: absolute;
         right: 25px; top: 30px;
@@ -96,7 +115,7 @@
     #banderole {
         position : absolute;
         left: 250px; top: 17px;
-        height: 80px; width: 720px;
+        height: 80px; width: 700px;
         background-color: rgb(254, 161, 162);
         border-style: solid; border-radius: 3px; border-width: 2px;
          border-color: rgb(255, 129, 131);

@@ -1,5 +1,6 @@
 <script setup>
-  import { reactive } from "vue";
+import { reactive } from "vue";
+  
   import { onMounted } from "vue";
 
   import NIVEAU from "../NIVEAU";
