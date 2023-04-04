@@ -18,43 +18,22 @@
     function emitterRetour (retourA){
         emit("retour",retourA);
     }
+
+    function emitterEditCompte (comptePerso){
+        emit("editCompte",comptePerso);
+    }
 </script>
 
 <template>
     <img id ="logoISIS" src="src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
     <img id ="logo" src="src\assets\GrosLogo.png" alt="easyLabusLogo"/>
     <div v-if="prenom!=null && nom!=null">
-
-        <div id="menuCompte" class=" d-flex justify-space-around">
-    <v-menu>
-      <template v-slot:activator="{ props }">
-        <v-btn
-          color="rgb(3, 155, 229)"
-          v-bind="props"
-        >
-        <v-icon
-      icon="mdi-account"
-      ></v-icon>
-        </v-btn>
-      </template>
-      <v-list>
-       <v-list-item><button >Paramètre</button></v-list-item> 
-       <v-list-item><button>fff</button></v-list-item> 
-
-        <!-- <v-list-item color="black"
-          v-for="(item, index) in items"
-          :key="index"
-          :value="index"
-        >
-          <v-list-item-title ><span>ttt</span></v-list-item-title>
-
-        </v-list-item> -->
-      </v-list>
-    </v-menu>
-  </div>
-
-        <!-- <img id ="util" class="util" src="src\assets\Utilisateur.png" alt=""/>
-        <img id ="param" class="util" src="src\assets\Paramètre.png" alt="" @click="$emit('editCompte')"/> -->
+        <div id="menuDEroulant">
+            <img id ="util" class="util" src="src\assets\Utilisateur.png" alt=""/>
+            <img id ="param" class="util" src="src\assets\Paramètre.png" alt=""/>
+            <button class="option" id="o1" @click="emitterEditCompte(true)">Paramètre</button>
+            <button class="option" id="o2" @click="emitterEditCompte(false)">Modifier/Ajouter un compte</button>
+        </div>
         <p id="prenom" v-if="prenom!='' || prenom!=null">{{ prenom }}</p>
         <p id="nom" v-if="prenom!='' || nom!=null">{{ nom }}</p>
        
@@ -108,10 +87,10 @@
         z-index: 1;
     }
 
-    #util:hover {
+    div#menuDEroulant:hover #util{
         display: none;
     }
-    #param:hover {
+    div#menuDEroulant:hover #param{
         z-index: 3;
     }
 
@@ -166,5 +145,23 @@
     }
     button#butNiv {
         font-size: 20px;
+    }
+
+    div#menuDEroulant .option {
+        display: none; position: absolute; right: 20px; top: 80px;
+        color: white; font-family: "Arial"; text-align: right; text-transform: uppercase;
+        background-color: rgb(40, 53, 147);
+    }
+
+    div#menuDEroulant #o2 {
+        top: 103px;
+    }
+
+    .option:hover {
+        font-weight: bold;
+    }
+
+    div#menuDEroulant:hover .option {
+        display: block;
     }
 </style>

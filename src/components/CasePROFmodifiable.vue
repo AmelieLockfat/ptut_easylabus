@@ -12,8 +12,9 @@
 
 <template>
     <tr>
-        <td rowspan="2"><input type="text" v-model="prenom"/></td>
-        <td rowspan="2"><input type="text" v-model="nom"/></td>
+        <td rowspan="2"><input type="text" required="true" v-model="ident"/></td>
+        <td rowspan="2"><input type="text" required="true" v-model="prenom"/></td>
+        <td rowspan="2"><input type="text" required="true" v-model="nom"/></td>
         <td colspan="2">{{ pers.email }}</td>
         <input type="button" id="del" value="X" @click="$emit('deletePers', props.indexp)"/>
     </tr>

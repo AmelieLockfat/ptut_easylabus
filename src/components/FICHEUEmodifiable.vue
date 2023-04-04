@@ -15,13 +15,15 @@
 
     let mats = reactive([]);
     let ints = reactive([]);
-    let int0 = ref(new PERSONNE())
+    let int0 = ref(new PERSONNE());
+    let minNum = ref(0);
+    let maxNum = ref(0);
 
-    let code = ref(props.UE.code)
-    let intitule = ref(props.UE.intitule)
+    let code = ref(props.UE.code);
+    let intitule = ref(props.UE.intitule);
     let creditsects = ref(props.UE.creditsects);
     let numsemestre = ref(props.UE.numsemestre);
-    let ordre = ref(props.UE.ordre)
+    let ordre = ref(props.UE.ordre);
     let motscles = ref(props.UE.motscles);
     let competences = ref(props.UE.competences);
     let volumtravailperso = ref(props.UE.volumtravailperso);
@@ -66,6 +68,13 @@
     function getAll(codeUE) {
         getMats(codeUE);
         getInts(codeUE);
+        if (numsemestre%2==0){
+            minNum.value = numsemestre.value - 1;
+            maxNum.value = numsemestre.value;
+        } else {
+            minNum.value = numsemestre.value;
+            maxNum.value = numsemestre.value + 1;
+        }
     }
 
     onMounted(() => {
@@ -98,7 +107,7 @@
 <template>
     <input class="edit" type="button" value="terminer" @click="$emit('finEdit')"/>
     <div id="fiche">
-        <input type="text" v-model="intitule"/>
+        <input type="text" required="true" v-model="intitule"/>
         <table border="1">
             <thead>
                 <tr>
@@ -109,9 +118,9 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="text" v-model="code"/></td>
-                    <td><input type="text" v-model="intitule"/></td>
-                    <td><input type="number" v-model="creditsects"/></td>
+                    <td><input type="text" required="true" v-model="code"/></td>
+                    <td><input type="text" required="true" v-model="intitule"/></td>
+                    <td><input type="number" min="0" step="1" v-model="creditsects"/></td>
                 </tr>
             </tbody>
         </table>
@@ -154,8 +163,8 @@
                     <td>Spécialité " informatique pour la santé "</td>
                     <td>Premier cycle</td>
                     <td>FIE1</td>
-                    <td><input type="number" v-model="numsemestre"/></td>
-                    <td><input type="number" v-model="ordre"/></td>
+                    <td><input type="number" :min="minNum" :max="maxNum" step="1" required="true" v-model="numsemestre"/></td>
+                    <td><input type="number" min="0" step="1" v-model="ordre"/></td>
                 </tr>
             </tbody>
         </table>
@@ -179,6 +188,7 @@
             <caption>Contenu (MATIERES)</caption>
             <tbody>
                 <CaseMATmodifiable v-for="(mat, index) of mats"
+                    :key="index"
                     :mat="mat"
                     :indexm="index"
                     @deleteMat="handlerDelete"
@@ -208,9 +218,9 @@
                     <td>{{ props.UE.heurecm }}</td>
                     <td>{{ props.UE.heuretd }}</td>
                     <td>{{ props.UE.heuretp }}</td>
-                    <td><input type="number" v-model="volumtravailperso"/></td>
-                    <td><input type="number" v-model="volumprojet"/></td>
-                    <td><input type="number" v-model="volumstage"/></td>
+                    <td><input type="number" min="0" step="1" v-model="volumtravailperso"/></td>
+                    <td><input type="number" min="0" step="1" v-model="volumprojet"/></td>
+                    <td><input type="number" min="0" step="1" v-model="volumstage"/></td>
                 </tr>
             </tbody>
         </table>

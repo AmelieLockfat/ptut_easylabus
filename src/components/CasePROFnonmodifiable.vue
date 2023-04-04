@@ -14,4 +14,11 @@
 </template>
 
 <style scoped>
+    table {
+        background-color: black;
+    }
+
+    tr {
+        background-color: white;
+    }
 </style>

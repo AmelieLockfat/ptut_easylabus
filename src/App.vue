@@ -22,6 +22,7 @@
   let utilisateur = ref(new PERSONNE())
 
   let editC = ref(false)
+  let ePerso = ref(false)
   
   let matChoisie = ref(false)
   let intMat = ref("")
@@ -35,8 +36,8 @@
           return response.json();
         })
         .then((dataJSON) => {*/
-          let dataJSON = {identifiant:"acharron",prenompers:"Arnaud",nompers:"Charron",numtel:"0698765432",email:"arnaud.charron@univ-jfc.fr",coordprivee:true};
-          utilisateur = new PERSONNE (dataJSON.identifiant, null, dataJSON.prenompers, dataJSON.nompers, dataJSON.numtel, dataJSON.email, dataJSON.coordprivee);
+          let dataJSON = {identifiant:"acharron",motdepasse:"mdpacharron",prenompers:"Arnaud",nompers:"Charron",numtel:"0698765432",email:"arnaud.charron@univ-jfc.fr",coordprivee:true};
+          utilisateur = new PERSONNE (dataJSON.identifiant, dataJSON.motdepasse, dataJSON.prenompers, dataJSON.nompers, dataJSON.email, dataJSON.numtel, dataJSON.coordprivee);
       /*  })
         .catch((error) => console.log(error));*/
     }
@@ -80,8 +81,9 @@
     }
   }
 
-  function handlerEditCompte () {
+  function handlerEditCompte (comptPerso) {
     editC.value=!editC.value;
+    ePerso.value=comptPerso;
     connecte.value=!connecte.value;
   }
 </script>
@@ -102,7 +104,7 @@
     v-if="connecte"
   />
   <Onglet_IDENTIFICATION @sub="handlerSub" v-else-if="editC==false"/>
-  <Onglet_EDITCOMPTE v-else/>
+  <Onglet_EDITCOMPTE :Utilisateur="utilisateur" :editPerso="ePerso" v-else/>
   
 </template>
 
