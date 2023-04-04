@@ -17,19 +17,18 @@
   items.push("2019-2020")
 
   function getNiveaux() {
-    /*const fetchOptions = { method: "GET" };
-    fetch(url, fetchOptions)
+    const fetchOptions = { method: "GET" };
+    fetch("https://backendeasylabus.azurewebsites.net/api/niveaus/All", fetchOptions)
       .then((response) => {
         return response.json();
       })
-      .then((dataJSON) => {*/
-        let dataJSON = [{intituleniveau:"FIE1"},{intituleniveau:"FIE2"},{intituleniveau:"FIE3"},{intituleniveau:"FIE4"},{intituleniveau:"FIE5"},{intituleniveau:"FIA3"},{intituleniveau:"FIA4"},{intituleniveau:"FIA5"}];
+      .then((dataJSON) => {
         Niveaux.splice(0, Niveaux.length);
         dataJSON.forEach((v) =>
           Niveaux.push(new NIVEAU(v.intituleniveau))
         );
-    /*  })
-      .catch((error) => console.log(error));*/
+      })
+      .catch((error) => console.log(error));
   }
   onMounted(() => {
     getNiveaux();
