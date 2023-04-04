@@ -1,7 +1,19 @@
 <script setup>
+    import { reactive } from "vue";
+
     defineProps(["nom","prenom","NIVchoisi","UEchoisi","MATchoisi"]);
     
     const emit = defineEmits(["retour","editCompte"]);
+
+    // let items = reactive([])
+    // items.push("Réglages")
+    // // items.push("Ajouter un compte") directement dans editCompte
+    // items.push("Se déconnecter")
+    // let items =  {
+    //     reglages: 'reglages',
+    //     modifier: 'modifier', 
+    //     deconnexion: 'deconnexion' 
+    // }
 
     function emitterRetour (retourA){
         emit("retour",retourA);
@@ -12,10 +24,41 @@
     <img id ="logoISIS" src="src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
     <img id ="logo" src="src\assets\GrosLogo.png" alt="easyLabusLogo"/>
     <div v-if="prenom!=null && nom!=null">
-        <img id ="util" class="util" src="src\assets\Utilisateur.png" alt=""/>
-        <img id ="param" class="util" src="src\assets\Paramètre.png" alt="" @click="$emit('editCompte')"/>
+
+        <div id="menuCompte" class=" d-flex justify-space-around">
+    <v-menu>
+      <template v-slot:activator="{ props }">
+        <v-btn
+          color="rgb(3, 155, 229)"
+          v-bind="props"
+        >
+        <v-icon
+      icon="mdi-account"
+      ></v-icon>
+        </v-btn>
+      </template>
+      <v-list>
+       <v-list-item><button >Paramètre</button></v-list-item> 
+       <v-list-item><button>fff</button></v-list-item> 
+
+        <!-- <v-list-item color="black"
+          v-for="(item, index) in items"
+          :key="index"
+          :value="index"
+        >
+          <v-list-item-title ><span>ttt</span></v-list-item-title>
+
+        </v-list-item> -->
+      </v-list>
+    </v-menu>
+  </div>
+
+        <!-- <img id ="util" class="util" src="src\assets\Utilisateur.png" alt=""/>
+        <img id ="param" class="util" src="src\assets\Paramètre.png" alt="" @click="$emit('editCompte')"/> -->
         <p id="prenom" v-if="prenom!='' || prenom!=null">{{ prenom }}</p>
         <p id="nom" v-if="prenom!='' || nom!=null">{{ nom }}</p>
+       
+    
     </div>
     <div v-else>
         <img class="util" src="src\assets\Utilisateur.png" alt=""/>
@@ -45,7 +88,12 @@
         left: 10px; top: 10px;
         /* filter: blur(1px); */
     }
-
+#menuCompte{
+    position:absolute;
+    bottom:430px;
+    margin-left:1125px;
+    
+}
     .util {
         position: absolute;
         right: 25px; top: 30px;
@@ -88,7 +136,7 @@
     #banderole {
         position : absolute;
         left: 250px; top: 17px;
-        height: 80px; width: 720px;
+        height: 80px; width: 700px;
         background-color: rgb(254, 161, 162);
         border-style: solid; border-radius: 3px; border-width: 2px;
          border-color: rgb(255, 129, 131);
