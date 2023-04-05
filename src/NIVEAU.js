@@ -1,5 +1,6 @@
 export default class NIVEAU {
     constructor(intitule) {
+        this._id = intitule;
         this._intitule = intitule.substr(0,3)+" "+intitule.substr(3,intitule.length-3);
         if (intitule.substr(0,3)=="FIE"){
             this._estFIE = true;
@@ -8,6 +9,9 @@ export default class NIVEAU {
         }
     }
 
+    get id() {
+        return this._id;
+    }
     get intitule() {
         return this._intitule;
     }

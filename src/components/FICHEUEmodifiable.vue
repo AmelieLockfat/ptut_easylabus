@@ -1,13 +1,13 @@
 <script setup>
-    import { reactive } from 'vue';
-    import { ref } from 'vue';
-    import { onMounted } from 'vue';
+    import { reactive , ref , onMounted } from 'vue';
     
     import PETITEMATIERE from "../PETITEMATIERE";
     import PERSONNE from "../PERSONNE";
 
     import CaseMATmodifiable from "./CaseMATmodifiable.vue";
     import CaseINTUE from "./CaseINTUE.vue";
+
+    const url = "https://backendeasylabus.azurewebsites.net/api";
 
     const props = defineProps({codeUE : String, UE : Object, Responsable : Object})
 
@@ -17,13 +17,15 @@
 
     let mats = reactive([]);
     let ints = reactive([]);
-    let int0 = ref(new PERSONNE())
+    let int0 = ref(new PERSONNE());
+    let minNum = ref(0);
+    let maxNum = ref(0);
 
-    let code = ref(props.UE.code)
-    let intitule = ref(props.UE.intitule)
+    let code = ref(props.UE.code);
+    let intitule = ref(props.UE.intitule);
     let creditsects = ref(props.UE.creditsects);
     let numsemestre = ref(props.UE.numsemestre);
-    let ordre = ref(props.UE.ordre)
+    let ordre = ref(props.UE.ordre);
     let motscles = ref(props.UE.motscles);
     let competences = ref(props.UE.competences);
     let volumtravailperso = ref(props.UE.volumtravailperso);
@@ -34,40 +36,44 @@
     let bibliographiedebase = ref(props.UE.bibliographiedebase);
 
     function getMats (codeUE) {
-        /*const fetchOptions = { method: "GET" };
-    fetch(url, fetchOptions)
+        const fetchOptions = { method: "GET" };
+    fetch(url+"/enseignements/ByUe?codeue="+codeUE, fetchOptions)
       .then((response) => {
         return response.json();
       })
-      .then((dataJSON) => {*/
-        console.log(codeUE);
-        let dataJSON = [{codeens:"E1-1-SFPH-1",nomens:"Mathématiques Analyse 1",contenu:"Cet enseignement aborde l'étude des fonctions, la trigonométrie, les suites réelles et complexes ainsi que les équations différentielles du premier et second ordre à coefficients complexes."},{codeens:"E1-1-SFPH-2",nomens:"Electricité 1",contenu:"Différentes caractéristiques de signaux Loi d'ohm en régime stationnaire puis en régime sinusoïdal. Lois de Kirchhoff, théorèmes de superposition, de Thévenin, de Norton et de Millman. Oscilloscope, multimètre. Représentation complexe des signaux sinusoïdaux."},{codeens:"E1-1-SFPH-3",nomens:"Mécanique physique",contenu:"Mécanique du point : vecteurs OM, vitesse, accélération. La loi fondamentale de la dynamique. énergie cinétique et énergie mécanique. relation force - énergie potentielle"},{codeens:"E1-1-SFPH-4",nomens:"Optique",contenu:"Savoir déterminer le trajet suivi par la lumière (modèle du rayon lumineux) lorsqu’elle est réfractée ou réfléchie (lame de verre et dioptres) Dans l’approximation de Gauss, savoir déterminer, à partir d'objets réels et virtuels, la position et la taille des images correspondantes théoriquement et graphiquement. Contenu : - Fondements de l’optique géométrique : principe de Fermat, lois de Descartes Formation des images - Dioptres et miroirs sphériques"}];
+      .then((dataJSON) => {
         dataJSON.forEach((v) =>
           mats.push(new PETITEMATIERE (v.codeens, v.nomens, v.contenu))
         );
-    /*  })
-      .catch((error) => console.log(error));*/
+      })
+      .catch((error) => console.log(error));
     }
 
     function getInts (codeUE) {
-        /*const fetchOptions = { method: "GET" };
-    fetch(url, fetchOptions)
+        const fetchOptions = { method: "GET" };
+    fetch(url+"/ues/Intervenants?codeue="+codeUE, fetchOptions)
       .then((response) => {
         return response.json();
       })
-      .then((dataJSON) => {*/
-        let dataJSON = [{identifiant:"edupuis",prenompers:"Erik",nompers:"Dupuis"},{identifiant:"eduba",prenompers:"Erika",nompers:"Duba"},{identifiant:"hdurant",prenompers:"Henri",nompers:"Durant"}];
+      .then((dataJSON) => {
         int0 = new PERSONNE (dataJSON[0].identifiant, null, dataJSON[0].prenompers, dataJSON[0].nompers, null, null, null);
         dataJSON.forEach((v) =>
           ints.push(new PERSONNE (v.identifiant, null, v.prenompers, v.nompers, null, null, null))
         );
-    /*  })
-      .catch((error) => console.log(error));*/
+      })
+      .catch((error) => console.log(error));
     }
 
     function getAll(codeUE) {
         getMats(codeUE);
         getInts(codeUE);
+        if (numsemestre%2==0){
+            minNum.value = numsemestre.value - 1;
+            maxNum.value = numsemestre.value;
+        } else {
+            minNum.value = numsemestre.value;
+            maxNum.value = numsemestre.value + 1;
+        }
     }
 
     onMounted(() => {
@@ -76,7 +82,6 @@
 
     function handlerDelete(idx) {
         mats.splice(idx,1);
-        
     }
 
     function handlerInput(codeMat, nomMat, contenuMat, idx) {
@@ -101,7 +106,7 @@
 <template>
     <input class="edit" type="button" value="terminer" @click="$emit('finEdit')"/>
     <div id="fiche">
-        <input type="text" v-model="intitule"/>
+        <input type="text" required="true" v-model="intitule"/>
         <table border="1">
             <thead>
                 <tr>
@@ -112,9 +117,9 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="text" v-model="code"/></td>
-                    <td><input type="text" v-model="intitule"/></td>
-                    <td><input type="number" v-model="creditsects"/></td>
+                    <td><input type="text" required="true" v-model="code"/></td>
+                    <td><input type="text" required="true" v-model="intitule"/></td>
+                    <td><input type="number" min="0" step="1" v-model="creditsects"/></td>
                 </tr>
             </tbody>
         </table>
@@ -157,8 +162,8 @@
                     <td>Spécialité " informatique pour la santé "</td>
                     <td>Premier cycle</td>
                     <td>FIE1</td>
-                    <td><input type="number" v-model="numsemestre"/></td>
-                    <td><input type="number" v-model="ordre"/></td>
+                    <td><input type="number" :min="minNum" :max="maxNum" step="1" required="true" v-model="numsemestre"/></td>
+                    <td><input type="number" min="0" step="1" v-model="ordre"/></td>
                 </tr>
             </tbody>
         </table>
@@ -182,6 +187,7 @@
             <caption>Contenu (MATIERES)</caption>
             <tbody>
                 <CaseMATmodifiable v-for="(mat, index) of mats"
+                    :key="index"
                     :mat="mat"
                     :indexm="index"
                     @deleteMat="handlerDelete"
@@ -211,9 +217,9 @@
                     <td>{{ props.UE.heurecm }}</td>
                     <td>{{ props.UE.heuretd }}</td>
                     <td>{{ props.UE.heuretp }}</td>
-                    <td><input type="number" v-model="volumtravailperso"/></td>
-                    <td><input type="number" v-model="volumprojet"/></td>
-                    <td><input type="number" v-model="volumstage"/></td>
+                    <td><input type="number" min="0" step="1" v-model="volumtravailperso"/></td>
+                    <td><input type="number" min="0" step="1" v-model="volumprojet"/></td>
+                    <td><input type="number" min="0" step="1" v-model="volumstage"/></td>
                 </tr>
             </tbody>
         </table>
