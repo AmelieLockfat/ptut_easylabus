@@ -12,6 +12,7 @@
   import Onglet_IDENTIFICATION from "./components/Onglet_IDENTIFICATION.vue";
 
   let nivChoisie = ref(false)
+  let idNiv = ref("")
   let intNiv = ref("")
   
   let ueChoisie = ref(false)
@@ -44,8 +45,9 @@
     connecte.value = true;
   }
 
-  function handlerChoixNiv (intitule) {
+  function handlerChoixNiv (id,intitule) {
     nivChoisie=true;
+    idNiv.value=id;
     intNiv.value=intitule;
   }
 
@@ -91,7 +93,7 @@
 <template>
   <Onglet_FICHEMATIERE :codeMAT="codMat" v-if="matChoisie && connecte"/>
   <Onglet_FICHEUE :codeUE="codUE" @choixMAT="handlerChoixMAT" v-else-if="ueChoisie && connecte"/>
-  <Onglet_UE @choixUE="handlerChoixUE" :Niveau="intNiv" v-else-if="nivChoisie && connecte"/>
+  <Onglet_UE @choixUE="handlerChoixUE" :Niveau="idNiv" v-else-if="nivChoisie && connecte"/>
   <Onglet_NIVEAU @choixNiv="handlerChoixNiv" v-else-if="connecte"/>
   <Entete
     :nom="utilisateur.nom"

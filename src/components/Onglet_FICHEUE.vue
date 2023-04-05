@@ -7,6 +7,8 @@
   import FICHEUEnonmodifiable from "./FICHEUEnonmodifiable.vue"
   import FICHEUEmodifiable from "./FICHEUEmodifiable.vue"
 
+  const url = "https://backendeasylabus.azurewebsites.net/api";
+
   const props = defineProps({codeUE: String});
 
   let modeEDIT = ref(false);
@@ -15,35 +17,29 @@
 
   const emit = defineEmits(["choixMAT"]);
 
-  function getUE(codeUE) {
-    /*const fetchOptions = { method: "GET" };
-    fetch(url, fetchOptions)
+  function getAll(codeUE) {
+    const fetchOptions = { method: "GET" };
+    fetch(url+"/ues/Fiche?codeue="+codeUE, fetchOptions)
       .then((response) => {
         return response.json();
       })
-      .then((dataJSON) => {*/
-        let dataJSON = {codeue:"E1-1-SFPH",intituleue:"Sciences fondamentales et physiques",creditsects:10,intitulediplome:"Spécialité « informatique pour la santé »",nomorientation:"Premier cycle",intituleniveau:"FIE1",numsemestre:1,ordreue:1,motcles:"Bla bla bla bla bla",competenses:"Capacité à mobiliser les ressources d’un large champ de sciences fondamentales",heurecm:54.0,heuretd:74.0,heuretp:24.0,volumtravailperso:90.0,volumprojet:0.0,volumstage:0.0,prerequis:"Enseignement de spécialité de mathématiques terminale de lycée général Enseignement de spécialité de physiques terminale de lycée général",modalitescontrole:"Voir les Modalités de Contrôle des Connaissances.",bibliographiedebase:"Bli bli bli bli bli"}
+      .then((dataJSON) => {
         UE.value = new UEclass(dataJSON.codeue, dataJSON.intituleue, dataJSON.creditsects, dataJSON.intitulediplome, dataJSON.nomorientation, dataJSON.intituleniveau, dataJSON.numsemestre, dataJSON.ordreue, dataJSON.motcles, dataJSON.competenses, dataJSON.heurecm, dataJSON.heuretd, dataJSON.heuretp, dataJSON.volumtravailperso, dataJSON.volumprojet, dataJSON.volumstage, dataJSON.prerequis, dataJSON.modalitescontrole, dataJSON.bibliographiedebase);
-    /*  })
-      .catch((error) => console.log(error));*/
+        getResp(UE.value.intituleniveau);
+      })
+      .catch((error) => console.log(error));
   }
 
   function getResp(intituleniveau) {
-    /*const fetchOptions = { method: "GET" };
-    fetch(url, fetchOptions)
+    const fetchOptions = { method: "GET" };
+    fetch(url+"/niveaus/Responsable?intitule="+intituleniveau, fetchOptions)
       .then((response) => {
         return response.json();
       })
-      .then((dataJSON) => {*/
-        let dataJSON = {identifiant:"jmpecatte", prenompers:"Jean Marie", nompers:"Pecatte"}
+      .then((dataJSON) => {
         Resp.value = new PERSONNE(dataJSON.identifiant, null, dataJSON.prenompers, dataJSON.nompers, null, null, null);
-    /*  })
-      .catch((error) => console.log(error));*/
-  }
-
-  function getAll(codeUE) {
-    getUE(codeUE);
-    getResp(UE.value.intituleniveau);
+      })
+      .catch((error) => console.log(error));
   }
 
   onMounted(() => {

@@ -35,8 +35,8 @@ import { reactive } from "vue";
     getNiveaux();
   });
   
-  function emitterChoixNiv (intitule){
-    emit("choixNiv",intitule);
+  function emitterChoixNiv (index){
+    emit("choixNiv",Niveaux[index].id,Niveaux[index].intitule);
   }
 </script>
 
@@ -66,8 +66,9 @@ import { reactive } from "vue";
 
   <div id="niveaux">
     <Case
-      v-for="(niveau) of Niveaux"
+      v-for="(niveau,index) of Niveaux"
       :intitule="niveau.intitule"
+      :indexn="index"
       :bleu="niveau.estFIE"
       @clickc="emitterChoixNiv"
     />

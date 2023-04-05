@@ -14,18 +14,18 @@
     let perss = reactive([]);
 
     function getPerss (codeMAT) {
-        /*const fetchOptions = { method: "GET" };
-    fetch(url, fetchOptions)
+      const fetchOptions = { method: "GET" };
+      fetch("https://backendeasylabus.azurewebsites.net/api/enseignements/Intervenants?codeens="+codeMAT, fetchOptions)
       .then((response) => {
         return response.json();
       })
-      .then((dataJSON) => {*/
-        let dataJSON = [{identifiant:"mprof1",prenompers:"Monsieur1",nompers:"Prof de Maths 1",numtel:"0612345678",email:"monsieur.profmaths1@univ-jfc.fr",coordprivee:true},{identifiant:"mprof2",prenompers:"Monsieur2",nompers:"Prof de Maths 2",numtel:"0612345679",email:"monsieur.profmaths2@univ-jfc.fr",coordprivee:false}];
+      .then((dataJSON) => {
+        console.log(dataJSON);
         dataJSON.forEach((v) =>
           perss.push(new PERSONNE (v.identifiant, null, v.prenompers, v.nompers, v.email, v.numtel, v.coordprivee))
         );
-    /*  })
-      .catch((error) => console.log(error));*/
+      })
+      .catch((error) => console.log(error));
     }
 
     onMounted(() => {
@@ -112,7 +112,7 @@
 <style scoped>
     #fiche {
         position: absolute; top: 150px; left:250px;
-        background-color: white; min-height: 1131px; width: 800px;
+        background-color: white; min-height: 1131px; width: 800px; border-style: none;
     }
 
     input.edit {

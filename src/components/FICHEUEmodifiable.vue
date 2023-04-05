@@ -7,6 +7,8 @@
     import CaseMATmodifiable from "./CaseMATmodifiable.vue";
     import CaseINTUE from "./CaseINTUE.vue";
 
+    const url = "https://backendeasylabus.azurewebsites.net/api";
+
     const props = defineProps({codeUE : String, UE : Object, Responsable : Object})
 
     let codeUE = props.codeUE;
@@ -34,35 +36,32 @@
     let bibliographiedebase = ref(props.UE.bibliographiedebase);
 
     function getMats (codeUE) {
-        /*const fetchOptions = { method: "GET" };
-    fetch(url, fetchOptions)
+        const fetchOptions = { method: "GET" };
+    fetch(url+"/enseignements/ByUe?codeue="+codeUE, fetchOptions)
       .then((response) => {
         return response.json();
       })
-      .then((dataJSON) => {*/
-        console.log(codeUE);
-        let dataJSON = [{codeens:"E1-1-SFPH-1",nomens:"Mathématiques Analyse 1",contenu:"Cet enseignement aborde l'étude des fonctions, la trigonométrie, les suites réelles et complexes ainsi que les équations différentielles du premier et second ordre à coefficients complexes."},{codeens:"E1-1-SFPH-2",nomens:"Electricité 1",contenu:"Différentes caractéristiques de signaux Loi d'ohm en régime stationnaire puis en régime sinusoïdal. Lois de Kirchhoff, théorèmes de superposition, de Thévenin, de Norton et de Millman. Oscilloscope, multimètre. Représentation complexe des signaux sinusoïdaux."},{codeens:"E1-1-SFPH-3",nomens:"Mécanique physique",contenu:"Mécanique du point : vecteurs OM, vitesse, accélération. La loi fondamentale de la dynamique. énergie cinétique et énergie mécanique. relation force - énergie potentielle"},{codeens:"E1-1-SFPH-4",nomens:"Optique",contenu:"Savoir déterminer le trajet suivi par la lumière (modèle du rayon lumineux) lorsqu’elle est réfractée ou réfléchie (lame de verre et dioptres) Dans l’approximation de Gauss, savoir déterminer, à partir d'objets réels et virtuels, la position et la taille des images correspondantes théoriquement et graphiquement. Contenu : - Fondements de l’optique géométrique : principe de Fermat, lois de Descartes Formation des images - Dioptres et miroirs sphériques"}];
+      .then((dataJSON) => {
         dataJSON.forEach((v) =>
           mats.push(new PETITEMATIERE (v.codeens, v.nomens, v.contenu))
         );
-    /*  })
-      .catch((error) => console.log(error));*/
+      })
+      .catch((error) => console.log(error));
     }
 
     function getInts (codeUE) {
-        /*const fetchOptions = { method: "GET" };
-    fetch(url, fetchOptions)
+        const fetchOptions = { method: "GET" };
+    fetch(url+"/ues/Intervenants?codeue="+codeUE, fetchOptions)
       .then((response) => {
         return response.json();
       })
-      .then((dataJSON) => {*/
-        let dataJSON = [{identifiant:"edupuis",prenompers:"Erik",nompers:"Dupuis"},{identifiant:"eduba",prenompers:"Erika",nompers:"Duba"},{identifiant:"hdurant",prenompers:"Henri",nompers:"Durant"}];
+      .then((dataJSON) => {
         int0 = new PERSONNE (dataJSON[0].identifiant, null, dataJSON[0].prenompers, dataJSON[0].nompers, null, null, null);
         dataJSON.forEach((v) =>
           ints.push(new PERSONNE (v.identifiant, null, v.prenompers, v.nompers, null, null, null))
         );
-    /*  })
-      .catch((error) => console.log(error));*/
+      })
+      .catch((error) => console.log(error));
     }
 
     function getAll(codeUE) {

@@ -8,6 +8,8 @@
 
   import CaseUE from "./CaseUE.vue";
 
+  const url = "https://backendeasylabus.azurewebsites.net/api";
+
   const props = defineProps({Niveau: String});
 
   const emit = defineEmits(["choixUE"]);
@@ -18,63 +20,56 @@
   let UE1s = reactive([]);
   let UE2s = reactive([]);
 
-  function getAll (intNiv) {
-    getSemestres(intNiv);
-    if (Semestres[0].num>Semestres[1].num) {
-      Semestres.reverse();
-    }
-    numSem1.value = "Semestre "+Semestres[0].num;
-    numSem2.value = "Semestre "+Semestres[1].num;
-    getUE1s(Semestres[0].id);
-    getUE2s(Semestres[1].id);
-  }
-
-  function getSemestres(intNiv) {
-    /*const fetchOptions = { method: "GET" };
-    fetch(url, fetchOptions)
+  function getAll(intNiv) {
+    const fetchOptions = { method: "GET" };
+    fetch(url+"/semestres/ByNiveau?intituleniveau="+intNiv, fetchOptions)
       .then((response) => {
         return response.json();
       })
-      .then((dataJSON) => {*/
-        let dataJSON = [{idsemestre:1, numsemestre:5},{idsemestre:2, numsemestre:6}];
+      .then((dataJSON) => {
         Semestres.splice(0, Semestres.length);
         dataJSON.forEach((v) =>
           Semestres.push(new SEMESTRE(v.idsemestre,v.numsemestre))
         );
-    /*  })
-      .catch((error) => console.log(error));*/
+        if (Semestres[0].num>Semestres[1].num) {
+          Semestres.reverse();
+        }
+        numSem1.value = "Semestre "+Semestres[0].num;
+        numSem2.value = "Semestre "+Semestres[1].num;
+        getUE1s(Semestres[0].id);
+        getUE2s(Semestres[1].id);
+      })
+      .catch((error) => console.log(error));
   }
 
   function getUE1s(idSem) {
-    /*const fetchOptions = { method: "GET" };
-    fetch(url, fetchOptions)
+    const fetchOptions = { method: "GET" };
+    fetch(url+"/ues/BySemestre?idsemestre="+idSem, fetchOptions)
       .then((response) => {
         return response.json();
       })
-      .then((dataJSON) => {*/
-        let dataJSON = [{codeue:"codeBDD", intituleue:"Base de données"},{codeue:"codeGL", intituleue:"Génie logiciel"},{codeue:"codeA1", intituleue:"Anglais"},{codeue:"codeUISIS", intituleue:"Urbanisation et interopérabilité des Systèmes d’informations de santé"}];
+      .then((dataJSON) => {
         UE1s.splice(0, Semestres.length);
         dataJSON.forEach((v) =>
           UE1s.push(new PETITUE(v.codeue, v.intituleue))
         );
-    /*  })
-      .catch((error) => console.log(error));*/
+      })
+      .catch((error) => console.log(error));
   }
 
   function getUE2s(idSem) {
-    /*const fetchOptions = { method: "GET" };
-    fetch(url, fetchOptions)
+    const fetchOptions = { method: "GET" };
+    fetch(url+"/ues/BySemestre?idsemestre="+idSem, fetchOptions)
       .then((response) => {
         return response.json();
       })
-      .then((dataJSON) => {*/
-        let dataJSON = [{codeue:"codeTW", intituleue:"Technologie Web"},{codeue:"codeA2", intituleue:"Anglais"}];
+      .then((dataJSON) => {
         UE2s.splice(0, Semestres.length);
         dataJSON.forEach((v) =>
           UE2s.push(new PETITUE(v.codeue, v.intituleue))
         );
-    /*  })
-      .catch((error) => console.log(error));*/
+      })
+      .catch((error) => console.log(error));
   }
 
   onMounted(() => {
