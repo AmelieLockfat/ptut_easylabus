@@ -36,11 +36,12 @@
 <template>
     <input class="edit" type="button" value="éditer" @click="$emit('debutEdit')"/>
     <div id="fiche">
+        <img src="src\assets\LogoISISFichEns.png" alt="Isislogo"/>
         <h1>FICHE ENSEIGNEMENT</h1>
         <table border="0">
-            <tr class="fondOrange textGauche">
-                <th colspan="2">INTITULE DE L'ENSEIGNEMENT :</th>
-                <td>{{ props.MAT.nom }}</td>
+            <tr>
+                <th colspan="2" class="fondOrange textGauche">INTITULE DE L'ENSEIGNEMENT :</th>
+                <td class="fondOrange textGauche">{{ props.MAT.nom }}</td>
                 <td></td>
             </tr>
             <tr>
@@ -57,8 +58,8 @@
         </table>
         <table border="0">
             <tr>
-                <th colspan="2">Nom de l'intervenant</th>
-                <th colspan="2">Coordonnées intervenant</th>
+                <th colspan="2" class="textSousligne">Nom de l'intervenant</th>
+                <th colspan="2" class="textSousligne">Coordonnées intervenant</th>
             </tr>
             <CasePROFnonmodifiable v-for="(pers) of perss"
                 :pers="pers"
@@ -84,7 +85,7 @@
         </table>
         <div class="textGauche textLong">
             <tr>
-                <th>Prérequis pour suivre l'enseignement :</th>
+                <th class="textSousligne tropBas">Prérequis pour suivre l'enseignement :</th>
             </tr>
             <tr cla>
                 <td>{{ props.MAT.prerequis }}</td>
@@ -92,7 +93,7 @@
         </div>
         <div class="textGauche textLong">
             <tr>
-                <th>Description de l'enseignement et plan du cours</th>
+                <th class="textSousligne tropBas">Description de l'enseignement et plan du cours</th>
             </tr>
             <tr>
                 <td>{{ props.MAT.planducours }}</td>
@@ -100,12 +101,13 @@
         </div>
         <div class="textGauche textLong">
             <tr>
-                <th>Modalités d'évaluation</th>
+                <th class="textSousligne tropBas">Modalités d'évaluation</th>
             </tr>
             <tr>
                 <td>{{ props.MAT.modalitesevaluation }}</td>
             </tr>
         </div>
+        <h2>Fiche enseignement</h2>
     </div>
 </template>
 
@@ -113,6 +115,7 @@
     #fiche {
         position: absolute; top: 150px; left:250px;
         background-color: white; min-height: 1131px; width: 800px; border-style: none;
+    font-family: "Garamond","Arial";
     }
 
     input.edit {
@@ -123,6 +126,11 @@
     }
     input.edit:hover {
         background-color: rgb(255, 129, 131); color: rgb(40, 53, 147);
+    }
+
+    img {
+        position: relative; left: 100px; top: 10px;
+        height: 55px; width: 150px;
     }
 
     div {
@@ -155,5 +163,30 @@
 
     .textLong {
         min-height: 100px;
+    }
+
+    .textSousligne {
+        text-decoration: underline;
+    }
+
+    th {
+        padding: 5px;
+    }
+
+    td {
+        padding: 5px;
+    }
+
+    .tropBas {
+        position: relative; bottom: 5px;
+    }
+
+    h1 {
+        color: #808080; font-size: 21px; position: relative; left: 350px; bottom: 25px;
+    }
+
+    h2 {
+        position: relative; top: 25px;
+        font-family: "Arial"; color: #808080; font-size: 14px; text-align: center;
     }
 </style>
