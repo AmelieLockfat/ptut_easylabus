@@ -4,16 +4,20 @@
 
 <template>
     <tr>
-        <td rowspan="2">{{ pers.prenom }}</td>
-        <td rowspan="2">{{ pers.nom }}</td>
-        <td colspan="2">{{ pers.email }}</td>
+        <td rowspan="2" class="noms">{{ pers.prenom }}</td>
+        <td rowspan="2" class="noms">{{ pers.nom }}</td>
+        <td>{{ pers.email }}</td>
     </tr>
     <tr>
-        <td colspan="2">{{ pers.numTel }}</td>
+        <td>{{ pers.numTel }}</td>
     </tr>
 </template>
 
 <style scoped>
+    .noms {
+        width: 190px;
+    }
+
     tr {
         background-color: white;
     }
