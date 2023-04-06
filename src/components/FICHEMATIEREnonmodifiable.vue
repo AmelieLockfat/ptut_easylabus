@@ -36,17 +36,20 @@
 <template>
     <input class="edit" type="button" value="éditer" @click="$emit('debutEdit')"/>
     <div id="fiche">
+        <img src="src\assets\LogoISISFichEns.png" alt="Isislogo"/>
         <h1>FICHE ENSEIGNEMENT</h1>
-        <table border="0">
-            <tr class="fondOrange textGauche">
-                <th colspan="2">INTITULE DE L'ENSEIGNEMENT :</th>
-                <td>{{ props.MAT.nom }}</td>
+        <table border="0" class="tailleNorm">
+            <tr id="caseIntitule">
+                <th colspan="2" class="fondOrange textGauche">INTITULE DE L'ENSEIGNEMENT :</th>
+                <td class="fondOrange textGauche" id="intitule">{{ props.MAT.nom }}</td>
                 <td></td>
             </tr>
+        </table>
+        <table border="0" class="tailleNorm">
             <tr>
-                <th rowspan="2" class="fondBleu textGauche">Code et Nom de l'UE</th>
-                <td>{{ props.MAT.codeue }}</td>
-                <th class="fondBleu textGauche">Année d'études</th>
+                <th rowspan="2" id="titreUE" class="fondBleu textGauche">Code et Nom de l'UE</th>
+                <td id="codeUE">{{ props.MAT.codeue }}</td>
+                <th class="fondBleu textGauche" id="anneEtude">Année d'études</th>
                 <th class="fondBleu">Semestre</th>
             </tr>
             <tr>
@@ -55,10 +58,10 @@
                 <td>{{ props.MAT.numsemestre }}</td>
             </tr>
         </table>
-        <table border="0">
+        <table border="0" class="tailleNorm">
             <tr>
-                <th colspan="2">Nom de l'intervenant</th>
-                <th colspan="2">Coordonnées intervenant</th>
+                <th colspan="2" class="textSousligne">Nom de l'intervenant</th>
+                <th colspan="2" class="textSousligne">Coordonnées intervenant</th>
             </tr>
             <CasePROFnonmodifiable v-for="(pers) of perss"
                 :pers="pers"
@@ -74,38 +77,39 @@
                 <th>Coefficient</th>
             </tr>
             <tr>
-                <td>{{ props.MAT.heurecm }}</td>
-                <td>{{ props.MAT.heuretd }}</td>
-                <td>{{ props.MAT.heuretp }}</td>
-                <td>{{ props.MAT.heuretotalencadree }}</td>
-                <td>{{ props.MAT.heuretravailperso }}</td>
-                <td>{{ props.MAT.coefficient }}</td>
+                <td class="petiteCase">{{ props.MAT.heurecm }}</td>
+                <td class="petiteCase">{{ props.MAT.heuretd }}</td>
+                <td class="petiteCase">{{ props.MAT.heuretp }}</td>
+                <td class="petiteCase">{{ props.MAT.heuretotalencadree }}</td>
+                <td class="petiteCase">{{ props.MAT.heuretravailperso }}</td>
+                <td class="petiteCase">{{ props.MAT.coefficient }}</td>
             </tr>
         </table>
-        <div class="textGauche textLong">
+        <div class="textGauche textLong tailleNorm">
             <tr>
-                <th>Prérequis pour suivre l'enseignement :</th>
+                <th class="textSousligne tropBas">Prérequis pour suivre l'enseignement :</th>
             </tr>
-            <tr cla>
+            <tr>
                 <td>{{ props.MAT.prerequis }}</td>
             </tr>
         </div>
-        <div class="textGauche textLong">
+        <div class="textGauche textLong tailleNorm">
             <tr>
-                <th>Description de l'enseignement et plan du cours</th>
+                <th class="textSousligne tropBas">Description de l'enseignement et plan du cours</th>
             </tr>
             <tr>
                 <td>{{ props.MAT.planducours }}</td>
             </tr>
         </div>
-        <div class="textGauche textLong">
+        <div class="textGauche textLong tailleNorm">
             <tr>
-                <th>Modalités d'évaluation</th>
+                <th class="textSousligne tropBas">Modalités d'évaluation</th>
             </tr>
             <tr>
                 <td>{{ props.MAT.modalitesevaluation }}</td>
             </tr>
         </div>
+        <h2>Fiche enseignement</h2>
     </div>
 </template>
 
@@ -113,6 +117,31 @@
     #fiche {
         position: absolute; top: 150px; left:250px;
         background-color: white; min-height: 1131px; width: 800px; border-style: none;
+        font-family: "Garamond","Arial"; font-size: 16px;
+    }
+
+    #caseIntitule {
+        font-size: 14px;
+    }
+
+    #intitule {
+        width: 320px;
+    }
+
+    #intitule+td {
+        width: 72px;
+    }
+
+    #titreUE {
+        width: 110px;
+    }
+
+    #codeUE {
+        width: 340px;
+    }
+
+    #anneEtude {
+        width: 120px;
     }
 
     input.edit {
@@ -125,16 +154,29 @@
         background-color: rgb(255, 129, 131); color: rgb(40, 53, 147);
     }
 
+    img {
+        position: relative; left: 100px; top: 10px;
+        height: 55px; width: 150px;
+    }
+
+    .tailleNorm {
+        width: 650px; position: relative; left: 75px;
+    }
+
     div {
-        border-color: black; border-style: solid; border-width: 3px; width: 650px; position: relative; left: 75px;
+        border-color: black; border-style: solid; border-width: 2px;
     }
 
     table {
-        background-color: black; width: 650px; position: relative; left: 75px;
+        background-color: black;
     }
 
     #heures {
-        width: 500px;
+        position: relative; left: 75px;
+    }
+
+    .petiteCase {
+        width: 85px;
     }
 
     tr {
@@ -155,5 +197,30 @@
 
     .textLong {
         min-height: 100px;
+    }
+
+    .textSousligne {
+        text-decoration: underline;
+    }
+
+    th {
+        padding: 5px;
+    }
+
+    td {
+        padding: 5px;
+    }
+
+    .tropBas {
+        position: relative; bottom: 5px;
+    }
+
+    h1 {
+        color: #808080; font-size: 21px; position: relative; left: 350px; bottom: 25px;
+    }
+
+    h2 {
+        position: relative; top: 25px;
+        font-family: "Arial"; color: #808080; font-size: 14px; text-align: center;
     }
 </style>

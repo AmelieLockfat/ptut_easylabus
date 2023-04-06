@@ -33,7 +33,7 @@
         <v-text-field 
             v-model="ident"
             :rules="[v => !!v || 'Vous devez entrer votre identifiant.']"
-            id="login" clearable label="Identifiant :*" variant="outlined" >
+            class="login" clearable label="Identifiant :*" variant="outlined" >
         </v-text-field>
             
             
@@ -43,7 +43,7 @@
             :type="mdpVisible ? 'text' : 'password'"
             @click:append-inner="mdpVisible = !mdpVisible"
             :rules="[v => !!v || 'Vous devez entrer votre mot de passe.']"
-            id="login" label="Mot de passe :*" variant="outlined">
+            class="login" label="Mot de passe :*" variant="outlined">
         </v-text-field>
         <br>
 
@@ -52,8 +52,7 @@
         
         </VForm>
     <VForm
-    class="my-10"
-    @submit.prevent="emitterSub(false)">
+    class="my-10">
         
             <v-btn id="vuetify" type="submit" @click="emitterSub(false)">Se connecter</v-btn> 
             <v-btn id="vuetify" type="submit"  @click="emitterSub(true)">Accéder en tant qu'invité</v-btn> 
@@ -136,7 +135,7 @@
 #mdp:hover{
     border-color: black;
 } */
-#login:active{
+.login:active{
     color:#ff8183;
 }
     
