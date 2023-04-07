@@ -1,13 +1,13 @@
 <script setup>
-  defineProps(["intitule","bleu"]);
+  defineProps(["intitule","indexn","bleu"]);
   defineEmits(["clickc"]);
 </script>
 
 <template>
-  <button id="butB" class="case" @click="$emit('clickc', intitule)" v-if="bleu">
+  <button id="butB" class="case" @click="$emit('clickc', indexn)" v-if="bleu">
     {{ intitule }}
   </button>
-  <button id="butR" class="case" @click="$emit('clickc', intitule)" v-else>
+  <button id="butR" class="case" @click="$emit('clickc', indexn)" v-else>
     {{ intitule }}
   </button>
 </template>
