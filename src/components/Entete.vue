@@ -28,17 +28,17 @@
     <img id ="logoISIS" src="src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
     <img id ="logo" src="src\assets\GrosLogo.png" alt="easyLabusLogo"/>
     <div v-if="prenom!=null && nom!=null">
-        <div id="menuDEroulant">
+        <!-- <div id="menuDEroulant">
             <img id ="util" class="util" src="src\assets\Utilisateur.png" alt=""/>
             <img id ="param" class="util" src="src\assets\Paramètre.png" alt=""/>
             <button class="option" id="o1" @click="emitterEditCompte(true)">Paramètre</button>
             <button class="option" id="o2" @click="emitterEditCompte(false)">Modifier/Ajouter un compte</button>
-        </div>
+        </div> -->
         <p id="prenom" v-if="prenom!='' || prenom!=null">{{ prenom }}</p>
         <p id="nom" v-if="prenom!='' || nom!=null">{{ nom }}</p>
-       
     
-    </div>
+
+
     <div v-else>
         <img class="util" src="src\assets\Utilisateur.png" alt=""/>
         <button id="connect" @click="emitterRetour('CONNECT')"  v-if="prenom==null && nom==null">SE CONNECTER</button>
@@ -50,6 +50,33 @@
             <li v-if="MATchoisi!=''" aria-current="page"><button @click="emitterRetour('MAT')">{{ MATchoisi }} </button></li>
         </ul>
     </div>
+</div>
+    
+    <div id="menuCompte" class=" d-flex justify-space-around">
+    <v-menu>
+      <template v-slot:activator="{ props }">
+        <v-btn
+          color="#ff8183"
+          v-bind="props"
+          icon="mdi-account"
+        >
+        
+        </v-btn>
+      </template>
+      <v-list>
+       <v-list-item><v-btn class="option" id="o1" @click="emitterEditCompte(true)">Paramètre</v-btn></v-list-item> 
+       <v-list-item><v-btn class="option" id="o2" @click="emitterEditCompte(false)">Modifier/Ajouter un compte</v-btn></v-list-item> 
+        <!-- <v-list-item color="black"
+          v-for="(item, index) in items"
+          :key="index"
+          :value="index"
+        >
+          <v-list-item-title ><span>ttt</span></v-list-item-title>
+
+        </v-list-item> -->
+      </v-list>
+    </v-menu>
+  </div>
 </template>
 
 <style scoped>
@@ -67,10 +94,10 @@
         left: 10px; top: 10px;
         /* filter: blur(1px); */
     }
-#menuCompte{
+    #menuCompte{
     position:absolute;
-    bottom:430px;
-    margin-left:1125px;
+    bottom:520px;
+    margin-left:1180px;
     
 }
     .util {
@@ -148,17 +175,24 @@
     }
 
     div#menuDEroulant .option {
-        display: none; position: absolute; right: 20px; top: 80px;
-        color: white; font-family: "Arial"; text-align: right; text-transform: uppercase;
-        background-color: rgb(40, 53, 147);
+        
+        display: none; position: absolute; right: 20px; top: 60px;
+        color: white;
+        font-family: "Arial"; text-align: center; text-transform: uppercase;
+        /* background-color: rgb(40, 53, 147); */
     }
 
     div#menuDEroulant #o2 {
         top: 103px;
     }
 
-    .option:hover {
-        font-weight: bold;
+    #o1:hover {
+        /* font-weight: bold; */
+        background-color: #ff8183;
+    }
+    #o2:hover {
+        /* font-weight: bold; */
+        background-color: rgb(3, 155, 229);
     }
 
     div#menuDEroulant:hover .option {
