@@ -11,6 +11,8 @@
   let numTel = ref(props.Utilisateur.numTel);
   let coordonneesDispo = ref(!props.Utilisateur.coordPrivee);
   let mdpVisible = ref(false);
+
+
 </script>
 
 <template>
@@ -24,9 +26,6 @@
       dark
       flat
     >
-      <!-- <v-btn icon>
-        <v-icon>mdi-arrow-left</v-icon>
-      </v-btn> -->
       <v-card-title 
         id="titre"
         class=" text-h6 font-weight-regular "
@@ -38,12 +37,6 @@
       </v-card-title>
 
       <v-spacer></v-spacer>
-      <!-- <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn> -->
     </v-toolbar>
     <v-form
       ref="form"

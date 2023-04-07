@@ -42,7 +42,7 @@ import { reactive } from "vue";
 
 <template>
   <br>
-    <div class=" d-flex justify-space-around">
+    <div id="annéeEtude" class=" d-flex justify-space-around">
     <v-menu>
       <template v-slot:activator="{ props }">
         <v-btn
@@ -76,6 +76,12 @@ import { reactive } from "vue";
 </template>
 
 <style scoped>
+#annéeEtude{
+  position:relative;
+  top:30px;
+  
+
+}
   #niveaux{
     position:relative;
     left:250px;

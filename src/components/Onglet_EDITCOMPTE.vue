@@ -1,5 +1,6 @@
 <script setup>
   import EDITCOMPTEperso from "./EDITCOMPTEperso.vue"
+  import EDITCOMPTEautre from "./EDITCOMPTEautre.vue"
 
   defineProps(["Utilisateur","editPerso"])
 </script>
@@ -8,6 +9,11 @@
     <img id ="logoISIS" src="src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
     <img id ="logo" src="src\assets\GrosLogo.png" alt="easyLabusLogo"/>
     <EDITCOMPTEperso :Utilisateur="Utilisateur" v-if="editPerso"/>
+    <EDITCOMPTEautre v-else/>
+
+    
+
+
 </template>
 
 <style scoped>
@@ -25,4 +31,5 @@
         left: 10px; top: 10px;
         /* filter: blur(1px); */
     }
+   
 </style>
