@@ -39,7 +39,7 @@
         <td rowspan="2" class="noms"><input type="text" required="true" v-model="ident"/></td>
         <td rowspan="2" class="noms"><input type="text" required="true" v-model="prenom"/></td>
         <td rowspan="2" class="noms"><input type="text" required="true" v-model="nom"/></td>
-        <td rowspan="2">
+        <td rowspan="2" id="caseSelect">
             <select v-model="selec">
                 <option v-for="(pers) of perss">{{ pers.identifiant+" | "+pers.prenom+" "+pers.nom }}</option>
             </select>
@@ -54,11 +54,11 @@
 
 <style scoped>
     .noms {
-        width: 127px;
+        width: 120px;
     }
 
     .noms input {
-        width: 117px;
+        width: 110px;
     }
 
     #del {
@@ -69,8 +69,12 @@
         width: 15px;
     }
 
+    #caseSelect {
+        padding: 0px; width: 25px;
+    }
+
     select {
-        width: 50px; height: 50px; color: black; background-color: rgb(136, 136, 136);
+        width: 25px; height: 50px; color: black; background-color: rgb(136, 136, 136);
     }
 
     tr {
