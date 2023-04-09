@@ -174,17 +174,17 @@
         font-size: 20px;
     }
 
-    div#menuDEroulant .option {
+    /*div#menuDEroulant .option {
         
         display: none; position: absolute; right: 20px; top: 60px;
         color: white;
         font-family: "Arial"; text-align: center; text-transform: uppercase;
-        /* background-color: rgb(40, 53, 147); */
+        
     }
 
     div#menuDEroulant #o2 {
         top: 103px;
-    }
+    }*/
 
     #o1:hover {
         /* font-weight: bold; */
@@ -195,7 +195,7 @@
         background-color: rgb(3, 155, 229);
     }
 
-    div#menuDEroulant:hover .option {
+    /*div#menuDEroulant:hover .option {
         display: block;
-    }
+    }*/
 </style>
