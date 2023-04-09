@@ -150,13 +150,13 @@
 <template>
     <input class="edit" type="button" value="terminer" @click="$emit('finEdit')"/>
     <div id="fiche">
-        <input type="text" required="true" v-model="intitule"/>
-        <table border="1">
+        <input id="h1" class="ArialNarrow" type="text" required="true" v-model="intitule"/>
+        <table border="0" id="tableauUE"  class="ArialNarrow">
             <thead>
                 <tr>
-                    <th>Code UE</th>
+                    <th id="codeUE">Code UE</th>
                     <th>Intitulé UE</th>
-                    <th>Crédits ECTS</th>
+                    <th id="ectsUE">Crédits ECTS</th>
                 </tr>
             </thead>
             <tbody>
@@ -167,7 +167,7 @@
                 </tr>
             </tbody>
         </table>
-        <table border="1">
+        <table border="0">
             <thead>
                 <tr>
                     <th colspan="2">Responsable pédagogique de l'UE</th>
@@ -176,27 +176,27 @@
             </thead>
             <tbody>
                 <tr>
-                    <td :rowspan="ints.length">{{ props.Responsable.prenom }}</td>
-                    <td :rowspan="ints.length">{{ props.Responsable.nom }}</td>
-                    <td>{{ int0.prenom }}</td>
-                    <td>{{ int0.nom }}</td>
+                    <td class="noms" :rowspan="ints.length">{{ props.Responsable.prenom }}</td>
+                    <td class="noms" :rowspan="ints.length">{{ props.Responsable.nom }}</td>
+                    <td class="noms">{{ int0.prenom }}</td>
+                    <td class="noms">{{ int0.nom }}</td>
                 </tr>
                 <CaseINTUE  v-for="(int) of ints.slice(1)"
                     :inter="int"
                 />
             </tbody>
         </table>
-        <table border="1">
+        <table border="0">
             <caption>Diplôme et Parcours-type</caption>
             <thead>
                 <tr>
-                    <th>Nature</th>
-                    <th>Domaine</th>
+                    <th id="nat">Nature</th>
+                    <th id="dom">Domaine</th>
                     <th>Diplôme</th>
-                    <th>Parcours-type / orientation</th>
-                    <th>Niveau</th>
-                    <th>Semestre</th>
-                    <th>Ordre UE dans la fiche programme du parcours-type concerné</th>
+                    <th id="ori">Parcours-type / orientation</th>
+                    <th id="niv">Niveau</th>
+                    <th id="sem">Semestre</th>
+                    <th id="ord">Ordre UE dans la fiche programme du parcours-type concerné</th>
                 </tr>
             </thead>
             <tbody>
@@ -211,23 +211,23 @@
                 </tr>
             </tbody>
         </table>
-        <table border="1">
+        <table border="0" class="textLong">
             <caption>Mots-clés (RNCP)</caption>
             <tbody>
                 <tr>
-                    <td><input type="text" v-model="motscles"/></td>
+                    <td><textarea v-model="motscles"/></td>
                 </tr>
             </tbody>
         </table>
-        <table border="1">
+        <table border="0" class="textLong">
             <caption>Compétences (RNCP)</caption>
             <tbody>
                 <tr>
-                    <td><input type="text" v-model="competences"/></td>
+                    <td><textarea v-model="competences"/></td>
                 </tr>
             </tbody>
         </table>
-        <table border="1">
+        <table border="0">
             <caption>Contenu (MATIERES)</caption>
             <tbody>
                 <CaseMATmodifiable v-for="(mat, index) of mats"
@@ -237,10 +237,10 @@
                     @deleteMat="handlerDelete"
                     @inputMat="handlerInput"
                 />
-                <tr><input type="button" value="+" @click="handlerAdd"/></tr>
+                <tr><td colspan="4"><input type="button" value="+ AJOUTER UN ENSEIGNEMENT +" @click="handlerAdd"/></td></tr>
             </tbody>
         </table>
-        <table border="1">
+        <table border="0" id="heures">
             <caption>Format et volumes horaires</caption>
             <thead>
                 <tr>
@@ -248,12 +248,12 @@
                     <th colspan="3">Volume horaire "étudiant" (travail personnel, projet, stage)</th>
                 </tr>
                 <tr>
-                    <th>CM</th>
-                    <th>TD</th>
-                    <th>TP</th>
-                    <th>Travail personnel</th>
-                    <th>Projet (en heures)</th>
-                    <th>Stage (en heures)</th>
+                    <th class="heure">CM</th>
+                    <th class="heure">TD</th>
+                    <th class="heure">TP</th>
+                    <th class="volum">Travail personnel</th>
+                    <th class="volum">Projet (en heures)</th>
+                    <th class="volum">Stage (en heures)</th>
                 </tr>
             </thead>
             <tbody>
@@ -267,27 +267,27 @@
                 </tr>
             </tbody>
         </table>
-        <table border="1">
+        <table border="0" class="textLong">
             <caption>Prérequis pour suivre l'UE</caption>
             <tbody>
                 <tr>
-                    <td><input type="text" v-model="prerequis"/></td>
+                    <td><textarea v-model="prerequis"/></td>
                 </tr>
             </tbody>
         </table>
-        <table border="1">
+        <table border="0" class="textLong">
             <caption>Modalités de contrôle des connaissances (Conditions de validation / Principes généraux)</caption>
             <tbody>
                 <tr>
-                    <td><input type="text" v-model="modalitescontrole"/></td>
+                    <td><textarea v-model="modalitescontrole"/></td>
                 </tr>
             </tbody>
         </table>
-        <table border="1">
+        <table border="0" class="textLong">
             <caption>Bibliographie de base</caption>
             <tbody>
                 <tr>
-                    <td><input type="text" v-model="bibliographiedebase"/></td>
+                    <td><textarea v-model="bibliographiedebase"/></td>
                 </tr>
             </tbody>
         </table>
@@ -298,6 +298,11 @@
     #fiche {
         position: absolute; top: 150px; left:250px;
         background-color: white; min-height: 1131px; width: 800px;
+        font-family: "Arial";
+    }
+
+    .ArialNarrow {
+        font-family: "Arial Narrow","Arial";
     }
 
     input.edit {
@@ -308,5 +313,90 @@
     }
     input.edit:hover {
         background-color: rgb(255, 129, 131); color: rgb(40, 53, 147);
+    }
+
+    #h1 {
+        width: 800px; font-weight: bold;
+        font-size: 20px; text-align: center; position: relative; top: 20px;
+    }
+
+    caption {
+        text-align: left; font-weight: bold;
+    }
+
+    table {
+        width: 700px; position: relative; left: 30px; background-color: black; margin: 20px;
+        font-size: 13px;
+    }
+    tr {
+        background-color: white;
+    }
+
+    th , td {
+        padding-left: 5px; padding-right: 5px;
+    }
+
+    #tableauUE {
+        font-size: 16px; font-weight: bold; text-align: center;
+    }
+
+    #tableauUE input{
+        font-size: 16px; font-weight: bold; text-align: center;
+    }
+
+    #codeUE {
+        width: 150px;
+    }
+
+    #ectsUE {
+        width: 100px;
+    }
+
+    .noms {
+        width: 175px;
+    }
+
+    #nat {
+        width: 50px;
+    }
+
+    #dom {
+        width: 70px;
+    }
+
+    #ori {
+        width: 150px;
+    }
+
+    #niv {
+        width: 70px;
+    }
+
+    #sem {
+        width: 70px;
+    }
+
+    #ord {
+        width: 100px;
+    }
+
+    .textLong {
+        min-height: 50px;
+    }
+
+    #heures {
+        text-align: center;
+    }
+
+    #heures tr th{
+        font-weight:100;
+    }
+
+    .heure {
+        width: 130px;
+    }
+
+    .volum {
+        width: 103px;
     }
 </style>

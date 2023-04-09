@@ -246,12 +246,8 @@
         text-decoration: underline;
     }
 
-    th {
-        padding: 5px;
-    }
-
-    td {
-        padding: 5px;
+    th , td {
+        padding-left: 5px; padding-right: 5px;
     }
 
     .tropBas {
