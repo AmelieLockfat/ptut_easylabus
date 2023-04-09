@@ -7,6 +7,7 @@
   import PETITUE from "../PETITUE";
 
   import CaseUE from "./CaseUE.vue";
+  import CaseUEmodifiable from "./CaseUEmodifiable.vue";
 
   const url = "https://backendeasylabus.azurewebsites.net/api";
 
@@ -14,7 +15,9 @@
 
   const emit = defineEmits(["choixUE"]);
   
-  let Semestres = [];
+  let Semestres = reactive([]);
+  let add1 = ref(false);
+  let add2 = ref(false);
   let numSem1 = ref("");
   let numSem2 = ref("");
   let UE1s = reactive([]);
@@ -89,6 +92,17 @@
       :ue="ue"
       @clickc="emitterChoixUE"
     />
+    <CaseUEmodifiable
+      :code="''"
+      :intitule="''"
+      :idSem="Semestres[0].id"
+      @annuler="add1=false"
+      @terminer="getUE1s, add1=false"
+      v-if="add1"
+    />
+    <button class="case add" @click="add1=true" v-else>
+      +
+    </button>
   </div>
   <div id="sem2" class="sem">
     <p>{{ numSem2 }}</p>
@@ -97,6 +111,17 @@
       :ue="ue"
       @clickc="emitterChoixUE"
     />
+    <CaseUEmodifiable
+      :code="''"
+      :intitule="''"
+      :idSem="Semestres[1].id"
+      @annuler="add2=false"
+      @terminer="getUE2s, add2=false"
+      v-if="add2"
+    />
+    <button class="case add" @click="add2=true" v-else>
+      +
+    </button>
   </div>
 </template>
 
@@ -123,5 +148,16 @@
 
   #sem2 {
     position: relative;
+  }
+
+  button.add {
+    display: inline-block; height: 150px; width: 220px;
+        margin-bottom: 20px; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 20px;
+        color: rgb(255, 255, 255); border-style: solid; font-size: 150px;
+        border-style: solid; border-width: 10px; border-color: rgb(3, 155, 229);
+  }
+
+  button.add:hover {
+    background-color: rgb(3, 155, 229); color: rgb(40, 53, 147);
   }
 </style>

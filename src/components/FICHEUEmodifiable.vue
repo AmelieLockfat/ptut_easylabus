@@ -16,6 +16,7 @@
     const emit = defineEmits(["finEdit"]);
 
     let mats = reactive([]);
+    let matsOri = [];
     let ints = reactive([]);
     let int0 = ref(new PERSONNE());
     let minNum = ref(0);
@@ -42,26 +43,27 @@
         return response.json();
       })
       .then((dataJSON) => {
-        dataJSON.forEach((v) =>
-          mats.push(new PETITEMATIERE (v.codeens, v.nomens, v.contenu))
-        );
+        for (let v of dataJSON) {
+          mats.push(new PETITEMATIERE (v.codeens, v.nomens, v.contenu));
+          matsOri.push(new PETITEMATIERE (v.codeens, v.nomens, v.contenu));
+        }
       })
       .catch((error) => console.log(error));
     }
 
     function getInts (codeUE) {
         const fetchOptions = { method: "GET" };
-    fetch(url+"/ues/Intervenants?codeue="+codeUE, fetchOptions)
-      .then((response) => {
-        return response.json();
-      })
-      .then((dataJSON) => {
-        int0 = new PERSONNE (dataJSON[0].identifiant, null, dataJSON[0].prenompers, dataJSON[0].nompers, null, null, null);
-        dataJSON.forEach((v) =>
-          ints.push(new PERSONNE (v.identifiant, null, v.prenompers, v.nompers, null, null, null))
-        );
-      })
-      .catch((error) => console.log(error));
+        fetch(url+"/ues/Intervenants?codeue="+codeUE, fetchOptions)
+            .then((response) => {
+                return response.json();
+            })
+            .then((dataJSON) => {
+                int0 = new PERSONNE (dataJSON[0].identifiant, null, dataJSON[0].prenompers, dataJSON[0].nompers, null, null, null);
+                dataJSON.forEach((v) =>
+                ints.push(new PERSONNE (v.identifiant, null, v.prenompers, v.nompers, null, null, null))
+                );
+            })
+            .catch((error) => console.log(error));
     }
 
     function getAll(codeUE) {
@@ -78,7 +80,7 @@
 
     onMounted(() => {
         getAll(codeUE);
-  });
+    });
 
     function handlerDelete(idx) {
         mats.splice(idx,1);
@@ -100,6 +102,48 @@
         }
         max++;
         mats.push(new PETITEMATIERE (codeUE+"-"+max, null, null));
+    }
+
+    function envoieNewMat(codeMat, nomMat, contMat) {
+        const head=new Headers()
+        head.append("Content-Type", "application/json")
+        const fetchOptions={method: "POST",
+            headers: head,
+            body: JSON.stringify({ codeens : codeMat ,
+                                nomens : nomMat ,
+                                contenu : contMat })}
+        fetch(url+"/ues/AddEns?codeue="+codeUE,fetchOptions)
+            .catch((error) =>
+                console.log(error)
+            )
+    }
+
+    function envoieDelMat(codeMat) {
+        const fetchOptions={method: "DELETE"}
+        fetch(url+"/ues/DelEns?codeens="+codeMat,fetchOptions)
+            .catch((error) =>
+                console.log(error)
+            )
+    }
+
+    function handlerSubmit () { //A ajouter dans le bouton terminer (@click="handlerSubmit")
+        for (let mat of mats) {
+            envoieNewMat(mat.code, mat.nom, mat.contenu);
+        }
+        let notIN = true;
+        for (let mato of matsOri) {
+            notIN = true;
+            for (let mat of mats) {
+                if (mato.code == mat.code) {
+                    notIN = false;
+                }
+            }
+            if (notIN){
+                envoieDelMat(mato.code)
+            }
+        }
+        // Ajouter appelle à ModifUe
+        emit("finEdit"); // trouver un moyen qu'il s'execute seulement un fois que tous les appels sont terminés
     }
 </script>
 
