@@ -161,9 +161,9 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="text" required="true" v-model="code"/></td>
-                    <td><input type="text" required="true" v-model="intitule"/></td>
-                    <td><input type="number" min="0" step="1" v-model="creditsects"/></td>
+                    <td><input id="incode" type="text" required="true" v-model="code"/></td>
+                    <td><input id="inint" type="text" required="true" v-model="intitule"/></td>
+                    <td><input id="inects" type="number" min="0" step="1" v-model="creditsects"/></td>
                 </tr>
             </tbody>
         </table>
@@ -206,8 +206,8 @@
                     <td>Spécialité " informatique pour la santé "</td>
                     <td>Premier cycle</td>
                     <td>FIE1</td>
-                    <td><input type="number" :min="minNum" :max="maxNum" step="1" required="true" v-model="numsemestre"/></td>
-                    <td><input type="number" min="0" step="1" v-model="ordre"/></td>
+                    <td><input id="insem" type="number" :min="minNum" :max="maxNum" step="1" required="true" v-model="numsemestre"/></td>
+                    <td><input id="inord" type="number" min="0" step="1" v-model="ordre"/></td>
                 </tr>
             </tbody>
         </table>
@@ -348,8 +348,20 @@
         width: 150px;
     }
 
+    #incod {
+        width: 140px;
+    }
+
+    #inint {
+        width: 430px;
+    }
+
     #ectsUE {
         width: 100px;
+    }
+
+    #inects {
+        width: 90px;
     }
 
     .noms {
@@ -376,12 +388,24 @@
         width: 70px;
     }
 
+    #insem {
+        width: 60px;
+    }
+
     #ord {
         width: 100px;
     }
 
+    #inord {
+        width: 90px;
+    }
+
     .textLong {
         min-height: 50px;
+    }
+
+    textarea {
+        resize:none ; width: 690px;
     }
 
     #heures {
@@ -390,6 +414,10 @@
 
     #heures tr th{
         font-weight:100;
+    }
+
+    #heures input {
+        width: 93px;
     }
 
     .heure {

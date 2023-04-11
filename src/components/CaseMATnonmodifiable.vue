@@ -10,8 +10,8 @@
 
 <template>
     <tr @click="emitterChoixMAT(mat.code,mat.nom)">
-        <td id="nom">{{ mat.nom }}</td>
-        <td>{{ mat.contenu }}</td>
+        <td id="nomMat">{{ mat.nom }}</td>
+        <td id="contMat">{{ mat.contenu }}</td>
     </tr>
 </template>
 
@@ -24,7 +24,11 @@
         padding-left: 5px; padding-right: 5px;
     }
 
-    #nom {
+    #nomMat {
         width: 160px;
+    }
+
+    #contMat {
+        min-height: 50px;
     }
 </style>
