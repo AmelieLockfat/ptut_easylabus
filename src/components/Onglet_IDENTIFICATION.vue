@@ -4,14 +4,23 @@
     const emit = defineEmits(["sub"]);
     const ident = ref("");
     const mdp = ref("");
-    const mdpVisible=ref(false)
-    function emitterSub (invite){
-        if (invite) {
-            emit("sub",invite,null,null)
-        }
-        else {
-            emit("sub",invite,ident.value,mdp.value)
-        }
+    const mdpVisible=ref(false);
+
+    function emitterSub (){
+        const fetchOptions = { method: "GET" };
+        fetch("https://backendeasylabus.azurewebsites.net/api/personneinternes/connect?identifiant="+ident.value+"&motdepasse="+mdp.value, fetchOptions)
+            .then((response) => {
+                return response.json();
+            })
+            .then((dataJSON) => {
+                if (dataJSON){
+                    emit("sub",false,ident.value,mdp.value);
+                }
+                else {
+                    alert ("IDENTIFIANT ou MOT DE PASSE incorrecte")
+                }
+            })
+            .catch((error) => console.log(error));
     }
 </script>
 
@@ -54,8 +63,8 @@
     <VForm
     class="my-10">
         
-            <v-btn id="vuetify" type="submit" @click="emitterSub(false)">Se connecter</v-btn> 
-            <v-btn id="vuetify" type="submit"  @click="emitterSub(true)">Accéder en tant qu'invité</v-btn> 
+            <v-btn id="vuetify" type="button" @click="emitterSub">Se connecter</v-btn> 
+            <v-btn id="vuetify" type="button" @click="$emit('sub',true,null,null)">Accéder en tant qu'invité</v-btn> 
             <!-- <input class="sub" type="submit" value="Se connecter" @click="emitterSub(true)"/> -->
             <!-- <input class="sub" type="button" value="Accéder en tant qu'invité" @click="emitterSub(true)"/> -->
         </VForm>
