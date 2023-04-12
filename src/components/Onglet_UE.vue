@@ -136,7 +136,7 @@
   div.sem p {
     text-transform: uppercase;
     font-size: 40px; color: rgb(255, 129, 131); font-family: "Arial Narrow","Arial";
-    width: 237px; height: 40px; padding-left: 13px;
+    width: 250px; height: 40px; padding-left: 13px;
     border-top-style: solid; border-top-color: rgb(255, 129, 131); border-top-width: 5px;
     border-left-style: solid; border-left-color: rgb(255, 129, 131); border-left-width: 5px;
     position: relative; bottom: 30px; right: 5px;

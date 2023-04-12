@@ -34,13 +34,36 @@
             <button class="option" id="o1" @click="emitterEditCompte(true)">Paramètre</button>
             <button class="option" id="o2" @click="emitterEditCompte(false)">Modifier/Ajouter un compte</button>
         </div> -->
+        <div id="menuCompte" class=" d-flex justify-space-around">
+            <v-menu>
+                <template v-slot:activator="{ props }">
+                    <v-btn
+                    color="#ff8183"
+                    v-bind="props"
+                    icon="mdi-account"
+                    >
+                    
+                    </v-btn>
+                </template>
+                <v-list>
+                    <v-list-item><v-btn class="option" id="o1" @click="emitterEditCompte(true)">Paramètre</v-btn></v-list-item> 
+                    <v-list-item><v-btn class="option" id="o2" @click="emitterEditCompte(false)">Modifier/Ajouter un compte</v-btn></v-list-item> 
+                        <!-- <v-list-item color="black"
+                        v-for="(item, index) in items"
+                        :key="index"
+                        :value="index"
+                        >
+                        <v-list-item-title ><span>ttt</span></v-list-item-title>
+
+                        </v-list-item> -->
+                </v-list>
+            </v-menu>
+        </div>
         <p id="prenom" v-if="prenom!='' || prenom!=null">{{ prenom }}</p>
         <p id="nom" v-if="prenom!='' || nom!=null">{{ nom }}</p>
-    
-
-
+    </div>
     <div v-else>
-        <img class="util" src="src\assets\Utilisateur.png" alt=""/>
+        <!-- <img class="util" src="src\assets\Utilisateur.png" alt=""/> -->
         <button id="connect" @click="emitterRetour('CONNECT')"  v-if="prenom==null && nom==null">SE CONNECTER</button>
     </div>
     <div id="banderole" v-if="NIVchoisi!=''">
@@ -50,33 +73,6 @@
             <li v-if="MATchoisi!=''" aria-current="page"><button @click="emitterRetour('MAT')">{{ MATchoisi }} </button></li>
         </ul>
     </div>
-</div>
-    
-    <div id="menuCompte" class=" d-flex justify-space-around">
-    <v-menu>
-      <template v-slot:activator="{ props }">
-        <v-btn
-          color="#ff8183"
-          v-bind="props"
-          icon="mdi-account"
-        >
-        
-        </v-btn>
-      </template>
-      <v-list>
-       <v-list-item><v-btn class="option" id="o1" @click="emitterEditCompte(true)">Paramètre</v-btn></v-list-item> 
-       <v-list-item><v-btn class="option" id="o2" @click="emitterEditCompte(false)">Modifier/Ajouter un compte</v-btn></v-list-item> 
-        <!-- <v-list-item color="black"
-          v-for="(item, index) in items"
-          :key="index"
-          :value="index"
-        >
-          <v-list-item-title ><span>ttt</span></v-list-item-title>
-
-        </v-list-item> -->
-      </v-list>
-    </v-menu>
-  </div>
 </template>
 
 <style scoped>
@@ -96,11 +92,11 @@
     }
     #menuCompte{
     position:absolute;
-    bottom:520px;
+    top: 20px;
     margin-left:1180px;
     
 }
-    .util {
+    /*.util {
         position: absolute;
         right: 25px; top: 30px;
         height: 50px; width: 50px;
@@ -119,22 +115,22 @@
     }
     div#menuDEroulant:hover #param{
         z-index: 3;
-    }
+    }*/
 
     p {
         color: white; font-size: 15px; text-align: right;
     }
 
     #prenom {
-        position: absolute; top: 40px; right: 90px;
+        position: absolute; top: 22px; right: 105px;
     }
 
     #nom {
-        position: absolute; top: 60px; right: 90px;
+        position: absolute; top: 45px; right: 105px;
     }
 
     #connect {
-        position: absolute; top: 41px; right: 120px;
+        position: absolute; top: 31px; right: 41px;
         color: white; font-size: 25px; text-align: right; font-family: 'Arial Black', 'Arial';
         background-color: rgba(0, 0, 0, 0); border-style: none;
     }
