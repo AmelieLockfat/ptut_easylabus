@@ -251,7 +251,7 @@
     }
 
     .tropBas {
-        padding-top: 0px; padding-bottom: 0px;
+        position: relative; bottom: 3px;
     }
 
     h1 {

@@ -203,9 +203,9 @@
                 <tr>
                     <td>Princ.</td>
                     <td>ISIS</td>
-                    <td>Spécialité " informatique pour la santé "</td>
-                    <td>Premier cycle</td>
-                    <td>FIE1</td>
+                    <td>{{ props.UE.intitulediplome }}</td>
+                    <td>{{ props.UE.nomorientation }}</td>
+                    <td>{{ props.UE.intituleniveau }}</td>
                     <td><input id="insem" type="number" :min="minNum" :max="maxNum" step="1" required="true" v-model="numsemestre"/></td>
                     <td><input id="inord" type="number" min="0" step="1" v-model="ordre"/></td>
                 </tr>

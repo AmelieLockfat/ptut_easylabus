@@ -21,8 +21,8 @@
             return response.json();
         })
         .then((dataJSON) => {
+            console.log(fetchOptions)
             emit("terminer");
-            console.log(code.value+" "+intitule.value+" "+idSem);
         })
         .catch((error) => console.log(error));
     }

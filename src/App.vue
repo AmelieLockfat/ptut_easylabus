@@ -31,16 +31,15 @@
 
   function handlerSub (invite,ident,mdp){
     if (!invite) {
-      /*const fetchOptions = { method: "GET" };
-      fetch(url, fetchOptions)
+      const fetchOptions = { method: "GET" };
+      fetch("https://backendeasylabus.azurewebsites.net/api/personneinternes/ByIdAMdp?identifiant="+ident+"&motdepasse="+mdp, fetchOptions)
         .then((response) => {
           return response.json();
         })
-        .then((dataJSON) => {*/
-          let dataJSON = {identifiant:"acharron",motdepasse:"mdpacharron",prenompers:"Arnaud",nompers:"Charron",numtel:"0698765432",email:"arnaud.charron@univ-jfc.fr",coordprivee:true};
-          utilisateur = new PERSONNE (dataJSON.identifiant, dataJSON.motdepasse, dataJSON.prenompers, dataJSON.nompers, dataJSON.email, dataJSON.numtel, dataJSON.coordprivee);
-      /*  })
-        .catch((error) => console.log(error));*/
+        .then((dataJSON) => {
+          utilisateur.value = new PERSONNE (dataJSON.identifiant, dataJSON.motdepasse, dataJSON.prenompers, dataJSON.nompers, dataJSON.email, dataJSON.numtel, dataJSON.coordprivee);
+        })
+        .catch((error) => console.log(error));
     }
     connecte.value = true;
   }
