@@ -123,9 +123,36 @@
       +
     </button>
   </div>
+
+  <v-btn id="lienINU" class="my-12"  href="https://auth.univ-jfc.fr/cas/login?service=https%3A%2F%2Fent.univ-jfc.fr%2FuPortal%2FLogin">
+      Se connecter à l'ENT JFC
+    </v-btn> 
+    <v-btn id="lienISIS" class="my-0"  href="https://isis.univ-jfc.fr/">
+      Visiter le site de l'école
+    </v-btn>   
 </template>
 
 <style scoped>
+  #lienINU{
+    font-size:x-small;
+    position:absolute;
+    top:235px;
+    right:1080px;
+    background-color: rgb(3, 155, 229);
+  }
+  #lienINU:hover{
+    background-color: rgb(70, 187, 245);
+  }
+  #lienISIS{
+    font-size:x-small;
+    position:absolute;
+    top:235px;
+    right:1080px;
+    background-color: rgb(3, 155, 229);
+  }
+  #lienISIS:hover{
+    background-color: rgb(81, 190, 244);
+  }
   div.sem {
     width: 780px;
     border-left-style: solid; border-left-color: rgb(255, 129, 131); border-left-width: 5px;

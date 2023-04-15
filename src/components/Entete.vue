@@ -25,8 +25,8 @@
 </script>
 
 <template>
-    <img id ="logoISIS" src="\src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
-    <img id ="logo" src="\src\assets\GrosLogo.png" alt="easyLabusLogo"/>
+    <img id ="logoISIS" src="src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
+    <img id ="logo" src="src\assets\GrosLogo.png" alt="easyLabusLogo"/>
     <div v-if="prenom!=null && nom!=null">
         <!-- <div id="menuDEroulant">
             <img id ="util" class="util" src="src\assets\Utilisateur.png" alt=""/>
@@ -34,36 +34,13 @@
             <button class="option" id="o1" @click="emitterEditCompte(true)">Paramètre</button>
             <button class="option" id="o2" @click="emitterEditCompte(false)">Modifier/Ajouter un compte</button>
         </div> -->
-        <div id="menuCompte" class=" d-flex justify-space-around">
-            <v-menu>
-                <template v-slot:activator="{ props }">
-                    <v-btn
-                    color="#ff8183"
-                    v-bind="props"
-                    icon="mdi-account"
-                    >
-                    
-                    </v-btn>
-                </template>
-                <v-list>
-                    <v-list-item><v-btn class="option" id="o1" @click="emitterEditCompte(true)">Paramètre</v-btn></v-list-item> 
-                    <v-list-item><v-btn class="option" id="o2" @click="emitterEditCompte(false)">Modifier/Ajouter un compte</v-btn></v-list-item> 
-                        <!-- <v-list-item color="black"
-                        v-for="(item, index) in items"
-                        :key="index"
-                        :value="index"
-                        >
-                        <v-list-item-title ><span>ttt</span></v-list-item-title>
-
-                        </v-list-item> -->
-                </v-list>
-            </v-menu>
-        </div>
         <p id="prenom" v-if="prenom!='' || prenom!=null">{{ prenom }}</p>
         <p id="nom" v-if="prenom!='' || nom!=null">{{ nom }}</p>
-    </div>
+    
+
+
     <div v-else>
-        <!-- <img class="util" src="src\assets\Utilisateur.png" alt=""/> -->
+        <img class="util" src="src\assets\Utilisateur.png" alt=""/>
         <button id="connect" @click="emitterRetour('CONNECT')"  v-if="prenom==null && nom==null">SE CONNECTER</button>
     </div>
     <div id="banderole" v-if="NIVchoisi!=''">
@@ -73,6 +50,33 @@
             <li v-if="MATchoisi!=''" aria-current="page"><button @click="emitterRetour('MAT')">{{ MATchoisi }} </button></li>
         </ul>
     </div>
+</div>
+    
+    <div id="menuCompte" class=" d-flex justify-space-around">
+    <v-menu>
+      <template v-slot:activator="{ props }">
+        <v-btn
+          color="rgb(3, 155, 229)"
+          v-bind="props"
+          icon="mdi-account"
+        >
+        
+        </v-btn>
+      </template>
+      <v-list>
+       <v-list-item><v-btn class="option" id="o1" @click="emitterEditCompte(true)">Paramètre</v-btn></v-list-item> 
+       <v-list-item><v-btn class="option" id="o2" @click="emitterEditCompte(false)">Modifier/Ajouter un compte</v-btn></v-list-item> 
+        <!-- <v-list-item color="black"
+          v-for="(item, index) in items"
+          :key="index"
+          :value="index"
+        >
+          <v-list-item-title ><span>ttt</span></v-list-item-title>
+
+        </v-list-item> -->
+      </v-list>
+    </v-menu>
+  </div>
 </template>
 
 <style scoped>
@@ -94,7 +98,6 @@
     position:absolute;
     top: 20px;
     margin-left:1180px;
-    
 }
     /*.util {
         position: absolute;
@@ -118,7 +121,7 @@
     }*/
 
     p {
-        color: white; font-size: 15px; text-align: right;
+        color: rgb(3, 155, 229); font-size: 15px; text-align: right;
     }
 
     #prenom {

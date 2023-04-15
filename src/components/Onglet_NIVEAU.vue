@@ -42,6 +42,8 @@ import { reactive } from "vue";
 
 <template>
   <br>
+  <br>
+
     <div id="annéeEtude" class=" d-flex justify-space-around">
     <v-menu>
       <template v-slot:activator="{ props }">
@@ -49,7 +51,7 @@ import { reactive } from "vue";
           color="rgb(3, 155, 229)"
           v-bind="props"
         >
-          Années
+          Années d'étude
         </v-btn>
       </template>
       <v-list>
@@ -63,6 +65,14 @@ import { reactive } from "vue";
       </v-list>
     </v-menu>
   </div>
+  <img id="coeur" src="src\assets\CoeurISIS(offContours).png" alt="logo coeur"/>
+
+    <v-btn id="lienINU" class="my-12"  href="https://auth.univ-jfc.fr/cas/login?service=https%3A%2F%2Fent.univ-jfc.fr%2FuPortal%2FLogin">
+      Se connecter à l'ENT JFC
+    </v-btn> 
+    <v-btn id="lienISIS" class="my-0"  href="https://isis.univ-jfc.fr/">
+      Visiter le site de l'école
+    </v-btn>   
 
   <div id="niveaux">
     <Case
@@ -76,16 +86,47 @@ import { reactive } from "vue";
 </template>
 
 <style scoped>
+ #coeur{
+    position:absolute;
+    height: 120px; width: 130px;
+    margin-left: 45px;
+    top:5px; left: 615px;
+    }
+a{
+  font-size: 10px;
+  color:white;
+  position:absolute;
+  margin-left:1090px;
+  top:650px;
+}
+
 #annéeEtude{
   position:relative;
   top:30px;
-  
-
 }
+
   #niveaux{
     position:relative;
     left:250px;
     top:100px;
     width: 900px;
+  }
+  #lienINU{
+    position:absolute;
+    top:235px;
+    right:1080px;
+    background-color: rgb(3, 155, 229);
+  }
+  #lienINU:hover{
+    background-color: rgb(70, 187, 245);
+  }
+  #lienISIS{
+    position:absolute;
+    top:235px;
+    right:1080px;
+    background-color: rgb(3, 155, 229);
+  }
+  #lienISIS:hover{
+    background-color: rgb(81, 190, 244);
   }
 </style>
