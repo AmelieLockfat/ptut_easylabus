@@ -1,13 +1,10 @@
 <script setup>
-  import EDITCOMPTEperso from "./EDITCOMPTEperso.vue"
-  import EDITCOMPTEautre from "./EDITCOMPTEautre.vue"
-
   defineProps(["Utilisateur","editPerso"])
 </script>
 
 <template>
-    <img id ="logoISIS" src="src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
-    <img id ="logo" src="src\assets\GrosLogo.png" alt="easyLabusLogo"/>
+    <img id ="logoISIS" src="\src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
+    <img id ="logo" src="\src\assets\GrosLogo.png" alt="easyLabusLogo"/>
 <v-card
       class="mx-auto mt-9"
       style="max-width: 500px;"

@@ -25,9 +25,9 @@
 </script>
 
 <template>
-    <img id="logoISIS" src="src\assets\LogoISIS-Blanc.png" alt="logo ISIS"/>
-    <img id="logo" src="src\assets\GrosLogo.png" alt="logo appli"/>
-    <img id="coeur" src="src\assets\CoeurISIS.png" alt="logo coeur"/>
+    <img id="logoISIS" src="\src\assets\LogoISIS-Blanc.png" alt="logo ISIS"/>
+    <img id="logo" src="\src\assets\GrosLogo.png" alt="logo appli"/>
+    <img id="coeur" src="\src\assets\CoeurISIS.png" alt="logo coeur"/>
 
     <div id="form">
         <p>

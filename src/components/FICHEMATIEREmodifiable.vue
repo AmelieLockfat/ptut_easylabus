@@ -53,7 +53,7 @@
 <template>
     <input class="edit" type="button" value="terminer" @click="$emit('finEdit')"/>
     <div id="fiche">
-        <img src="src\assets\LogoISISFichEns.png" alt="Isislogo"/>
+        <img src="\src\assets\LogoISISFichEns.png" alt="Isislogo"/>
         <h1>FICHE ENSEIGNEMENT</h1>
         <table border="0" class="tailleNorm">
             <tr id="caseIntitule">
