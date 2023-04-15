@@ -21,31 +21,33 @@
 
     function getMats (codeUE) {
         const fetchOptions = { method: "GET" };
-    fetch(url+"/enseignements/ByUe?codeue="+codeUE, fetchOptions)
-      .then((response) => {
-        return response.json();
-      })
-      .then((dataJSON) => {
-        dataJSON.forEach((v) =>
-          mats.push(new PETITEMATIERE (v.codeens, v.nomens, v.contenu))
-        );
-      })
-      .catch((error) => console.log(error));
+        fetch(url+"/enseignements/ByUe?codeue="+codeUE, fetchOptions)
+        .then((response) => {
+            return response.json();
+        })
+        .then((dataJSON) => {
+            dataJSON.forEach((v) =>
+                mats.push(new PETITEMATIERE (v.codeens, v.nomens, v.contenu))
+            );
+        })
+        .catch((error) => console.log(error));
     }
 
     function getInts (codeUE) {
         const fetchOptions = { method: "GET" };
-    fetch(url+"/ues/Intervenants?codeue="+codeUE, fetchOptions)
-      .then((response) => {
-        return response.json();
-      })
-      .then((dataJSON) => {
-        int0 = new PERSONNE (dataJSON[0].identifiant, null, dataJSON[0].prenompers, dataJSON[0].nompers, null, null, null);
-        dataJSON.forEach((v) =>
-          ints.push(new PERSONNE (v.identifiant, null, v.prenompers, v.nompers, null, null, null))
-        );
-      })
-      .catch((error) => console.log(error));
+        fetch(url+"/ues/Intervenants?codeue="+codeUE, fetchOptions)
+        .then((response) => {
+            return response.json();
+        })
+        .then((dataJSON) => {
+            if (dataJSON.length>0){
+                int0 = new PERSONNE (dataJSON[0].identifiant, null, dataJSON[0].prenompers, dataJSON[0].nompers, null, null, null);
+            }
+            dataJSON.forEach((v) =>
+                ints.push(new PERSONNE (v.identifiant, null, v.prenompers, v.nompers, null, null, null))
+            );
+        })
+        .catch((error) => console.log(error));
     }
 
     function handlerChoixMAT (codeMAT,intituleMAT){
@@ -98,6 +100,7 @@
                 </tr>
                 <CaseINTUE  v-for="(int) of ints.slice(1)"
                     :inter="int"
+                    v-if="ints.length>1"
                 />
             </tbody>
         </table>

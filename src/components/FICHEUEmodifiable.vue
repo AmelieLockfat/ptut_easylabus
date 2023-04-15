@@ -58,7 +58,9 @@
                 return response.json();
             })
             .then((dataJSON) => {
-                int0 = new PERSONNE (dataJSON[0].identifiant, null, dataJSON[0].prenompers, dataJSON[0].nompers, null, null, null);
+                if (dataJSON.length>0){
+                    int0 = new PERSONNE (dataJSON[0].identifiant, null, dataJSON[0].prenompers, dataJSON[0].nompers, null, null, null);
+                }
                 dataJSON.forEach((v) =>
                 ints.push(new PERSONNE (v.identifiant, null, v.prenompers, v.nompers, null, null, null))
                 );
@@ -183,6 +185,7 @@
                 </tr>
                 <CaseINTUE  v-for="(int) of ints.slice(1)"
                     :inter="int"
+                    v-if="ints.length>1"
                 />
             </tbody>
         </table>
