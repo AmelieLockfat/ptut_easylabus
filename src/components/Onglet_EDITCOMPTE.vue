@@ -2,18 +2,15 @@
   import EDITCOMPTEperso from "./EDITCOMPTEperso.vue"
   import EDITCOMPTEautre from "./EDITCOMPTEautre.vue"
 
-  defineProps(["Utilisateur","editPerso"])
-
-  function finEdit (){
-    
-  }
+  defineProps(["Utilisateur","editPerso"]);
+  defineEmits(["finEdit"]);
 </script>
 
 <template>
     <img id ="logoISIS" src="\src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
     <img id ="logo" src="\src\assets\GrosLogo.png" alt="easyLabusLogo"/>
-    <EDITCOMPTEperso :Utilisateur="Utilisateur" @submit="finEdit" v-if="editPerso"/>
-    <EDITCOMPTEautre @submit="finEdit" v-else/>
+    <EDITCOMPTEperso :Utilisateur="Utilisateur" @submit="$emit('finEdit')" v-if="editPerso"/>
+    <EDITCOMPTEautre @submit="$emit('finEdit')" v-else/>
 </template>
 
 <style scoped>
