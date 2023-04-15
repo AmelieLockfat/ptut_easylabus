@@ -25,8 +25,8 @@
 </script>
 
 <template>
-    <img id ="logoISIS" src="src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
-    <img id ="logo" src="src\assets\GrosLogo.png" alt="easyLabusLogo"/>
+    <img id ="logoISIS" src="\src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
+    <img id ="logo" src="\src\assets\GrosLogo.png" alt="easyLabusLogo"/>
     <div v-if="prenom!=null && nom!=null">
         <!-- <div id="menuDEroulant">
             <img id ="util" class="util" src="src\assets\Utilisateur.png" alt=""/>
@@ -40,7 +40,7 @@
 
 
     <div v-else>
-        <img class="util" src="src\assets\Utilisateur.png" alt=""/>
+        <img class="util" src="\src\assets\Utilisateur.png" alt=""/>
         <button id="connect" @click="emitterRetour('CONNECT')"  v-if="prenom==null && nom==null">SE CONNECTER</button>
     </div>
     <div id="banderole" v-if="NIVchoisi!=''">

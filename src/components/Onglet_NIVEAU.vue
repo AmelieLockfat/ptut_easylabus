@@ -65,7 +65,7 @@ import { reactive } from "vue";
       </v-list>
     </v-menu>
   </div>
-  <img id="coeur" src="src\assets\CoeurISIS(offContours).png" alt="logo coeur"/>
+  <img id="coeur" src="\src\assets\CoeurISIS(offContours).png" alt="logo coeur"/>
 
     <v-btn id="lienINU" class="my-12"  href="https://auth.univ-jfc.fr/cas/login?service=https%3A%2F%2Fent.univ-jfc.fr%2FuPortal%2FLogin">
       Se connecter à l'ENT JFC
