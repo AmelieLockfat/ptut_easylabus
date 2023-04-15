@@ -124,20 +124,25 @@
     </button>
   </div>
 
-  <v-btn id="lienINU" class="my-12"  href="https://auth.univ-jfc.fr/cas/login?service=https%3A%2F%2Fent.univ-jfc.fr%2FuPortal%2FLogin">
+  <v-btn id="lienINU" class="lien"  href="https://auth.univ-jfc.fr/cas/login?service=https%3A%2F%2Fent.univ-jfc.fr%2FuPortal%2FLogin">
       Se connecter à l'ENT JFC
     </v-btn> 
-    <v-btn id="lienISIS" class="my-0"  href="https://isis.univ-jfc.fr/">
+    <v-btn id="lienISIS" class="lien"  href="https://isis.univ-jfc.fr/">
       Visiter le site de l'école
     </v-btn>   
 </template>
 
 <style scoped>
+  .lien{
+    font-size: 10px;
+    color:rgb(0, 0, 0);
+  }
+
   #lienINU{
     font-size:x-small;
     position:absolute;
-    top:235px;
-    right:1080px;
+    top:280px;
+    left:10px;
     background-color: rgb(3, 155, 229);
   }
   #lienINU:hover{
@@ -147,7 +152,7 @@
     font-size:x-small;
     position:absolute;
     top:235px;
-    right:1080px;
+    left:10px;
     background-color: rgb(3, 155, 229);
   }
   #lienISIS:hover{

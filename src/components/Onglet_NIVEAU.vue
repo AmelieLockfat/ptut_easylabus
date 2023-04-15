@@ -67,10 +67,10 @@ import { reactive } from "vue";
   </div>
   <img id="coeur" src="\src\assets\CoeurISIS(offContours).png" alt="logo coeur"/>
 
-    <v-btn id="lienINU" class="my-12"  href="https://auth.univ-jfc.fr/cas/login?service=https%3A%2F%2Fent.univ-jfc.fr%2FuPortal%2FLogin">
+    <v-btn id="lienINU" class="lien"  href="https://auth.univ-jfc.fr/cas/login?service=https%3A%2F%2Fent.univ-jfc.fr%2FuPortal%2FLogin">
       Se connecter à l'ENT JFC
     </v-btn> 
-    <v-btn id="lienISIS" class="my-0"  href="https://isis.univ-jfc.fr/">
+    <v-btn id="lienISIS" class="lien"  href="https://isis.univ-jfc.fr/">
       Visiter le site de l'école
     </v-btn>   
 
@@ -90,19 +90,16 @@ import { reactive } from "vue";
     position:absolute;
     height: 120px; width: 130px;
     margin-left: 45px;
-    top:5px; left: 615px;
+    top:5px; left: 597px; z-index: -1;
     }
-a{
-  font-size: 10px;
-  color:white;
-  position:absolute;
-  margin-left:1090px;
-  top:650px;
-}
+  .lien{
+    font-size: 10px;
+    color:rgb(0, 0, 0);
+  }
 
 #annéeEtude{
-  position:relative;
-  top:30px;
+  position:absolute;
+  top:80px; left: 530px;
 }
 
   #niveaux{
@@ -113,8 +110,8 @@ a{
   }
   #lienINU{
     position:absolute;
-    top:235px;
-    right:1080px;
+    top:280px;
+    left:10px;
     background-color: rgb(3, 155, 229);
   }
   #lienINU:hover{
@@ -123,7 +120,7 @@ a{
   #lienISIS{
     position:absolute;
     top:235px;
-    right:1080px;
+    left:10px;
     background-color: rgb(3, 155, 229);
   }
   #lienISIS:hover{
