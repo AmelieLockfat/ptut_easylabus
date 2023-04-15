@@ -36,11 +36,34 @@
         </div> -->
         <p id="prenom" v-if="prenom!='' || prenom!=null">{{ prenom }}</p>
         <p id="nom" v-if="prenom!='' || nom!=null">{{ nom }}</p>
-    
+        <div id="menuCompte" class=" d-flex justify-space-around">
+            <v-menu>
+                <template v-slot:activator="{ props }">
+                    <v-btn
+                    color="rgb(3, 155, 229)"
+                    v-bind="props"
+                    icon="mdi-account"
+                    ></v-btn>
+                </template>
+                <v-list>
+                    <v-list-item><v-btn class="option" id="o1" @click="emitterEditCompte(true)">Paramètre</v-btn></v-list-item> 
+                    <v-list-item><v-btn class="option" id="o2" @click="emitterEditCompte(false)">Modifier/Ajouter un compte</v-btn></v-list-item> 
+                        <!-- <v-list-item color="black"
+                        v-for="(item, index) in items"
+                        :key="index"
+                        :value="index"
+                        >
+                        <v-list-item-title ><span>ttt</span></v-list-item-title>
+
+                        </v-list-item> -->
+                </v-list>
+            </v-menu>
+        </div>
+  </div>
 
 
     <div v-else>
-        <img class="util" src="\src\assets\Utilisateur.png" alt=""/>
+        <!--img class="util" src="\src\assets\Utilisateur.png" alt=""/-->
         <button id="connect" @click="emitterRetour('CONNECT')"  v-if="prenom==null && nom==null">SE CONNECTER</button>
     </div>
     <div id="banderole" v-if="NIVchoisi!=''">
@@ -50,33 +73,7 @@
             <li v-if="MATchoisi!=''" aria-current="page"><button @click="emitterRetour('MAT')">{{ MATchoisi }} </button></li>
         </ul>
     </div>
-</div>
     
-    <div id="menuCompte" class=" d-flex justify-space-around">
-    <v-menu>
-      <template v-slot:activator="{ props }">
-        <v-btn
-          color="rgb(3, 155, 229)"
-          v-bind="props"
-          icon="mdi-account"
-        >
-        
-        </v-btn>
-      </template>
-      <v-list>
-       <v-list-item><v-btn class="option" id="o1" @click="emitterEditCompte(true)">Paramètre</v-btn></v-list-item> 
-       <v-list-item><v-btn class="option" id="o2" @click="emitterEditCompte(false)">Modifier/Ajouter un compte</v-btn></v-list-item> 
-        <!-- <v-list-item color="black"
-          v-for="(item, index) in items"
-          :key="index"
-          :value="index"
-        >
-          <v-list-item-title ><span>ttt</span></v-list-item-title>
-
-        </v-list-item> -->
-      </v-list>
-    </v-menu>
-  </div>
 </template>
 
 <style scoped>
