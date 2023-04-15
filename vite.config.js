@@ -13,6 +13,6 @@ export default defineConfig({
   build: {
     rollupOptions: {
       external: ['src/assets/LogoISIS-Blanc.png','src/assets/GrosLogo.png','src/assets/CoeurISIS.png','src/assets/Bouclier.png','src/assets/logo.svg','src/assets/LogoISISFichEns.png']
-    },
+    }
   },
 });
