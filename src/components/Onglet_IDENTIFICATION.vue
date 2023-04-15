@@ -31,7 +31,7 @@
 
     <div id="form">
         <p>
-            <img src="src\assets\Bouclier.png" alt=""/>
+            <img src="\src\assets\Bouclier.png" alt=""/>
               Entrez votre identifiant et votre mot de passe
         </p>
 
