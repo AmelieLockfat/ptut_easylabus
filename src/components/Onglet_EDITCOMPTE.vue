@@ -3,17 +3,17 @@
   import EDITCOMPTEautre from "./EDITCOMPTEautre.vue"
 
   defineProps(["Utilisateur","editPerso"])
+
+  function finEdit (){
+    
+  }
 </script>
 
 <template>
     <img id ="logoISIS" src="\src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
     <img id ="logo" src="\src\assets\GrosLogo.png" alt="easyLabusLogo"/>
-    <EDITCOMPTEperso :Utilisateur="Utilisateur" v-if="editPerso"/>
-    <EDITCOMPTEautre v-else/>
-
-    
-
-
+    <EDITCOMPTEperso :Utilisateur="Utilisateur" @submit="finEdit" v-if="editPerso"/>
+    <EDITCOMPTEautre @submit="finEdit" v-else/>
 </template>
 
 <style scoped>

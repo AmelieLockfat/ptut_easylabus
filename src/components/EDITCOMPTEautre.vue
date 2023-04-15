@@ -1,10 +1,12 @@
 <script setup>
-  defineProps(["Utilisateur","editPerso"])
+  const emit = defineEmits(["submit"]);
+
+  function handlerSubmit (){
+    emit("submit");
+  }
 </script>
 
 <template>
-    <img id ="logoISIS" src="\src\assets\LogoISIS-Blanc.png" alt="Isislogo"/>
-    <img id ="logo" src="\src\assets\GrosLogo.png" alt="easyLabusLogo"/>
 <v-card
       class="mx-auto mt-9"
       style="max-width: 500px;"
@@ -88,6 +90,7 @@
         <v-btn
         id="boutonCreer"
         color="rgb(3, 155, 229)"
+        @click="handlerSubmit"
       >
         Créer le compte
         <v-icon
@@ -100,20 +103,6 @@
 </template>
 
 <style scoped>
-#logo{
-    width : 180px; height: 27px;
-    position:absolute;
-    top:200px; left: 10px;
-    margin-right: 10px;
-    /*filter: blur(1px);*/
-}
-
-#logoISIS{
-    height: 170px; width: 180px;
-    position: absolute;
-    left: 10px; top: 10px;
-    /* filter: blur(1px); */
-}
 #ajouterCompte{
         justify-content: center;
         margin-left: 110px;

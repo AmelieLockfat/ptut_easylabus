@@ -87,6 +87,22 @@
     ePerso.value=comptPerso;
     connecte.value=!connecte.value;
   }
+
+  function handlerFinEdit () {
+    if (ePerso==true) {
+      const fetchOptions = { method: "GET" };
+      fetch("https://backendeasylabus.azurewebsites.net/api/personneinternes/ByIdAMdp?identifiant="+ident+"&motdepasse="+mdp, fetchOptions)
+        .then((response) => {
+          return response.json();
+        })
+        .then((dataJSON) => {
+          utilisateur.value = new PERSONNE (dataJSON.identifiant, dataJSON.motdepasse, dataJSON.prenompers, dataJSON.nompers, dataJSON.email, dataJSON.numtel, dataJSON.coordprivee);
+        })
+        .catch((error) => console.log(error));
+    }
+    editC.value=!editC.value;
+    connecte.value = true;
+  }
 </script>
 
 <template>
@@ -105,7 +121,7 @@
     v-if="connecte"
   />
   <Onglet_IDENTIFICATION @sub="handlerSub" v-else-if="editC==false"/>
-  <Onglet_EDITCOMPTE :Utilisateur="utilisateur" :editPerso="ePerso" v-else/>
+  <Onglet_EDITCOMPTE :Utilisateur="utilisateur" :editPerso="ePerso" @finEdit="handlerFinEdit" v-else/>
   
 </template>
 

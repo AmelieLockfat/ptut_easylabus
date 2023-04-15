@@ -1,7 +1,8 @@
 <script setup>
   import { ref } from 'vue';
 
-  const props = defineProps({ Utilisateur : Object })
+  const props = defineProps({ Utilisateur : Object });
+  const emit = defineEmits(["submit"]);
 
   let ident = ref(props.Utilisateur.identifiant);
   let mdp = ref(props.Utilisateur.motDePasse);
@@ -12,7 +13,9 @@
   let coordonneesDispo = ref(!props.Utilisateur.coordPrivee);
   let mdpVisible = ref(false);
 
-
+  function handlerSubmit (){
+    emit("submit");
+  }
 </script>
 
 <template>
@@ -93,6 +96,7 @@
       <v-btn
         id="valider"
         color="#ff8183"
+        @click="handlerSubmit"
       >
         Valider
         <v-icon
